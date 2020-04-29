@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System;
 using ProjectManage.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +42,7 @@ namespace ProjectManage.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll(string search = null)
         {
+            return Ok("11111111");
             var query = ctx.Users.AsQueryable();
 
             /*==============================
@@ -60,7 +60,7 @@ namespace ProjectManage.Controllers
             return Ok(data);
 
         }
-
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] ApplicationUser model)
         {
             if (!ModelState.IsValid)
@@ -88,7 +88,7 @@ namespace ProjectManage.Controllers
                 //await ctx.SaveChangesAsync();
                 return Ok(model);
             }
-            return BadRequest("Thêm tài khoản thất bại");
+            return BadRequest("Đăng ký tài khoản thất bại");
 
         }
 

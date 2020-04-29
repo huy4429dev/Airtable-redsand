@@ -12,15 +12,24 @@ namespace ProjectManage.Data
 
         }
 
-      
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<UserProject> UserProjects { get; set; }
+        public DbSet<ListTask> ListTasks { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<UserTask> UserTasks { get; set; }
+        public DbSet<TaskItem> TaskItems { get; set; }
+        public DbSet<TaskComment> TaskComments { get; set; }
+        public DbSet<TaskAttach> TaskAttaches { get; set; }
+        public DbSet<ProjectHistory> ProjectHistories { get; set; }
 
         override protected void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
             //========================================================================
 
             // Tên bảng cho các bảng identity
+
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<Role>().ToTable("Roles");
             builder.Entity<IdentityUserToken<int>>().ToTable("UserTokens");
@@ -29,10 +38,49 @@ namespace ProjectManage.Data
             builder.Entity<IdentityUserClaim<int>>().ToTable("UserClaims");
             builder.Entity<IdentityUserLogin<int>>().ToTable("UserLogins");
 
-            //========================================================================
-            // 
+            /*========================================================================
+            /* Relation 
+
+              1. n - n: User - Project
+              2. n - n: User - Task
+
+            */
+
+            //===================== 1 ========================
+
+            builder.Entity<UserProject>()
+                .HasKey(bc => new { bc.UserId, bc.ProjectId });
+
+            builder.Entity<UserProject>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.UserProjects)
+                .HasForeignKey(bc => bc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserProject>()
+                .HasOne(bc => bc.Project)
+                .WithMany(c => c.UserProjects)
+                .HasForeignKey(bc => bc.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
+            //===================== 2 ========================
+
+
+            builder.Entity<UserTask>()
+                .HasKey(bc => new { bc.UserId, bc.TaskId });
+
+            builder.Entity<UserTask>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.UserTasks)
+                .HasForeignKey(bc => bc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserTask>()
+                .HasOne(bc => bc.Task)
+                .WithMany(c => c.UserTasks)
+                .HasForeignKey(bc => bc.TaskId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 

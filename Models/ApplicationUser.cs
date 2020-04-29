@@ -15,6 +15,45 @@ namespace ProjectManage.Models
         public string Password { get; set; }
         public string Avatar { get; set; }
 
+        /*==================================
+            user - project: 1 - n  - manager
+        */
+
+        public ICollection<Project> Projects { get; set; }
+
+        /*==================================
+            user - project: n - n  
+        */
+
+        public ICollection<UserProject> UserProjects { get; set; }
+
+
+        /*==================================
+            user - task: n - n  
+        */
+
+        public ICollection<UserTask> UserTasks { get; set; }
+
+        /*=================================== 
+            user - task: 1 - n
+
+        */
+
+        public ICollection<Task> Tasks {get;set;}
+
+        
+        /*=================================== 
+            user - comment: 1 - n
+        */
+
+        public ICollection<TaskComment> TaskComments {get;set;}
+
+        /*=================================== 
+            user - projectHistory: 1 - n
+        */
+
+
+        public ICollection<ProjectHistory> ProjectHistories { get; set; }
 
     }
 
