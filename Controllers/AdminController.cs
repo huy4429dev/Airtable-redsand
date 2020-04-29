@@ -52,8 +52,5 @@ namespace ProjectManage.Controlers
             return Content("Exists");
         }
 
-        public string  sayHi(){
-            return "hj";
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace ProjectManage
     {
         [HttpGet]
         public string getAll(){
-            return "hi";
+            return "hi hi hi";
         }
     }
 }
