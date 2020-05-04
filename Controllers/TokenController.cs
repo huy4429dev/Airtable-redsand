@@ -34,6 +34,7 @@ namespace Netcore1.Controllers
             var user = await userManager.FindByNameAsync(model.UserName);
 
             // nếu người dùng không tồn tại
+            
             if (user == null)
             {
                 return BadRequest(new
