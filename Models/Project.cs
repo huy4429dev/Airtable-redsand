@@ -17,7 +17,7 @@ namespace ProjectManage.Models
         [Required(ErrorMessage = "Vui lòng chọn hình ảnh")]
         public string Thumb { get; set; }
 
-        public string? Note { get; set; }
+        public string Note { get; set; }
 
         /*=================================== 
             user - project: 1 - n
