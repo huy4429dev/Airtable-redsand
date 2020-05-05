@@ -10,7 +10,7 @@ class Sigup extends Component {
             <div className="wrapper">
                 <Row>
                     <Col xs="6" sm="4" className="images">
-                        <img src={images1} />
+                        <img src={images1} alt="Hình Ảnh" />
                     </Col>
                     <Col xs="6" sm="4" className="form-log pl-5 pr-5">
                         <Form>
@@ -50,7 +50,7 @@ class Sigup extends Component {
                         </Form>
                     </Col>
                     <Col sm="4" className="images">
-                        <img src={images2} />
+                        <img src={images2} alt="Hình Ảnh" />
                     </Col>
                 </Row>
             </div>

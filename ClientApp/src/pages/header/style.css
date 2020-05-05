@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 .header-left{
     display: flex;
@@ -71,4 +72,20 @@
     border-radius: 50%;
     background-color: #dfe1e6;
     line-height: 34px;
+}
+.header-form{
+    width: 20rem;
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+}
+.header-form-top{
+    margin-left: 6rem;
+    font-size: 1.5rem;
+}
+.hr{
+    width: 94%;
 }
