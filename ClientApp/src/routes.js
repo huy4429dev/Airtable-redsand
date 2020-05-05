@@ -1,35 +1,29 @@
 import React from 'react';
-// import Dashboard from './containers/Dashboard';
-// import NotFound from './containers/NotFound'
-// import DetailtProject from './containers/DetailtProject';
-// import User from './containers/User';
-// import Login from './containers/Login';
+import Sigup from './components/account/Sigup';
+import Login from './components/account/Login';
+import HeaderPage from './pages/header/HeaderPage';
+import Boards from './components/boards/Boards';
 const routes =[
-    // {
-    //     path:'/',
-    //     exact:true,
-    //     main:()=> <Dashboard />
-    // },
-    // {
-    //     path:'/detailt/:slug.:id.html',
-    //     exact:false,
-    //     main:({match})=> <DetailtProject match={match} />
-    // },
-    // {
-    //     path:'/user/:id',
-    //     exact:false,
-    //     main:({match})=> <User match={match}/>
-    // },
-    // {
-    //     path:'/login.html',
-    //     exact:false,
-    //     main:()=> <Login/>
-    // },
-    // {
-    //     path:'',
-    //     exact:false,
-    //     main:()=> <NotFound/>
-    // }
+    {
+        path:'/login',
+        exact:false,
+        main:()=> <Login />
+    },
+    {
+        path:'/sigup',
+        exact:false,
+        main:()=> <Sigup/>
+    },
+    {
+        path:'/home',
+        exact:false,
+        main:()=> <HeaderPage/>
+    },
+    {
+        path:'/boards',
+        exact:false,
+        main:()=> <Boards/>
+    }
 ];
 
 export default routes;
