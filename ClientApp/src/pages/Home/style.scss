@@ -1,0 +1,74 @@
+
+$text-white:#fff;
+$text-blue:#1374c0;
+$bgr-blue : #1374c0;
+$bgr-white:#fff;
+
+.wrapper{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    background-color: $bgr-blue;
+    &__brand{
+        font-size: 2rem !important;
+    }
+}
+.banner{
+    background-color:$bgr-blue !important;
+    &__title{
+        color: $text-white;
+        font-size: 3rem;
+    }
+    &__desc{
+        color: $text-white;
+        font-size: 1.3rem;
+    }
+}
+.content{
+    width: 100%;
+    height: 100%;
+    background-color: $bgr-white;
+    &__title{
+        color: $text-blue;
+        font-size: 2rem;
+    }
+    &__img{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    &__desc{
+        font-size: 1.2rem;
+        color:$text-blue
+    }
+    &__mobile{
+        width: 50%;
+        height: auto;
+        object-fit: cover;
+    }
+    &__image{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    &__btn{
+        width: 100%;
+        color:$text-white;
+    }
+    &__box{
+        background: linear-gradient(180deg, #42548e 0%, #6b668c 100%);
+        border-radius: 12px;
+    }
+    &__bgr{
+        background-image: url("./../../assets/images/bg.png");
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        min-height: 10rem;
+    }
+    &__bottom{
+        background: linear-gradient(to bottom, #fff 0%, #f7ecff 46%, #d2ecff 74%, #fff 100%);
+        height: 100%;
+    }
+}

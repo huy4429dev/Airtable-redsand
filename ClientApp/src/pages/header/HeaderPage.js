@@ -1,46 +1,50 @@
 import React, { Component } from 'react';
 import './style.css';
-import { Form, FormGroup, Button, Label } from 'reactstrap';
+import { Button } from 'reactstrap';
+import Boards from '../../components/boards/Boards';
+import FormUser from './FormUser';
+import FormNocation from './FormNocation';
+import Infomation from './Infomation';
+import FormCreate from './FormCreate';
 class HeaderPage extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             isActive: false,
-            isActiveNocation: false
+            isActiveNocation: false,
+            isActiveInfomation:false,
+            isActiveCreate:false
         }
     }
     handleShowFormUser = () => {
         this.setState({
-            isActive: true
+            isActive: !this.state.isActive
         })
     }
-    handleHideFormUser = () => {
-        this.setState({
-            isActive: false
-        })
-    }
-
     handleShowFormNocation = () => {
         this.setState({
-            isActiveNocation: true
+            isActiveNocation: !this.state.isActiveNocation
         })
     }
-    handleHideFormNocation = () => {
+    handleShowFormInfomation=()=>{
         this.setState({
-            isActiveNocation: false
+            isActiveInfomation:!this.state.isActiveInfomation
         })
     }
 
-
+    handleShowFormCreate=()=>{
+        this.setState({
+            isActiveCreate:!this.state.isActiveCreate
+        })
+    }
     render() {
         return (
             <React.Fragment>
                 <div className="header">
                     <div className="header-left">
                         <Button className="ml-2" color="info"><i className='fas fa-th'></i></Button>{' '}
-                        <Button className="ml-1" color="info"><i className='fas fa-home'></i></Button>{' '}
+                        <Button onClick={this.home} className="ml-1" color="info"><i className='fas fa-home'></i></Button>{' '}
                         <Button className="ml-1 d-flex align-items-center" color="info"><i className="material-icons">dashboard</i>Boards</Button>{' '}
-
                         <div>
                             <div className="searchbar">
                                 <input className="search_input" type="text" name="" placeholder="Search..." />
@@ -49,54 +53,30 @@ class HeaderPage extends Component {
                         </div>
                     </div>
                     <div className="header-right">
-                        <Button className=" d-flex align-items-center" color="info"><i className="material-icons">add</i></Button>{' '}
-                        <Button className="ml-1" color="info"><i className="fas fa-exclamation-circle"></i></Button>{' '}
+                        <Button onClick={this.handleShowFormCreate} className=" d-flex align-items-center" color="info"><i className="material-icons">add</i></Button>{' '}
+                        <Button onClick={this.handleShowFormInfomation} className="ml-1" color="info"><i className="fas fa-exclamation-circle"></i></Button>{' '}
                         <Button onClick={this.handleShowFormNocation} className="ml-1 mr-1" color="info"><i className='far fa-bell'></i></Button>{' '}
                         <div onClick={this.handleShowFormUser} className="user mr-2 text-center">VH</div>
                     </div>
 
                 </div>
-                {/* start form user */}
                 {this.state.isActive ?
-                    <Form className="header-form">
-                        <FormGroup className="d-flex align-items-center justify-content-between mt-2">
-                            <span className="header-form-top">Văn Hà</span>
-                            <i onClick={this.handleHideFormUser} className="fa fa-close mr-2"></i>
-                        </FormGroup>
-                        <hr className="hr"></hr>
-                        <Button outline color="light border border-0 text-left text-dark" block>Profile and Visibility</Button>
-                        <Button outline color="light border border-0 text-left text-dark" block>Activity</Button>{' '}
-                        <Button outline color="light border border-0 text-left text-dark" block>Cards</Button>{' '}
-                        <hr className="hr"></hr>
-                        <Button outline color="light border border-0 text-left text-dark" block>Settings</Button>{' '}
-                        <Button outline color="light border border-0 text-left text-dark" block>Help</Button>{' '}
-                        <hr className="hr"></hr>
-                        <Button outline color="light border border-0 text-left text-dark mb-3" block>Log Out</Button>{' '}
-                    </Form>
-
+                    <FormUser onClick={this.handleShowFormUser} />
                     : null}
-
-                {/* end form user */}
-
-
-                {/* start form nocation */}
                 {this.state.isActiveNocation ?
-                    <Form className="header-form">
-                        <FormGroup className="d-flex align-items-center justify-content-between mt-2">
-                            <span className="header-form-top">Notifications</span>
-                            <i onClick={this.handleHideFormNocation} className="fa fa-close mr-2"></i>
-                        </FormGroup>
-                        <hr className="hr"></hr>
-                        <FormGroup>
-                            <Button outline color="light border border-0 text-left text-dark" block>Profile and Visibility</Button>
-                            <Label className="ml-3">Project</Label>
-                            
-                        </FormGroup>
-                    </Form>
-
+                    <FormNocation onClick={this.handleShowFormNocation} />
                     : null}
+       
+                {this.state.isActiveInfomation?
+                    <Infomation onClick={this.handleShowFormInfomation}/>
+                    :null
+                }
 
-                {/* end form nocation */}
+                {this.state.isActiveCreate?
+                    <FormCreate onClick={this.handleShowFormCreate}/>
+                    :null
+                }
+                {/* <Boards /> */}
             </React.Fragment>
         );
     }

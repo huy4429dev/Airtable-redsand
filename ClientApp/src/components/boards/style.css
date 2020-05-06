@@ -5,3 +5,6 @@
 .item-recently-create{
     line-height: 7rem;
 }
+.link{
+    text-decoration: none !important;
+}
