@@ -12,10 +12,11 @@ namespace ProjectManage.Models
 
         [StringLength(255, ErrorMessage = "Lỗi định dạng")]
         [Required(ErrorMessage = "Vui lòng nhập tên dự án")]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn hình ảnh")]
         public string Thumb { get; set; }
+
         public string Note { get; set; }
 
         /*=================================== 
