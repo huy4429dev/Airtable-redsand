@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Models = ProjectManage.Models;
 using ProjectManage.Data;
 using Microsoft.AspNetCore.Mvc;
+using ProjectManage.Models;
+
 namespace ProjectManage.Controllers
 {
     [Route("api/task")]
@@ -16,18 +18,50 @@ namespace ProjectManage.Controllers
             this.context = context;
         }
 
+        //================== get task by id
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var task = await context.Tasks.Select(t => new
+            var task = await context.Tasks
+            .Where(t => t.Id.Equals(id))
+            .Select(t => new
             {
-                task = t,
-                user = t.UserTasks.Select(ut => ut.User.FullName)
-            }).FirstAsync();
+                task     = t,
+                users    = t.UserTasks.Select(ut => ut.User.FullName),
+                comments = t.TaskComments
+                            .Where(tc => tc.TaskId == id)
+                            .Select(tc => new {
+                                content = tc.content,
+                                fullname = tc.User.FullName 
+                            })
+                            .ToList(),
+                attaches = t.taskAttaches
+                
+            })
+            .FirstOrDefaultAsync();
 
-            return Ok(task);
+            if (task != null)
+            {
+                return Ok(task);
+            }
+
+            return BadRequest("Khôn tồn tại task");
         }
+
+
+        //================== get all task
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var query = context.Tasks.AsQueryable();
+            var data = await query.ToListAsync();
+            return Ok(data);
+        }
+
+
+        //================== create task
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Models.Task model)
@@ -41,16 +75,18 @@ namespace ProjectManage.Controllers
                 return BadRequest(errors);
             }
 
-            model.Status = 0;
+            model.Status    = 0;
             model.CreatedAt = DateTime.Now;
             model.UpdatedAt = DateTime.Now;
-            model.DeadLine = DateTime.Now.AddDays(1);
+            model.DeadLine  = DateTime.Now.AddDays(1);
 
             await context.Tasks.AddAsync(model);
             await context.SaveChangesAsync();
-
             return Ok(model);
         }
+
+
+        //================ Add user 
 
 
         [HttpPost("{id}/user")]
@@ -70,7 +106,7 @@ namespace ProjectManage.Controllers
             {
                 /*==============================
                      Update table UserTasks
-                     1. Delete
+                     1. Delete  
                      2. Insert
                      ==============================*/
 
@@ -101,6 +137,71 @@ namespace ProjectManage.Controllers
             return BadRequest("Không tồn tại task");
         }
 
+        //================== add comment
+
+        [HttpPost("{id}/comment")]
+        public async Task<IActionResult> AddComment(int id, [FromBody] Models.TaskComment model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                                    .Where(y => y.Count > 0)
+                                    .ToList();
+                return BadRequest(errors);
+            }
+
+            var found = await context.Tasks.FindAsync(id);
+            if (found != null)
+            {
+                model.CreatedAt = DateTime.Now;
+                model.UpdatedAt = DateTime.Now;
+                await context.AddAsync(model);
+                await context.SaveChangesAsync();
+                return Ok(model);
+            }
+            return BadRequest("Không tồn tại task");
+        }
+
+
+        //================== add task item
+
+        [HttpPost("{id}/task-item")]
+        public async Task<IActionResult> AddTaskItem(int id, [FromBody] Models.TaskItem model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                                    .Where(y => y.Count > 0)
+                                    .ToList();
+                return BadRequest(errors);
+            }
+
+            var found = await context.Tasks.FindAsync(id);
+            if (found != null)
+            {
+                model.Status = ProjectStatus.Pending;
+                model.CreatedAt = DateTime.Now;
+                model.UpdatedAt = DateTime.Now;
+                await context.TaskItems.AddAsync(model);
+                await context.SaveChangesAsync();
+                return Ok(model);
+            }
+
+            return BadRequest("Không tồn tại task");
+
+
+        }
+
+        /*================== update task
+
+         1. title
+         2. desc
+         3. deadline
+         4. status
+         5. updatedAt
+
+        */
+
         [HttpPut("{id}")]
         public async Task<IActionResult> update(int id, [FromBody] Models.Task model)
         {
@@ -113,15 +214,21 @@ namespace ProjectManage.Controllers
             }
 
             var found = await context.Tasks.FindAsync(id);
-            if(found != null){
+            if (found != null)
+            {
                 found.Title = model.Title;
                 found.Desc = model.Desc;
                 found.DeadLine = model.DeadLine;
+                found.Status = 100;
                 found.UpdatedAt = DateTime.Now;
+                await context.SaveChangesAsync();
+                return Ok(found);
             }
             return BadRequest("Không tồn tại task.");
         }
 
+
+        //================== delete task
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

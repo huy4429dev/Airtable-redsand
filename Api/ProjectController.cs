@@ -43,23 +43,24 @@ namespace ProjectManage.Controllers
 
             if (userId.HasValue)
             {
-               var newQuery =  _context.Projects.Where(p => p.UserProjects.Any(pu => pu.UserId == userId))
-                    .Select(p => new
-                    {
-                        id = p.Id,
-                        name = p.Name,
-                        created = p.CreatedAt,
-                        updated = p.UpdatedAt,
-                        manager = p.ManagerId,
-                        status = p.Status,
-                        users =  p.UserProjects.Select(du => new { 
-                            userId = du.User.Id,
-                            fullName = du.User.FullName,
-                            email = du.User.Email,
-                            avatar = du.User.Avatar, 
-                        }) 
+                var newQuery = _context.Projects.Where(p => p.UserProjects.Any(pu => pu.UserId == userId))
+                     .Select(p => new
+                     {
+                         id = p.Id,
+                         name = p.Name,
+                         created = p.CreatedAt,
+                         updated = p.UpdatedAt,
+                         manager = p.ManagerId,
+                         status = p.Status,
+                         users = p.UserProjects.Select(du => new
+                         {
+                             userId = du.User.Id,
+                             fullName = du.User.FullName,
+                             email = du.User.Email,
+                             avatar = du.User.Avatar,
+                         })
 
-                    });
+                     });
 
                 var dataNeW = await newQuery.ToListAsync();
                 return Ok(dataNeW);
@@ -75,7 +76,7 @@ namespace ProjectManage.Controllers
 
         // post-create new Project: api/Project
         [HttpPost]
-        public async Task<ActionResult<Project>> Create([FromBody] Project model)
+        public async Task<ActionResult<Project>> Create([FromBody] Project model, ProjectViewModel viewModel)
         {
 
 
@@ -97,13 +98,44 @@ namespace ProjectManage.Controllers
             await _context.Projects.AddAsync(model);
             await _context.SaveChangesAsync();
 
-            return Ok(model);
+            /*==============================
+            Insert table ProjectsHistories
+            ==============================*/
+
+            var history = new ProjectHistory()
+            {
+                ProjectId = model.Id,
+                UserId = model.ManagerId,
+                Content = "Tạo dự án",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+
+            await _context.ProjectHistories.AddAsync(history);
+            await _context.SaveChangesAsync();
+
+            var FullName = await _context.Users.Where(u => u.Id == model.ManagerId).Select(u => u.FullName).FirstAsync();
+
+            /*==============================
+            Get projects and projectHistory
+            ==============================*/
+
+            viewModel.Id = model.Id;
+            viewModel.Name = model.Name;
+            viewModel.Status = model.Status;
+            viewModel.Thumb = model.Thumb;
+            viewModel.Note = model.Note;
+            viewModel.ManagerId = model.ManagerId;
+            viewModel.FullName = FullName;
+            viewModel.Content = history.Content;
+            viewModel.CreatedAt = viewModel.CreatedAt;
+            return Ok(viewModel);
         }
 
         // put-edit newproject: api/Project/1
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, [FromBody] Project model)
+        public async Task<IActionResult> Edit(int id, [FromBody] Project model, ProjectViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -140,6 +172,7 @@ namespace ProjectManage.Controllers
                 var query = _context.UserProjects.AsQueryable();
                 query = query.Where(item => item.ProjectId == id);
                 var data = await query.ToListAsync();
+                
                 foreach (var item in data)
                 {
 
@@ -147,7 +180,8 @@ namespace ProjectManage.Controllers
                     await _context.SaveChangesAsync();
 
                 }
-
+                 
+                
                 /* =========== 2 ==========*/
 
                 if (model.UserProjects.Count > 0)
@@ -156,7 +190,41 @@ namespace ProjectManage.Controllers
                     await _context.SaveChangesAsync();
                 }
 
-                return Ok(model);
+
+
+                /*==============================
+                Insert table ProjectsHistories
+                ==============================*/
+
+                var history = new ProjectHistory()
+                {
+                    ProjectId = id,
+                    UserId = model.ManagerId,
+                    Content = "Cập nhật dự án",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                await _context.ProjectHistories.AddAsync(history);
+                await _context.SaveChangesAsync();
+
+                var FullName = await _context.Users.Where(u => u.Id == model.ManagerId).Select(u => u.FullName).FirstAsync();
+
+                /*==============================
+                Get projects and projectHistory
+                ==============================*/
+
+                viewModel.Id = id;
+                viewModel.Name = model.Name;
+                viewModel.Status = model.Status;
+                viewModel.Thumb = model.Thumb;
+                viewModel.Note = model.Note;
+                viewModel.ManagerId = found.ManagerId;
+                viewModel.FullName = FullName;
+                viewModel.Content = history.Content;
+                viewModel.CreatedAt = history.CreatedAt;
+
+                return Ok(viewModel);
 
             }
 

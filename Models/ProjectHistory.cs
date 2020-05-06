@@ -25,6 +25,7 @@ namespace ProjectManage.Models
         /*=============================
              project - projectHistory: 1 - n
         */
+
         [ForeignKey("ProjectId")]
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
@@ -32,4 +33,5 @@ namespace ProjectManage.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
+
 }

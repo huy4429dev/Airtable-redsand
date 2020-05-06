@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using ProjectManage.Data;
 using ProjectManage.Models;
 namespace ProjectManage.Controllers
@@ -70,7 +68,7 @@ namespace ProjectManage.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ListTask model)
+        public async Task<IActionResult> Create([FromBody] ListTask model, ListTaskViewModel viewModel)
         {
 
             if (!ModelState.IsValid)
@@ -86,12 +84,38 @@ namespace ProjectManage.Controllers
 
             await context.ListTasks.AddAsync(model);
             await context.SaveChangesAsync();
-            return Ok(model);
+
+            var history = new ProjectHistory()
+            {
+                ProjectId = model.ProjectId,
+                UserId = model.UserId,
+                Content = "Tạo danh sách công việc",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+
+            await context.ProjectHistories.AddAsync(history);
+            await context.SaveChangesAsync();
+
+            var FullName = await context.Users.Where(u => u.Id == model.UserId).Select(u => u.FullName).FirstAsync();
+
+            /*==============================
+            Get projects and projectHistory
+            ==============================*/
+
+            viewModel.Id = model.Id;
+            viewModel.Title = model.Title;
+            viewModel.Desc = model.Desc;
+            viewModel.ProjectId = model.ProjectId;
+            viewModel.FullName = FullName;
+            viewModel.Content = history.Content;
+            viewModel.CreatedAt = viewModel.CreatedAt;
+            return Ok(viewModel);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromBody] ListTask model, int id)
-        {   
+        public async Task<IActionResult> Update([FromBody] ListTask model, int id, ListTaskViewModel viewModel)
+        {
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Select(x => x.Value.Errors)
@@ -107,8 +131,34 @@ namespace ProjectManage.Controllers
                 found.Desc = model.Desc;
                 found.UpdatedAt = DateTime.Now;
                 await context.SaveChangesAsync();
-                return Ok(found);
+                var history = new ProjectHistory()
+                {
+                    ProjectId = model.ProjectId,
+                    UserId    = model.UserId,
+                    Content   = "Thay đổi danh sách công việc",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                await context.ProjectHistories.AddAsync(history);
+                await context.SaveChangesAsync();
+
+                var FullName = await context.Users.Where(u => u.Id == model.UserId).Select(u => u.FullName).FirstAsync();
+
+                /*==============================
+                Get projects and projectHistory
+                ==============================*/
+
+                viewModel.Id        = id;
+                viewModel.Title     = model.Title;
+                viewModel.Desc      = model.Desc;
+                viewModel.ProjectId = model.ProjectId;
+                viewModel.FullName  = FullName;
+                viewModel.Content   = history.Content;
+                viewModel.CreatedAt = viewModel.CreatedAt;
+                return Ok(viewModel);
             }
+
 
             return BadRequest("Không tồn tại list task");
 
@@ -116,14 +166,39 @@ namespace ProjectManage.Controllers
 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int UserId, ListTaskViewModel viewModel)
         {
             var found = await context.ListTasks.FindAsync(id);
             if (found != null)
             {
                 context.ListTasks.Remove(found);
                 await context.SaveChangesAsync();
-                return Ok("Xóa thành công");
+                 var history = new ProjectHistory()
+                {
+                    ProjectId = found.ProjectId,
+                    UserId    = found.UserId,
+                    Content   = "Xóa danh sách công việc",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                await context.ProjectHistories.AddAsync(history);
+                await context.SaveChangesAsync();
+
+                var FullName = await context.Users.Where(u => u.Id == UserId).Select(u => u.FullName).FirstAsync();
+
+                /*==============================
+                Get projects and projectHistory
+                ==============================*/
+
+                viewModel.Id        = id;
+                viewModel.Title     = found.Title;
+                viewModel.Desc      = found.Desc;
+                viewModel.ProjectId = found.ProjectId;
+                viewModel.FullName  = FullName;
+                viewModel.Content   = history.Content;
+                viewModel.CreatedAt = viewModel.CreatedAt;
+                return Ok(viewModel);
             }
             return BadRequest("Không tồn tại list task");
         }
