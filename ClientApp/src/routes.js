@@ -1,35 +1,24 @@
 import React from 'react';
-// import Dashboard from './containers/Dashboard';
-// import NotFound from './containers/NotFound'
-// import DetailtProject from './containers/DetailtProject';
-// import User from './containers/User';
-// import Login from './containers/Login';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Detailt from './pages/DetailtProject';
+
 const routes =[
-    // {
-    //     path:'/',
-    //     exact:true,
-    //     main:()=> <Dashboard />
-    // },
-    // {
-    //     path:'/detailt/:slug.:id.html',
-    //     exact:false,
-    //     main:({match})=> <DetailtProject match={match} />
-    // },
-    // {
-    //     path:'/user/:id',
-    //     exact:false,
-    //     main:({match})=> <User match={match}/>
-    // },
-    // {
-    //     path:'/login.html',
-    //     exact:false,
-    //     main:()=> <Login/>
-    // },
-    // {
-    //     path:'',
-    //     exact:false,
-    //     main:()=> <NotFound/>
-    // }
+    {
+        path:'/',
+        exact:true,
+        main:()=> <Home />
+    },
+    {
+        path:'/detailt',
+        exact:true,
+        main:()=> <Detailt/>
+    },
+    {
+        path:'',
+        exact:false,
+        main:()=> <NotFound/>
+    }
 ];
 
 export default routes;
