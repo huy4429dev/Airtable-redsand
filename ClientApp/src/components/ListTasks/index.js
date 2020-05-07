@@ -25,7 +25,7 @@ class ListTasks extends Component {
                                         <div className="mt-2"
                                             ref={provided.innerRef}
                                             {...provided.droppableProps}
-                                            isDraggingOver={snapshot.isDraggingOver}>
+                                            isdraggingover={snapshot.isdraggingover}>
                                                 {this.props.tasks.map((task, index) => (
                                                     <Task key={task.id} task={task} index={index}/>
                                                 ))}

@@ -8,10 +8,10 @@ $bgr-white:#fff;
     width: 100%;
     height: 100%;
 }
-.header{
+.header-home{
     background-color: $bgr-blue;
     &__brand{
-        font-size: 2rem !important;
+        font-size: 3rem !important;
     }
 }
 .banner{

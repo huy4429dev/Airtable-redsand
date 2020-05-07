@@ -21,7 +21,7 @@ class Home extends Component {
     render() {
         return (
             <div className="wrapper">
-                <Navbar fixed="top" className="header" variant="dark">
+                <Navbar fixed="top" className="header-home" variant="dark">
                     <Navbar.Brand href="#home" className="header__brand">Trello</Navbar.Brand>
                     <Nav className="ml-auto">
                         <Link to="/login"><Button variant="outline-light">Login</Button></Link>
