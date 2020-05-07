@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
 import { Form, FormGroup, Button, Label } from 'reactstrap';
+import ModalAddProject from './../../components/modalAddProject';
+import * as actions from './../../actions/header';
+import connect from './../../lib/connect';
+
 class HeaderPage extends Component {
     constructor(props, context) {
         super(props, context);
@@ -31,14 +35,26 @@ class HeaderPage extends Component {
             isActiveNocation: false
         })
     }
-
+    hideModalAddProject = () => {
+        const { showModalAddProject } = this.props;
+        const { hideModalAddProject } = this.props.actions;
+        if (showModalAddProject) {
+            return (
+                <ModalAddProject hideModalAddProject={hideModalAddProject} />
+            )
+        }
+    }
+    showModalAddProject = () => {
+        const { showModalAddProject } = this.props.actions;
+        showModalAddProject();
+    }
 
     render() {
         return (
             <React.Fragment>
                 <div className="header">
                     <div className="header-left">
-                        <Button className="ml-2 header__btn" ><i className='fas fa-th'></i></Button>{' '}
+                        <Button className="ml-2 header__btn" ><i className='fas fa-th'></i></Button>
                         <Link to="/boards"><Button className="ml-1  header__btn" ><i className='fas fa-home'></i></Button></Link>
                         <Button className="ml-1 d-flex align-items-center  header__btn" ><i className="material-icons">dashboard</i>Boards</Button>{' '}
 
@@ -50,9 +66,9 @@ class HeaderPage extends Component {
                         </div>
                     </div>
                     <div className="header-right">
-                        <Button className=" header__btn d-flex align-items-center" ><i className="material-icons">add</i></Button>{' '}
+                        <Button onClick={this.showModalAddProject} className=" header__btn d-flex align-items-center" ><i className="material-icons">add</i></Button>
                         <Button className="ml-1  header__btn" ><i className="fas fa-exclamation-circle"></i></Button>{' '}
-                        <Button onClick={this.handleShowFormNocation} className="ml-1 mr-1  header__btn"  ><i className='far fa-bell'></i></Button>{' '}
+                        <Button onClick={this.handleShowFormNocation} className="ml-1 mr-1  header__btn"  ><i className='far fa-bell'></i></Button>
                         <div onClick={this.handleShowFormUser} className="user mr-2 text-center">VH</div>
                     </div>
 
@@ -87,17 +103,22 @@ class HeaderPage extends Component {
                         <FormGroup>
                             <Button outline color="light border border-0 text-left text-dark" block>Profile and Visibility</Button>
                             <Label className="ml-3">Project</Label>
-                            
+
                         </FormGroup>
                     </Form>
 
                     : null}
 
                 {/* end form nocation */}
+                {this.hideModalAddProject()}
             </React.Fragment>
         );
     }
 
 }
 
-export default HeaderPage;
+export default (connect(HeaderPage, state => (
+    {
+        showModalAddProject: state.headerReducer.showModalAddProject
+    }
+), actions));
