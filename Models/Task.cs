@@ -49,7 +49,7 @@ namespace ProjectManage.Models
 
         public ICollection<TaskAttach> taskAttaches { get; set; }
 
-        public DateTime DeadLine { get; set; }
+        public DateTime? DeadLine { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

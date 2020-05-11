@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './style.css';
 import { Button } from 'reactstrap';
-import Boards from '../../components/boards/Boards';
-import FormUser from './FormUser';
-import FormNocation from './FormNocation';
-import Infomation from './Infomation';
-import FormCreate from './FormCreate';
+import FormUser from './../../components/ListHeader/FormUser';
+import FormNocation from './../../components/ListHeader/FormNocation';
+import Infomation from './../../components/ListHeader/Infomation';
+import FormCreate from './../../components/ListHeader/FormCreate';
+import * as actions from './../../actions/header';
+import connect from './../../lib/connect';
+import { Link } from 'react-router-dom';
+
 class HeaderPage extends Component {
     constructor(props, context) {
         super(props, context);
@@ -37,13 +40,15 @@ class HeaderPage extends Component {
             isActiveCreate:!this.state.isActiveCreate
         })
     }
+
     render() {
         return (
             <React.Fragment>
                 <div className="header">
                     <div className="header-left">
-                        <Button className="ml-2" color="info"><i className='fas fa-th'></i></Button>{' '}
-                        <Button onClick={this.home} className="ml-1" color="info"><i className='fas fa-home'></i></Button>{' '}
+                        <Button className="ml-2" color="info"><i className='fas fa-th'></i></Button>
+                        <Button  className="ml-1" color="info"><Link className="text-white" to ='/boards'><i className='fas fa-home'></i>  </Link></Button>
+                      
                         <Button className="ml-1 d-flex align-items-center" color="info"><i className="material-icons">dashboard</i>Boards</Button>{' '}
                         <div>
                             <div className="searchbar">
@@ -83,4 +88,8 @@ class HeaderPage extends Component {
 
 }
 
-export default HeaderPage;
+export default (connect(HeaderPage, state => (
+    {
+        showModalAddProject: state.headerReducer.showModalAddProject
+    }
+), actions));

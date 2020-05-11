@@ -13,7 +13,7 @@ class Task extends Component {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            isDragding={snapshot.isDragging}
+                            isdragding={snapshot.isdragging}
                         >
                             <Card.Body className="card__task">
                                 <p className="card__task-title">{this.props.task.content}</p>

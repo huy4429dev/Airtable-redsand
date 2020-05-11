@@ -1,26 +1,35 @@
 import React from 'react';
-import Sigup from './components/account/Sigup';
-import Login from './components/account/Login';
-import HeaderPage from './pages/header/HeaderPage';
-import Boards from './components/boards/Boards';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Detailt from './pages/DetailtProject';
-const routes =[
+import Sigup from './components/account/Sigup';
+import Login from './components/account/Login';
+import HeaderPage from './pages/header/HeaderPage';
+import Boards from './pages/boards/Boards';
+import BoardAdd from './pages/boards/BoardAdd';
+// import Index from './components/profile/Index';
+import Profile from './components/profile/profile';
+// import Index from './components/profile/Index';
+const routes = [
     {
-        path:'/login',
-        exact:false,
-        main:()=> <Login />
+        path: '/',
+        exact: true,
+        main: () => <Home />
     },
     {
-        path:'/sigup',
-        exact:false,
-        main:()=> <Sigup/>
+        path: '/detailt',
+        exact: true,
+        main: () => <Detailt/>
     },
     {
-        path:'/home',
-        exact:false,
-        main:()=> <HeaderPage/>
+        path: '/add_project',
+        exact: false,
+        main: ({ history }) => <BoardAdd history={history} />
+    },
+    {
+        path: '/login',
+        exact: false,
+        main: () => <Login />
     },
     {
         path:'/boards',
@@ -28,20 +37,26 @@ const routes =[
         main:()=> <Boards/>
     },
     {
-        path:'/',
-        exact:true,
-        main:()=> <Home />
+        path: '/sigup',
+        exact: false,
+        main: () => <Sigup />
     },
     {
-        path:'/detailt',
-        exact:true,
-        main:()=> <Detailt/>
+        path: '/home',
+        exact: false,
+        main: () => <HeaderPage />
     },
     {
-        path:'',
-        exact:false,
-        main:()=> <NotFound/>
-    }
+        path: '',
+        exact: false,
+        main: () => <NotFound />
+    }, 
+    {
+        path: '/profile',
+        exact: false,
+        main: () => <Profile />
+    },
+
 ];
 
 export default routes;

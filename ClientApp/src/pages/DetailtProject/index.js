@@ -5,7 +5,7 @@ import ListTasks from '../../components/ListTasks';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import data from './../../data';
 import './style.scss';
-import HeaderPage from '../header/HeaderPage';
+import HeaderPage from './../header/HeaderPage';
 
 class Detailt extends Component {
     constructor(props) {
@@ -96,10 +96,10 @@ class Detailt extends Component {
     render() {
         return (
             <React.Fragment>
-                  <HeaderPage/>
+                <HeaderPage/>
                 <div style={{ backgroundImage: `url('${bgr}')` }} className="detailt">
                     <div className="detailt__box">
-                        <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex justify-content-between align-items-center mt-3">
                             <div>
                                 <input className="detailt__name" defaultValue="linh" />
                                 <button className="detailt__btn"><i className="far fa-star"></i></button>
