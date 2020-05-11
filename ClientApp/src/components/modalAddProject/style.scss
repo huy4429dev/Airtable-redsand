@@ -1,0 +1,61 @@
+.project{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.78);
+    z-index: 1001;
+    &__modal{
+        width: 500px;
+        position: absolute;
+        z-index: 1002;
+        top: 20%;
+        left: 50%;
+        transform: translate(-20%,-50%);
+    }
+    &__img{
+        width: 100%;
+        height: 100px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &__btn{
+        background-color: rgba(9,30,66,.04);
+        box-shadow: none;
+        border: none;
+        color: #a5adba;
+        cursor: not-allowed;
+        background-color: #f4f5f7;
+        border-radius: 2px;
+    }
+    &__input{
+        margin: 8px 0px 0px 8px;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        box-sizing: border-box;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        left: -8px;
+        line-height: 24px;
+        margin-bottom: 0;
+        padding: 2px 8px;
+        &:hover{
+            background: hsla(0,0%,100%,.15)!important;
+            box-shadow: none;
+        }
+        &:focus{
+            background: hsla(0,0%,100%,.3)!important;
+            box-shadow: none;
+        }
+    }
+    &__btn-close{
+        background-color: transparent;
+        outline: none !important;
+        color: #fff;
+        border: none;
+    }
+}
