@@ -9,9 +9,10 @@ class Task extends Component {
         handleShowModalDetailtTask();
     }
     render() {
+        const { task,index} = this.props;
         return (
             <React.Fragment>
-                <Draggable draggableId={this.props.task.id} index={this.props.index}>
+                <Draggable draggableId={String(task.id)} index={index}>
                     {(provided, snapshot) => (
                         <Card className="mt-2" onClick={this.handleShowModalDetailtTask}
                             ref={provided.innerRef}
@@ -20,7 +21,7 @@ class Task extends Component {
                             isdragding={snapshot.isdragging}
                         >
                             <Card.Body className="card__task">
-                                <p className="card__task-title">{this.props.task.content}</p>
+                                <p className="card__task-title">{this.props.task.title}</p>
                             </Card.Body>
                         </Card>
                     )}

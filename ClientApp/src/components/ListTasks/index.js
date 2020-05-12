@@ -9,29 +9,40 @@ import ButtonAddTask from '../buttonAddTask';
 class ListTasks extends Component {
     hideFormAddTask = () => {
         const { hideFormAddTask, handleHideFormAddTask ,idListTask} = this.props;
-        const { id } = this.props.column;
-        if (hideFormAddTask && idListTask === id) {
+        const {handleAddTask} = this.props;
+        const { columnId } = this.props; 
+        if (hideFormAddTask && idListTask === columnId.id) {
             return (
-                <FormAddTask handleHideFormAddTask={handleHideFormAddTask}/>
+                <FormAddTask handleHideFormAddTask={handleHideFormAddTask}
+                handleAddTask = {handleAddTask}
+                columnId={columnId}/>
             )
         }
     }
     showButtonAddTask = () => {
         const { showButtonAddTask, handleShowFormAddTask, idListTask } = this.props;
-        const { id } = this.props.column;
-        if (showButtonAddTask && idListTask !== id) {
+        const { columnId } = this.props; 
+        if (showButtonAddTask && idListTask !== columnId.id) {
             return (
-                <ButtonAddTask handleShowFormAddTask={handleShowFormAddTask} id={id} />
+                <ButtonAddTask handleShowFormAddTask={handleShowFormAddTask} columnId={columnId} />
+            )
+        }
+    }
+    show = ()=>{
+        const {tasks,handleShowModalDetailtTask} = this.props;
+        if(tasks){
+            return (
+                tasks.map((task, index) => {
+                    return <Task key={index} task={task} index={index} handleShowModalDetailtTask={handleShowModalDetailtTask} />
+                })
             )
         }
     }
     render() {
-        const { id, title } = this.props.column;
-        const { handleShowModalDetailtTask } = this.props;
-
+        const { column, columnId,index ,tasks,handleShowModalDetailtTask } = this.props;
         return (
             <React.Fragment>
-                <Draggable draggableId={id} index={this.props.index}>
+                <Draggable draggableId={String(column)} index={index}>
                     {(provided) => (
                         <div className="grid__card"
                             {...provided.draggableProps}
@@ -40,18 +51,16 @@ class ListTasks extends Component {
                             <Card className="detailt__list-task"  {...provided.dragHandleProps}>
                                 <Card.Body className="card__body">
                                     <div className="d-flex justify-content-between">
-                                        <input defaultValue={title} className="detailt__name-list-task" />
+                                        <input defaultValue={columnId.title} className="detailt__name-list-task" />
                                         <i className="fas fa-ellipsis-h detailt__more"></i>
                                     </div>
-                                    <Droppable droppableId={id}>
+                                    <Droppable droppableId={String(column)}>
                                         {(provided, snapshot) => (
                                             <div className="mt-2"
                                                 ref={provided.innerRef}
                                                 {...provided.droppableProps}
                                                 isdraggingover={snapshot.isdraggingover}>
-                                                {this.props.tasks.map((task, index) => (
-                                                    <Task key={task.id} task={task} index={index} handleShowModalDetailtTask={handleShowModalDetailtTask} />
-                                                ))}
+                                                    {this.show()}
                                                 {provided.placeholder}
                                             </div>
                                         )}

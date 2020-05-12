@@ -11,12 +11,12 @@ const initialState = {
     idListTask: null,
     showModalEditDeadlineTask: false,
     showModalAddUserTask: false,
-    listTask : null
+    listTask: null
 }
 
 const detailtProjectReducers = (state = initialState, action) => {
+    var index = -1;
     switch (action.type) {
-
         case types.SHOW_FORM_ADD_LIST_TASK:
             return { ...state, showFormAddListTask: true, showButtonAddListTask: false }
 
@@ -54,21 +54,53 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state, showModalAddUserTask: false }
 
         case types.ADD_LIST_TASK_SUCCESS:
-            return { ...state }
+            return { ...state, listTask: state.listTask.concat(action.data)}
 
         case types.ADD_LIST_TASK_FAILE:
             return { ...state }
 
         case types.GET_LIST_TASK_SUCCESS:
             const listTask = action.data;
-            return { ...state,listTask:listTask}
+            return { ...state, listTask: listTask }
 
         case types.GET_LIST_TASK_FAILE:
-            return { ...state}
+            return { ...state }
+
+        case types.ADD_TASK_SUCCESS:
+            var task = action.data;
+            index = findTaskInListTask(state.listTask, task);
+            var slice = state.listTask.slice(index,index+1);
+            var newTasks = [...slice,slice[0].tasks = slice[0].tasks.concat(task)];
+
+            const test = [
+                ...state.listTask.slice(0,index),
+                newTasks,
+                ...state.listTask.slice(index + 1)
+            ];
+            return {
+                ...state,
+                hideFormAddTask: false,
+                showButtonAddTask: true,
+                listTask : test
+            }
+
+        case types.ADD_TASK_FAILE:
+            return { ...state }
 
         default:
             return state
     }
 }
-
+const findTaskInListTask = (listTask, task) => {
+    var index = -1;
+    if (listTask.length > 0) {
+        for (var i = 0; i < listTask.length; i++) {
+            if (listTask[i].id === task.listTaskId) {
+                index = i;
+                break;
+            }
+        }
+    }
+    return index;
+}
 export default detailtProjectReducers;

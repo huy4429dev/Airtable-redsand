@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 
 class ButtonAddTask extends Component {
-    handleShowFormAddTask = (id) => {
+    handleShowFormAddTask = (columnId) => {
         const { handleShowFormAddTask } = this.props;
         if (handleShowFormAddTask) {
-            handleShowFormAddTask(id);
+            handleShowFormAddTask(columnId);
         }      
     }
     render() {
-        const {id} = this.props;
+        const {columnId} = this.props;
         return (
             <React.Fragment>
-                <button onClick={()=>this.handleShowFormAddTask(id)} className="mt-2 card__btn-sub"><i className="fas fa-plus icon--gray" ></i>Thêm thẻ khác</button>
+                <button onClick={()=>this.handleShowFormAddTask(columnId.id)} className="mt-2 card__btn-sub"><i className="fas fa-plus icon--gray" ></i>Thêm thẻ khác</button>
             </React.Fragment>
         )
     }
