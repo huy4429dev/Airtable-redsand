@@ -1,0 +1,33 @@
+.modal-user{
+    position: relative !important;
+    top: -10%;
+    left: 28%;
+    width: 20rem !important;
+    color: #6b778c;
+    &__input{
+        background: #fff;
+        border: none;
+        box-shadow: inset 0 0 0 2px #0079bf;
+        width: 100%;
+        padding: 0.5rem 0.3rem;
+    }
+    &__btn{
+        display: block;
+        text-align: center;
+        width: 100%;
+        border: none;
+        background-color: #5aac44;
+        border-radius: 4px;
+        padding: 0.4rem 0.3rem;
+        color : #fff;
+        outline: none !important;
+        &:hover{
+            background-color: #61bd4f;
+        }
+    }
+    &__close{
+        right: 6%;
+        top: 9%;
+        color: #6b778c;
+    }
+}

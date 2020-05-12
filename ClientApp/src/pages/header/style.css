@@ -1,3 +1,11 @@
+.form-filter-information{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
 .header{
     background-color: #026aa7;
     width: 100%;
@@ -8,6 +16,7 @@
     position: relative;
     z-index: 1000;
 }
+
 .header-left{
     display: flex;
 }
@@ -74,8 +83,22 @@
     background-color: #dfe1e6;
     line-height: 34px;
 }
+
+.user:hover{
+    background-color: #bcbec4;
+}
 .header-form{
     width: 20rem;
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+}
+
+.header-form-second{
+    width: 25rem;
     position: absolute;
     top: 3rem;
     right: 1rem;
@@ -89,4 +112,37 @@
 }
 .hr{
     width: 94%;
+}
+.show-lable{
+    font-size: 0.9rem;
+}
+
+.show-lable:hover{
+    color: rgb(47, 33, 170);
+}
+
+.lable-top{
+    font-size: 0.9rem;
+}
+
+.toggler-nocation{
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+}
+
+.nocation-button-top{
+    background-color: #ccc;
+}
+
+.form-nacation{
+    background-color: #f4f6f7;
+}
+
+.infomation-img{
+    width: 100%;
+}
+
+.form-create-span{
+    font-size: 0.7rem;
 }

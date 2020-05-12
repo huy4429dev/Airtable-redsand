@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Col, Button, Label } from 'reactstrap';
-import './style.css';
+
 class SizeBar extends Component {
     render() {
         return (
