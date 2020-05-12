@@ -21,6 +21,8 @@ namespace ProjectManage.Data
         public DbSet<TaskComment> TaskComments { get; set; }
         public DbSet<TaskAttach> TaskAttaches { get; set; }
         public DbSet<ProjectHistory> ProjectHistories { get; set; }
+        public DbSet<Background> Backgrounds { get; set; }
+        public DbSet<ProjectRecently> ProjectRecentlies { get; set; }
 
         override protected void OnModelCreating(ModelBuilder builder)
         {
@@ -43,6 +45,7 @@ namespace ProjectManage.Data
 
               1. n - n: User - Project
               2. n - n: User - Task
+              3. n - n: User - ProjectRecently
 
             */
 
@@ -80,6 +83,24 @@ namespace ProjectManage.Data
                 .HasOne(bc => bc.Task)
                 .WithMany(c => c.UserTasks)
                 .HasForeignKey(bc => bc.TaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //===================== 3 ========================
+
+
+            builder.Entity<ProjectRecently>()
+                .HasKey(bc => new { bc.Id});
+
+            builder.Entity<ProjectRecently>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.ProjectRecentlies)
+                .HasForeignKey(bc => bc.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ProjectRecently>()
+                .HasOne(bc => bc.Project)
+                .WithMany(c => c.ProjectRecentlies)
+                .HasForeignKey(bc => bc.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

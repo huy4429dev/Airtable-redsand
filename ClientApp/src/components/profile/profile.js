@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import './style.css';
 class Profile extends Component {
     render() {
         return (
-            <div>
-                aaaa
-            </div>
+           <div>
+               
+           </div>
         );
     }
 }

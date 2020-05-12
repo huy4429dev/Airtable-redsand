@@ -7,9 +7,8 @@ import Login from './components/account/Login';
 import HeaderPage from './pages/header/HeaderPage';
 import Boards from './pages/boards/Boards';
 import BoardAdd from './pages/boards/BoardAdd';
-// import Index from './components/profile/Index';
-import Profile from './components/profile/profile';
-// import Index from './components/profile/Index';
+import Profile from './components/profile/Profile';
+
 const routes = [
     {
         path: '/',
@@ -20,6 +19,11 @@ const routes = [
         path: '/detailt',
         exact: true,
         main: () => <Detailt/>
+    },
+    {
+        path: '/profile',
+        exact: true,
+        main: () => <Profile/>
     },
     {
         path: '/add_project',
@@ -34,7 +38,7 @@ const routes = [
     {
         path:'/boards',
         exact:false,
-        main:()=> <Boards/>
+        main:({history})=> <Boards history={history}/>
     },
     {
         path: '/sigup',
@@ -50,11 +54,6 @@ const routes = [
         path: '',
         exact: false,
         main: () => <NotFound />
-    }, 
-    {
-        path: '/profile',
-        exact: false,
-        main: () => <Profile />
     },
 
 ];

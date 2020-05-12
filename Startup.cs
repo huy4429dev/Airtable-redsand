@@ -100,6 +100,16 @@ namespace ProjectManage
                     // };
                 });
 
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuthNSection["88295671040-1qd369uj90dgl3ab8dbv7bj4lq8q7n95.apps.googleusercontent.com"];
+                    options.ClientSecret = googleAuthNSection["37HAGU5SsV43KDrlnvQ39Dvc"];
+                });
+
             services.AddCors();
             services.AddControllersWithViews();
 
