@@ -54,7 +54,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state, showModalAddUserTask: false }
 
         case types.ADD_LIST_TASK_SUCCESS:
-            return { ...state, listTask: state.listTask.concat(action.data)}
+            return { ...state, listTask: state.listTask.concat(action.data) }
 
         case types.ADD_LIST_TASK_FAILE:
             return { ...state }
@@ -68,22 +68,20 @@ const detailtProjectReducers = (state = initialState, action) => {
 
         case types.ADD_TASK_SUCCESS:
             var task = action.data;
-            index = findTaskInListTask(state.listTask, task);
-            var slice = state.listTask.slice(index,index+1);
-            var newTasks = [...slice,slice[0].tasks = slice[0].tasks.concat(task)];
+            index = state.listTask.findIndex(item => item.id == task.listTaskId);
+            console.log('xxxxxxxxxxxxxxxxxx', index, task)
+            if (index >= 0) {
+                state.listTask[index].tasks = [
+                    ...state.listTask[index].tasks,
+                    task
+                ];
+            }
 
-            const test = [
-                ...state.listTask.slice(0,index),
-                newTasks,
-                ...state.listTask.slice(index + 1)
-            ];
             return {
                 ...state,
                 hideFormAddTask: false,
-                showButtonAddTask: true,
-                listTask : test
+                showButtonAddTask: true
             }
-
         case types.ADD_TASK_FAILE:
             return { ...state }
 
@@ -91,16 +89,16 @@ const detailtProjectReducers = (state = initialState, action) => {
             return state
     }
 }
-const findTaskInListTask = (listTask, task) => {
-    var index = -1;
-    if (listTask.length > 0) {
-        for (var i = 0; i < listTask.length; i++) {
-            if (listTask[i].id === task.listTaskId) {
-                index = i;
-                break;
-            }
-        }
-    }
-    return index;
-}
+// const findTaskInListTask = (listTask, task) => {
+//     var index = -1;
+//     if (listTask.length > 0) {
+//         for (var i = 0; i < listTask.length; i++) {
+//             if (listTask[i].id === task.listTaskId) {
+//                 index = i;
+//                 break;
+//             }
+//         }
+//     }
+//     return index;
+// }
 export default detailtProjectReducers;
