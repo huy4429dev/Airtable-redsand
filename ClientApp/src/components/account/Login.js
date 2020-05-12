@@ -37,6 +37,13 @@ class Login extends Component {
         }
         loginUser(user);
     }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps && nextProps.login){
+            this.setState({
+                login  :true
+            })
+        }
+    }
     render() {
         if( this.state.login){
             return <Redirect to ="/boards"/>
@@ -91,5 +98,6 @@ class Login extends Component {
 
 export default (connect(Login, state => (
     {
+        login : state.userReducer.login
     }
     ),actions));
