@@ -1,0 +1,44 @@
+.modal-user-task__img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 0.8rem;
+}
+.modal-user-task__nav{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.modal-user-task__list{
+    background-color: rgba(9,30,66,.04);
+    padding: 0.3rem 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    cursor: pointer;
+}
+.modal-user-task__card{
+    padding: 0.5rem 0.5rem !important;
+}
+.modal-user-task__input{
+    width: 100%;
+    padding: 0.3rem 0.3rem;
+    background-color: #fafbfc;
+    border: none;
+    box-shadow: inset 0 0 0 2px #dfe1e6;
+    color: #172b4d;
+    box-sizing: border-box;
+    border-radius: 3px;
+    display: block;
+    line-height: 20px;
+    margin-bottom: 12px;
+    &:focus{
+        outline: none;
+        box-shadow: inset 0 0 0 2px #0079bf;
+        background: #fff;
+        border-radius: 4px;
+    }
+}
+.modal-deadline__close{
+    cursor: pointer;
+}

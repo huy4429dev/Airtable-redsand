@@ -1,0 +1,29 @@
+$text-white : #fff;
+.form-list-task{
+    padding: 0.3rem 0.3rem;
+    &__innput{
+        background: $text-white;
+        border: none;
+        box-shadow: inset 0 0 0 2px #0079bf;
+        display: block;
+        margin: 0;
+        transition: margin 85ms ease-in;
+        width: 100%;
+        padding: 0.2rem 0.5rem;
+    }
+    &__btn{
+        background-color: #5aac44;
+        border: none;
+        margin: 0.2rem 0.2rem 0rem 0rem ;
+        padding: 0.2rem 0.4rem ;
+        border-radius: 2px;
+        color: $text-white;
+        &:focus{
+            outline: none;
+        }
+    }
+    &__close{
+        margin: 0.7rem 0.4rem;
+        color: #6b778c;
+    }
+}
