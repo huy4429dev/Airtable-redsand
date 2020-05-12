@@ -38,7 +38,7 @@ class Home extends Component {
                                 </p>
                             </Col>
                             <Col sm={6} xs={12}>
-                                <img src={hero} />
+                                <img src={hero} alt ="hinh"/>
                             </Col>
                         </Row>
                     </Container>
@@ -54,17 +54,17 @@ class Home extends Component {
                                     <p className=" content__desc">
                                         Dù là cho công việc, dự án phụ hay kỳ nghỉ cùng gia đình sắp tới, Trello sẽ luôn giúp tổ chức sắp xếp nhóm của bạn.
                                     </p >
-                                    <a href="#"><Button variant="secondary">Bắt đầu làm việc nhóm</Button></a>
+                                    <a href="#to"><Button variant="secondary">Bắt đầu làm việc nhóm</Button></a>
                                 </Col>
                                 <Col sm={6} xs={12}>
-                                    <img  src={a1} className="content__img" />
+                                    <img  src={a1} className="content__img" alt="hinh"/>
                                 </Col>
                             </Row>
                         </section>
                         <section>
                             <Row>
                                 <Col sm={6} xs={12} className="d-flex justify-content-center">
-                                    <img  src={mobile} className="content__mobile" />
+                                    <img  src={mobile} className="content__mobile" alt="hinh"/>
                                 </Col>
                                 <Col sm={6} xs={12}>
                                     <h3 className="mt-5 content__title">
@@ -87,7 +87,7 @@ class Home extends Component {
                                     </p >          
                                 </Col>
                                 <Col sm={6} xs={12}>
-                                    <img  src={butler} className="content__mobile" />
+                                    <img  src={butler} className="content__mobile" alt="hinh"/>
                                 </Col>
                             </Row>
                         </section>
@@ -100,27 +100,27 @@ class Home extends Component {
                             </Row>
                             <Row>
                                 <Col sm="4" xs="12" className="text-center">
-                                    <img src={img1} className="content__image"/>
+                                    <img src={img1} className="content__image" alt="hinh"/>
                                     <h3 className=" content__title">
                                     Playbook nhóm
                                     </h3>
                                     <p className="content__desc">
                                     Thật dễ dàng để thúc đẩy nhóm của bạn lên và hoạt động với Trello. Chúng tôi đã thu thập tất cả các bảng và công cụ bạn cần để thành công trong một nguồn lực có sẵn.
                                     </p >
-                                    <a href="#"><Button  className="content__btn" variant="secondary">Lập kế hoạch chơi game</Button></a>
+                                    <a href="#to"><Button  className="content__btn" variant="secondary">Lập kế hoạch chơi game</Button></a>
                                 </Col>
                                 <Col sm="4" xs="12" className="text-center">
-                                    <img src={img2} className="content__image"/>
+                                    <img src={img2} className="content__image" alt="hinh"/>
                                     <h3 className=" content__title">
                                     Nền tảng Hiệu quả
                                     </h3>
                                     <p className="content__desc">
                                     Thật dễ dàng để thúc đẩy nhóm của bạn lên và hoạt động với Trello. Chúng tôi đã thu thập tất cả các bảng và công cụ bạn cần để thành công trong một nguồn lực có sẵn.
                                     </p >
-                                    <a href="#"><Button className="content__btn"  variant="secondary">Mở rộng quy trình làm việc của bạn</Button></a>
+                                    <a href="#to"><Button className="content__btn"  variant="secondary">Mở rộng quy trình làm việc của bạn</Button></a>
                                 </Col>
                                 <Col sm="4" xs="12" className="text-center">
-                                    <img src={img3} className="content__image"/>
+                                    <img src={img3} className="content__image" alt="hinh"/>
                                     <h3 className=" content__title">
                                     Luôn Đồng bộ
                                     </h3>
@@ -134,7 +134,7 @@ class Home extends Component {
                             <Row className="content__box mt-5 d-flex flex-column justify-content-center align-items-center text-white" >
                                 <h3 className="mt-5" >Bắt đầu lên kế hoạch hôm nay</h3>
                                 <p>Các công ty thuộc mọi hình dạng và kích thước đều sử dụng Trello.</p>
-                                <a>
+                                <a href="#to">
                                     <Button variant="primary" className="mb-5">Tìm hiểu cách</Button>
                                 </a>
                             </Row>
@@ -144,7 +144,7 @@ class Home extends Component {
                                 <Col sm="4" className="offset-sm-4 text-center">
                                     <h3 className="mt-5 content__title ">Làm việc thông minh hơn với Trello</h3>
                                         <p className="content__desc">Đăng ký và trở thành một trong hàng triệu người trên thế giới sử dụng Trello để hoàn thành nhiều công việc hơn.</p>
-                                        <a>
+                                        <a href="#to">
                                             <Button  variant="success" className="mb-5">Bắt đầu - miễn phí</Button>
                                         </a>
                                 </Col>

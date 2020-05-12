@@ -49,7 +49,7 @@ namespace ProjectManage.Controllers
                     {
                         file.CopyTo(stream);
                     }
-                    model.url = dbPath;
+                    model.url = fileName;
                     model.size = file.Length;
                     model.CreatedAt = new DateTime();
 
