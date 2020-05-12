@@ -55,7 +55,9 @@ namespace ProjectManage.Controllers
                         .Select(h => new {
                             content = h.Content,
                             time = h.CreatedAt,
-                            fullname = h.User.FullName
+                            fullname = h.User.FullName,
+                            userId =  h.User.Id
+
                         })
                         .ToListAsync();
             return Ok(data);

@@ -37,10 +37,10 @@ class Login extends Component {
         }
         loginUser(user);
     }
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps){
         if(nextProps && nextProps.login){
             this.setState({
-                login  :true
+                login:true
             })
         }
     }
@@ -69,8 +69,8 @@ class Login extends Component {
                                 <Button className="btn-login" color="success" type="submit" bssize="lg" block>Đăng Nhập</Button>
                             </FormGroup>
                         </Form>
-                        <FormGroup>
-                            <h5 className="text-center ">OR</h5>
+                        <FormGroup className="text-center">
+                            <span className="text-center ">OR</span>
                         </FormGroup>
                         <FormGroup>
                             <Button outline color="info" bssize="lg" block>

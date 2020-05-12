@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjectManage.Data;
@@ -9,9 +10,10 @@ using ProjectManage.Data;
 namespace ProjectManage.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200511011316_create_table_backgroundS")]
+    partial class create_table_backgroundS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,28 +318,6 @@ namespace ProjectManage.Migrations
                     b.ToTable("ProjectHistories");
                 });
 
-            modelBuilder.Entity("ProjectManage.Models.ProjectRecently", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("ProjectId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ProjectRecentlies");
-                });
-
             modelBuilder.Entity("ProjectManage.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -639,21 +619,6 @@ namespace ProjectManage.Migrations
 
                     b.HasOne("ProjectManage.Models.ApplicationUser", "User")
                         .WithMany("ProjectHistories")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProjectManage.Models.ProjectRecently", b =>
-                {
-                    b.HasOne("ProjectManage.Models.Project", "Project")
-                        .WithMany("ProjectRecentlies")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectManage.Models.ApplicationUser", "User")
-                        .WithMany("ProjectRecentlies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

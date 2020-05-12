@@ -1,5 +1,4 @@
 import * as types from  './../constansts/user';
-import callApi from './../apis/ajax';
 
 
 export const siginUser = (user) =>{

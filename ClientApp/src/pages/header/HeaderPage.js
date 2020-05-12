@@ -1,52 +1,44 @@
 import React, { Component } from 'react';
 import './style.css';
-import { Link } from 'react-router-dom';
-import { Form, FormGroup, Button, Label } from 'reactstrap';
-import ModalAddProject from './../../components/modalAddProject';
+import { Button } from 'reactstrap';
+import FormUser from './../../components/ListHeader/FormUser';
+import FormNocation from './../../components/ListHeader/FormNocation';
+import Infomation from './../../components/ListHeader/Infomation';
+import FormCreate from './../../components/ListHeader/FormCreate';
 import * as actions from './../../actions/header';
 import connect from './../../lib/connect';
+import { Link } from 'react-router-dom';
 
 class HeaderPage extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             isActive: false,
-            isActiveNocation: false
+            isActiveNocation: false,
+            isActiveInfomation:false,
+            isActiveCreate:false
         }
     }
     handleShowFormUser = () => {
         this.setState({
-            isActive: true
+            isActive: !this.state.isActive
         })
     }
-    handleHideFormUser = () => {
+    handleShowFormNocation = () => {
         this.setState({
-            isActive: false
+            isActiveNocation: !this.state.isActiveNocation
+        })
+    }
+    handleShowFormInfomation=()=>{
+        this.setState({
+            isActiveInfomation:!this.state.isActiveInfomation
         })
     }
 
-    handleShowFormNocation = () => {
+    handleShowFormCreate=()=>{
         this.setState({
-            isActiveNocation: true
+            isActiveCreate:!this.state.isActiveCreate
         })
-    }
-    handleHideFormNocation = () => {
-        this.setState({
-            isActiveNocation: false
-        })
-    }
-    hideModalAddProject = () => {
-        const { showModalAddProject } = this.props;
-        const { hideModalAddProject } = this.props.actions;
-        if (showModalAddProject) {
-            return (
-                <ModalAddProject hideModalAddProject={hideModalAddProject} />
-            )
-        }
-    }
-    showModalAddProject = () => {
-        const { showModalAddProject } = this.props.actions;
-        showModalAddProject();
     }
 
     render() {
@@ -54,10 +46,10 @@ class HeaderPage extends Component {
             <React.Fragment>
                 <div className="header">
                     <div className="header-left">
-                        <Button className="ml-2 header__btn" ><i className='fas fa-th'></i></Button>
-                        <Link to="/boards"><Button className="ml-1  header__btn" ><i className='fas fa-home'></i></Button></Link>
-                        <Button className="ml-1 d-flex align-items-center  header__btn" ><i className="material-icons">dashboard</i>Boards</Button>{' '}
-
+                        <Button className="ml-2" color="info"><i className='fas fa-th'></i></Button>
+                        <Button  className="ml-1" color="info"><Link className="text-white" to ='/boards'><i className='fas fa-home'></i>  </Link></Button>
+                      
+                        <Button className="ml-1 d-flex align-items-center" color="info"><i className="material-icons">dashboard</i>Boards</Button>{' '}
                         <div>
                             <div className="searchbar">
                                 <input className="search_input" type="text" name="" placeholder="Search..." />
@@ -66,51 +58,30 @@ class HeaderPage extends Component {
                         </div>
                     </div>
                     <div className="header-right">
-                        <Button onClick={this.showModalAddProject} className=" header__btn d-flex align-items-center" ><i className="material-icons">add</i></Button>
-                        <Button className="ml-1  header__btn" ><i className="fas fa-exclamation-circle"></i></Button>{' '}
-                        <Button onClick={this.handleShowFormNocation} className="ml-1 mr-1  header__btn"  ><i className='far fa-bell'></i></Button>
+                        <Button onClick={this.handleShowFormCreate} className=" d-flex align-items-center" color="info"><i className="material-icons">add</i></Button>{' '}
+                        <Button onClick={this.handleShowFormInfomation} className="ml-1" color="info"><i className="fas fa-exclamation-circle"></i></Button>{' '}
+                        <Button onClick={this.handleShowFormNocation} className="ml-1 mr-1" color="info"><i className='far fa-bell'></i></Button>{' '}
                         <div onClick={this.handleShowFormUser} className="user mr-2 text-center">VH</div>
                     </div>
 
                 </div>
-                {/* start form user */}
                 {this.state.isActive ?
-                    <Form className="header-form">
-                        <FormGroup className="d-flex align-items-center justify-content-between mt-2">
-                            <span className="header-form-top">Văn Hà</span>
-                            <i onClick={this.handleHideFormUser} className="fa fa-close mr-2"></i>
-                        </FormGroup>
-                        <hr className="hr"></hr>
-                        <Button outline color="light border border-0 text-left text-dark" block>Profile and Visibility</Button>
-                        <Button outline color="light border border-0 text-left text-dark" block>Activity</Button>{' '}
-                        <Button outline color="light border border-0 text-left text-dark" block>Cards</Button>{' '}
-                        <hr className="hr"></hr>
-                        <Button outline color="light border border-0 text-left text-dark" block>Settings</Button>{' '}
-                        <Button outline color="light border border-0 text-left text-dark" block>Help</Button>{' '}
-                        <hr className="hr"></hr>
-                        <Button outline color="light border border-0 text-left text-dark mb-3" block>Log Out</Button>{' '}
-                    </Form>
+                    <FormUser onClick={this.handleShowFormUser} />
                     : null}
-                {/* end form user */}
-                {/* start form nocation */}
                 {this.state.isActiveNocation ?
-                    <Form className="header-form">
-                        <FormGroup className="d-flex align-items-center justify-content-between mt-2">
-                            <span className="header-form-top">Notifications</span>
-                            <i onClick={this.handleHideFormNocation} className="fa fa-close mr-2"></i>
-                        </FormGroup>
-                        <hr className="hr"></hr>
-                        <FormGroup>
-                            <Button outline color="light border border-0 text-left text-dark" block>Profile and Visibility</Button>
-                            <Label className="ml-3">Project</Label>
-
-                        </FormGroup>
-                    </Form>
-
+                    <FormNocation onClick={this.handleShowFormNocation} />
                     : null}
+       
+                {this.state.isActiveInfomation?
+                    <Infomation onClick={this.handleShowFormInfomation}/>
+                    :null
+                }
 
-                {/* end form nocation */}
-                {this.hideModalAddProject()}
+                {this.state.isActiveCreate?
+                    <FormCreate onClick={this.handleShowFormCreate}/>
+                    :null
+                }
+                {/* <Boards /> */}
             </React.Fragment>
         );
     }
