@@ -99,10 +99,21 @@ export const handleAddListTask = (data) =>{
 
 export const getListTask = (userId) =>{
     return {
-        url:`${types.API_ENDPOINT}/${types.URL_LIST_TASK}`,
+        url:`${types.API_ENDPOINT}/${types.URL_LIST_TASK}?projectId=${userId}`,
         method:types.API_METHOD_GET,
         onSuccess:types.GET_LIST_TASK_SUCCESS,
         onError:types.GET_LIST_TASK_FAILE
     }
 }
 // get list task
+
+export const handleAddTask = (task) =>{
+    return {
+        url:`${types.API_ENDPOINT}/${types.URL_TASK}`,
+        data:task,
+        method:types.API_METHOD_POST,
+        onSuccess:types.ADD_TASK_SUCCESS,
+        onError:types.ADD_TASK_FAILE
+    }
+}
+// add task

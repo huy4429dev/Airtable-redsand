@@ -20,7 +20,8 @@ class Detailt extends Component {
         super(props);
 
         this.state = {
-            data: data
+            data: data,
+            data1: null
         }
     }
 
@@ -102,7 +103,7 @@ class Detailt extends Component {
     };
     hideFormAddListTask = () => {
         const { showFormAddListTask } = this.props;
-        const { handleHideFormAddListTask,handleAddListTask } = this.props.actions;
+        const { handleHideFormAddListTask, handleAddListTask } = this.props.actions;
         if (showFormAddListTask) {
             return (
                 <FormAddListTask
@@ -162,18 +163,81 @@ class Detailt extends Component {
     }
     componentDidMount() {
         const { getListTask } = this.props.actions;
+        const { showButtonAddTask, idListTask, listTask } = this.props;
         const userId = 1;
         getListTask(userId);
+        if (listTask !== null) {
+            this.setState({
+                data1: listTask
+            })
+        }
     }
-    
+    show = () => {
+        const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask,handleAddTask } = this.props.actions;
+        const { showButtonAddTask, idListTask, listTask, hideFormAddTask } = this.props;    
+        if (listTask !== null) {
+            return (
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <Droppable droppableId="all-column" direction="horizontal" type="column">
+                        {(provided) => (
+                            <div className="detailt__list-box mt-2 d-flex"
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}>
+                                { 
+                                    listTask.map((columnId, index) => {
+                                        const column = columnId.id;
+                                        const tasks = columnId.tasks;   
+                                        return (<ListTasks 
+                                            key={index} 
+                                            column={column}
+                                            columnId={columnId}
+                                            tasks={tasks} index={index}
+                                            hideFormAddTask={hideFormAddTask}
+                                            handleShowFormAddTask={handleShowFormAddTask}
+                                            handleHideFormAddTask={handleHideFormAddTask}
+                                            showButtonAddTask={showButtonAddTask}
+                                            handleShowModalDetailtTask={handleShowModalDetailtTask}
+                                            idListTask={idListTask} 
+                                            handleAddTask ={handleAddTask}/>)
+                                    })
+                                }
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            )
+        }
+    }
     render() {
-        const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask } = this.props.actions;
-        const { showButtonAddTask, idListTask,listTask } = this.props;
-        
+        // const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask } = this.props.actions;
+        // const { showButtonAddTask, idListTask, listTask } = this.props;
         return (
             <React.Fragment>
                 <HeaderPage />
                 <div style={{ backgroundImage: `url('${bgr}')` }} className="detailt">
+                    <div className="detailt__box">
+                        <div className="d-flex justify-content-between align-items-center mt-3">
+                            <div>
+                                <input className="detailt__name" defaultValue="linh" />
+                                <button className="detailt__btn"><i className="far fa-star"></i></button>
+                                <button className="detailt__btn">Nhóm cá nhân</button>
+                                <button className="detailt__btn"><i className="fas fa-user-friends mr-1"></i>Hiện với nhóm</button>
+                                <Image src={bgr} className="detailt__avatar" roundedCircle />
+                                <button className="detailt__btn" onClick={this.handleShowModalAddUser} >Mời</button>
+                            </div>
+                            <button className="detailt__btn">Hiện menu</button>
+                        </div>
+                        {this.showButtonAddListTask()}
+                        {this.hideFormAddListTask()}
+                        {this.show()}
+                    </div>
+                    {this.hideModalAddUser()}
+                </div>
+                {this.showModalEditDeadlineTask()}
+                {this.hideModalDetailtTask()}
+                {this.showModalAddUserTask()}
+                {/* <div style={{ backgroundImage: `url('${bgr}')` }} className="detailt">
                     <div className="detailt__box">
                         <div className="d-flex justify-content-between align-items-center mt-3">
                             <div>
@@ -198,7 +262,6 @@ class Detailt extends Component {
                                             const column = this.state.data.columns[columnId];
                                             const tasks = column.taskIds.map(taskId => this.state.data.tasks[taskId]);
                                             const { hideFormAddTask } = this.props;
-
                                             return (<ListTasks key={column.id} column={column}
                                                 tasks={tasks} index={index}
                                                 hideFormAddTask={hideFormAddTask}
@@ -218,7 +281,7 @@ class Detailt extends Component {
                 </div>
                 {this.showModalEditDeadlineTask()}
                 {this.hideModalDetailtTask()}
-                {this.showModalAddUserTask()}
+                {this.showModalAddUserTask()} */}
             </React.Fragment>
         )
     }
