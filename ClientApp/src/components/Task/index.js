@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import { Draggable } from 'react-beautiful-dnd';
+import Attachment from './component/Attachment'
 import './style.scss';
 
 class Task extends Component {
@@ -17,7 +18,9 @@ class Task extends Component {
                         >
                             <Card.Body className="card__task">
                                 <p className="card__task-title">{this.props.task.content}</p>
+
                             </Card.Body>
+                            <Attachment></Attachment>
                         </Card>
                     )}
                 </Draggable>

@@ -8,6 +8,7 @@ using ProjectManage.Models;
 
 namespace ProjectManage.Controlers
 {
+[Route("admin")]
     public class AdminController : ControllerBase
     {
         ApplicationDbContext ctx;
