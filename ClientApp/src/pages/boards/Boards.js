@@ -4,17 +4,41 @@ import './style.css';
 import SizeBar from './../../components/boards/SizeBar';
 import BoardList from './../../components/boards/BoardList';
 import HeaderPage from './../header/HeaderPage';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { actShowProjectReques, actShowProjectReccentlyRequest } from './../../actions/board';
 import BoardsListItem from '../../components/boards/BoardsListItem';
 import BoardRecentlyList from '../../components/boards/BoardRecentlyList';
 import BoardRecentlyItem from '../../components/boards/BoardRecentlyItem';
+import * as actions from './../../actions/board';
+import connect from '../../lib/connect';
 class Boards extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state={
+            project:[],
+            projectRecently:[]
+        }
+    }
     
+
+
     componentDidMount() {
+        const { actShowProjectReques ,actShowProjectReccentlyRequest } = this.props.actions;
+        const { project,projectRecently } = this.props;
         const userId = localStorage.userId;
-        this.props.fectProjectBoard(userId);
-        this.props.fetchBoardRecently(userId);
+        actShowProjectReques(userId);
+        
+        if (project !== []) {
+            this.setState({
+                project: project
+            })
+        }
+        actShowProjectReccentlyRequest(userId);
+        if(projectRecently !==[]){
+            this.setState({
+                projectRecently:projectRecently
+            })
+        }
     }
     showProjectBoard = (project) => {
         var resoult = [];
@@ -71,21 +95,9 @@ class Boards extends Component {
         );
     }
 }
-function mapStateToProps(state) {
-    return {
-        project: state.boardReducer.project,
-        projectRecently: state.boardReducer.projectRecently
+export default (connect(Boards, state => (
+    {
+        project:state.boardReducer.project,
+        projectRecently:state.boardReducer.projectRecently
     }
-}
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        fectProjectBoard: (userId) => {
-            dispatch(actShowProjectReques(userId));
-        },
-        fetchBoardRecently: (userId) => {
-            dispatch(actShowProjectReccentlyRequest(userId));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Boards);
+), actions));
