@@ -1,5 +1,6 @@
 export const API_ENDPOINT ='https://localhost:5001';
 export const URL_LIST_TASK = 'api/list-task';
+export const URL_TASK = 'api/task';
 
 export const API_METHOD_POST = 'POST';
 export const API_METHOD_GET = "GET";
@@ -29,3 +30,6 @@ export const ADD_LIST_TASK_FAILE = "ADD_LIST_TASK_FAILE";
 
 export const GET_LIST_TASK_SUCCESS = "GET_LIST_TASK_SUCCESS";
 export const GET_LIST_TASK_FAILE = "GET_LIST_TASK_FAILE";
+
+export const ADD_TASK_SUCCESS = "ADD_TASK_SUCCESS";
+export const ADD_TASK_FAILE = "ADD_TASK_FAILE";
