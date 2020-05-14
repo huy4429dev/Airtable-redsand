@@ -117,3 +117,14 @@ export const handleAddTask = (task) =>{
     }
 }
 // add task
+
+export const handleEditNameProject = (idProject,project) =>{
+    return {
+        url:`${types.API_ENDPOINT}/${types.URL_PROJECT}/${idProject}`,
+        data:project,
+        method:types.API_METHOD_PUT,
+        onSuccess:types.EDIT_PROJECT_SUCCESS,
+        onError:types.EDIT_PROJECT_FAILE
+    }
+}
+// edit project

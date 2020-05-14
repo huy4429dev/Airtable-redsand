@@ -69,36 +69,31 @@ const detailtProjectReducers = (state = initialState, action) => {
         case types.ADD_TASK_SUCCESS:
             var task = action.data;
             index = state.listTask.findIndex(item => item.id == task.listTaskId);
-            console.log('xxxxxxxxxxxxxxxxxx', index, task)
             if (index >= 0) {
                 state.listTask[index].tasks = [
                     ...state.listTask[index].tasks,
                     task
                 ];
             }
-
             return {
                 ...state,
                 hideFormAddTask: false,
                 showButtonAddTask: true
             }
+
         case types.ADD_TASK_FAILE:
             return { ...state }
+
+        case types.EDIT_PROJECT_SUCCESS:
+            return { ...state}
+    
+        case types.EDIT_PROJECT_FAILE:
+            return { ...state }
+    
 
         default:
             return state
     }
 }
-// const findTaskInListTask = (listTask, task) => {
-//     var index = -1;
-//     if (listTask.length > 0) {
-//         for (var i = 0; i < listTask.length; i++) {
-//             if (listTask[i].id === task.listTaskId) {
-//                 index = i;
-//                 break;
-//             }
-//         }
-//     }
-//     return index;
-// }
+
 export default detailtProjectReducers;

@@ -21,7 +21,11 @@ class Detailt extends Component {
 
         this.state = {
             data: data,
-            data1: null
+            data1: null,
+            name : 'linh',
+            widthInput: null,
+            titleProject: null,
+            idProject: 1
         }
     }
 
@@ -173,8 +177,8 @@ class Detailt extends Component {
         }
     }
     show = () => {
-        const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask,handleAddTask } = this.props.actions;
-        const { showButtonAddTask, idListTask, listTask, hideFormAddTask } = this.props;    
+        const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask, handleAddTask } = this.props.actions;
+        const { showButtonAddTask, idListTask, listTask, hideFormAddTask } = this.props;
         if (listTask !== null) {
             return (
                 <DragDropContext onDragEnd={this.onDragEnd}>
@@ -183,12 +187,12 @@ class Detailt extends Component {
                             <div className="detailt__list-box mt-2 d-flex"
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
-                                { 
+                                {
                                     listTask.map((columnId, index) => {
                                         const column = columnId.id;
-                                        const tasks = columnId.tasks;   
-                                        return (<ListTasks 
-                                            key={index} 
+                                        const tasks = columnId.tasks;
+                                        return (<ListTasks
+                                            key={index}
                                             column={column}
                                             columnId={columnId}
                                             tasks={tasks} index={index}
@@ -197,8 +201,8 @@ class Detailt extends Component {
                                             handleHideFormAddTask={handleHideFormAddTask}
                                             showButtonAddTask={showButtonAddTask}
                                             handleShowModalDetailtTask={handleShowModalDetailtTask}
-                                            idListTask={idListTask} 
-                                            handleAddTask ={handleAddTask}/>)
+                                            idListTask={idListTask}
+                                            handleAddTask={handleAddTask} />)
                                     })
                                 }
                                 {provided.placeholder}
@@ -208,6 +212,31 @@ class Detailt extends Component {
                 </DragDropContext>
             )
         }
+    }
+    setWidthInput = (e) => {
+        const { target } = e;
+        const { idProject,name} = this.state;
+        const value = target.value;
+        const lengthValue = value.length;
+        const idUser = JSON.parse(localStorage.userId);
+        this.setState({
+            widthInput: lengthValue,
+            name : value
+        })
+        const project = {
+            name : name,
+            thumb : "hh",
+            managerId : idUser,
+            userProjects : [
+                {
+                    userId : idUser,
+                    projectId : idProject
+                }
+            ]
+        }
+        setTimeout(() => {
+            this.props.actions.handleEditNameProject(idProject,project);
+        },3000);
     }
     render() {
         // const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask } = this.props.actions;
@@ -219,7 +248,7 @@ class Detailt extends Component {
                     <div className="detailt__box">
                         <div className="d-flex justify-content-between align-items-center mt-3">
                             <div>
-                                <input className="detailt__name" defaultValue="linh" />
+                                <input className="detailt__name" defaultValue={ this.state.name} name="name" onChange={this.setWidthInput} style={{ minWidth: `${this.state.widthInput * 9}px` }} />
                                 <button className="detailt__btn"><i className="far fa-star"></i></button>
                                 <button className="detailt__btn">Nhóm cá nhân</button>
                                 <button className="detailt__btn"><i className="fas fa-user-friends mr-1"></i>Hiện với nhóm</button>
