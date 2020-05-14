@@ -53,10 +53,13 @@ class BoardAdd extends Component {
 
     }
     handleUploadImage = (e) => {
-        // const files = e.target.files;
-        // const formData = new FormData();
-        // formData.append('myFile', files[0]);
+        const {actAddFileRequest} = this.props.actions;
+        const files = e.target.files;
+        const formData = new FormData();
+        formData.append('myFile', files[0]);
         // this.props.onAddfile(formData);
+        actAddFileRequest(formData);
+
     }
 
     componentWillMount() {
@@ -145,7 +148,8 @@ class BoardAdd extends Component {
 export default (connect(BoardAdd, state => (
     {
         showimg: state.imgReducer.showimg,
-        project: state.boardReducer.project
+        project: state.boardReducer.project,
+        img:state.boardReducer.img
     }
 ), actions));
 // export default connect(mapStateToProps, mapDispatchToProps)(BoardAdd);

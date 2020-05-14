@@ -15,29 +15,31 @@ export const actShowProjectReccentlyRequest = (userId) => {
     return {
         url: `${types.URL_API}/${types.URL_PROJECT_RECENTLY}?userId=${userId}`,
         method: types.API_METHOT_GET,
-        onSuccess:types.SHOW_PROJECT_RECENTLY
+        onSuccess: types.SHOW_PROJECT_RECENTLY,
+        onError: types.SHOW_PROJECT_RECENTLY_ERROR
     }
 }
 
 //show image
-    export const actShowImageRequest =()=>{
-        return{
-            url:`${types.URL_API}/${types.URL_BACKGROUGT}`,
-            method:types.API_METHOT_GET,
-            onSuccess:types.SHOW_IMAGE
-        }
+export const actShowImageRequest = () => {
+    return {
+        url: `${types.URL_API}/${types.URL_BACKGROUGT}`,
+        method: types.API_METHOT_GET,
+        onSuccess: types.SHOW_IMAGE,
+        onError: types.SHOW_IMAGE_ERROR
     }
+}
 
 //add project
-    export const actAddProjectRequest=(userId,project)=>{
-        return{
-            url:`${types.URL_API}/${types.URL_PROJECT}?userId=${userId}`,
-            data:project,
-            method:types.API_METHOT_POST,
-            onSuccess:types.ADD_PROJECT
-
-        }
+export const actAddProjectRequest = (userId, project) => {
+    return {
+        url: `${types.URL_API}/${types.URL_PROJECT}?userId=${userId}`,
+        data: project,
+        method: types.API_METHOT_POST,
+        onSuccess: types.ADD_PROJECT,
+        onError: types.ADD_PROJECT_ERROR
     }
+}
 
 //add project Recently
 export const actAddRecentlyRequest = (projectRecently) => {
@@ -55,14 +57,15 @@ export const actAddRecently = (projectRecently) => {
 }
 //add file img
 
-    export const actAddFileRequest = (img)=>{
-        return{
-            url:`${types.URL_API}/${types.URL_BACKGROUGT}`,
-            data:img,
-            method:types.API_METHOT_POST,
-            
-        }
+export const actAddFileRequest = (img) => {
+    return {
+        url: `${types.URL_API}/${types.URL_BACKGROUGT}`,
+        data: img,
+        method: types.API_METHOT_POST,
+        onSuccess: types.ADD_FILE_IMG,
+        onError: types.ERRO_IMG
     }
+}
 // export const actAddFileRequest = (img) => {
 //     return dispatch => {
 //         return callApi('background', 'POST', img).then(res => {
