@@ -5,7 +5,9 @@ import Detailt from './pages/DetailtProject';
 import Sigup from './components/account/Sigup';
 import Login from './components/account/Login';
 import HeaderPage from './pages/header/HeaderPage';
-import Boards from './components/boards/Boards';
+import Boards from './pages/boards/Boards';
+import BoardAdd from './pages/boards/BoardAdd';
+//import Profile from './components/profile/Profile';
 
 const routes = [
     {
@@ -16,12 +18,27 @@ const routes = [
     {
         path: '/detailt',
         exact: true,
-        main: () => <Detailt/>
+        main: () => <Detailt />
+    },
+    // {
+    //     path: '/profile',
+    //     exact: true,
+    //     main: () => <Profile />
+    // },
+    {
+        path: '/add_project',
+        exact: false,
+        main: ({ history }) => <BoardAdd history={history} />
     },
     {
         path: '/login',
         exact: false,
         main: () => <Login />
+    },
+    {
+        path: '/boards',
+        exact: false,
+        main: ({ history }) => <Boards history={history} />
     },
     {
         path: '/sigup',
@@ -34,15 +51,11 @@ const routes = [
         main: () => <HeaderPage />
     },
     {
-        path: '/boards',
-        exact: false,
-        main: () => <Boards />
-    },
-    {
         path: '',
         exact: false,
         main: () => <NotFound />
-    }
+    },
+
 ];
 
 export default routes;

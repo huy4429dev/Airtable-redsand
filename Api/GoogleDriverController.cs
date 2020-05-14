@@ -12,6 +12,11 @@ namespace ProjectManage.Controllers
     public class GoogleDriverController : ControllerBase
     {
 
+        [HttpGet]
+        public IActionResult sayHi(){
+            return Ok("done");
+        }
+
         [HttpPost]
         public IActionResult Upload(IFormFile file)
         {

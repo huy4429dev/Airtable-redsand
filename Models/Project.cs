@@ -53,6 +53,14 @@ namespace ProjectManage.Models
 
         public ICollection<ProjectHistory> ProjectHistories { get; set; }
 
+
+            
+        /*==================================
+            project - projectRecently: n - n  
+        */
+
+        public ICollection<ProjectRecently> ProjectRecentlies { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }

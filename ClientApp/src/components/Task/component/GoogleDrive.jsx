@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GooglePicker from 'react-google-picker'
+import GooglePicker from '@peergrade/react-google-picker'
 
 export default class  GoogleDrive extends Component {
     constructor(props) {

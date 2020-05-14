@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.14",
+    "@peergrade/react-google-picker": "^0.0.8",
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "merge": "^1.2.1",
@@ -13,6 +15,7 @@
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-bootstrap": "^1.0.1",
+    "react-datepicker": "^2.15.0",
     "react-datetime-picker": "^3.0.2",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",

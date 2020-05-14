@@ -52,13 +52,14 @@ namespace ProjectManage.Controllers
                          updated = p.UpdatedAt,
                          manager = p.ManagerId,
                          status = p.Status,
+                         thumb = p.Thumb,
                          users = p.UserProjects.Select(du => new
                          {
                              userId = du.User.Id,
                              fullName = du.User.FullName,
                              email = du.User.Email,
                              avatar = du.User.Avatar,
-                         })
+                         }),
 
                      });
 

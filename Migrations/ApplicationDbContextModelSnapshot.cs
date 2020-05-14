@@ -186,6 +186,28 @@ namespace ProjectManage.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ProjectManage.Models.Background", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<float>("size")
+                        .HasColumnType("real");
+
+                    b.Property<string>("url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Backgrounds");
+                });
+
             modelBuilder.Entity("ProjectManage.Models.ListTask", b =>
                 {
                     b.Property<int>("Id")
@@ -292,6 +314,28 @@ namespace ProjectManage.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ProjectHistories");
+                });
+
+            modelBuilder.Entity("ProjectManage.Models.ProjectRecently", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProjectRecentlies");
                 });
 
             modelBuilder.Entity("ProjectManage.Models.Role", b =>
@@ -598,6 +642,21 @@ namespace ProjectManage.Migrations
 
                     b.HasOne("ProjectManage.Models.ApplicationUser", "User")
                         .WithMany("ProjectHistories")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjectManage.Models.ProjectRecently", b =>
+                {
+                    b.HasOne("ProjectManage.Models.Project", "Project")
+                        .WithMany("ProjectRecentlies")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectManage.Models.ApplicationUser", "User")
+                        .WithMany("ProjectRecentlies")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
