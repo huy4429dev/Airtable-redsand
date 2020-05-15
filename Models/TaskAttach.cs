@@ -12,6 +12,7 @@ namespace ProjectManage.Models
         [Required(ErrorMessage = "Vui lòng chọn file")]
         public string Url { get; set; }
 
+        public string Name{get;set;}
         /*=================================== 
               task - taskAttach: 1 - n
 
