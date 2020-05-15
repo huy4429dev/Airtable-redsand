@@ -1,0 +1,148 @@
+.form-filter-information{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+.header{
+    background-color: #026aa7;
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+}
+
+.header-left{
+    display: flex;
+}
+.header-right{
+    display: flex;
+}
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 2rem;
+    background-color: #4e97c2;
+    border-radius: 20px;
+    padding: 3px;
+    margin-left: 0.5rem;
+    }
+
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    /* line-height: 40px; */
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_input{
+    padding: 0;
+    width: 300px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
+
+    .search_icon{
+    height: 25px;
+    width: 25px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration:none;
+    }
+.material-icons{
+        font-size:1rem !important;
+        color: #fff;
+}
+
+
+.btn{
+    padding: 0rem 0.75rem !important;
+}
+.user{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: #dfe1e6;
+    line-height: 34px;
+}
+
+.user:hover{
+    background-color: #bcbec4;
+}
+.header-form{
+    width: 20rem;
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+}
+
+.header-form-second{
+    width: 25rem;
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    z-index: 1;
+    background-color: #fff;
+    box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+}
+.header-form-top{
+    margin-left: 6rem;
+    font-size: 1.5rem;
+}
+.hr{
+    width: 94%;
+}
+.show-lable{
+    font-size: 0.9rem;
+}
+
+.show-lable:hover{
+    color: rgb(47, 33, 170);
+}
+
+.lable-top{
+    font-size: 0.9rem;
+}
+
+.toggler-nocation{
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+}
+
+.nocation-button-top{
+    background-color: #ccc;
+}
+
+.form-nacation{
+    background-color: #f4f6f7;
+}
+
+.infomation-img{
+    width: 100%;
+}
+
+.form-create-span{
+    font-size: 0.7rem;
+}

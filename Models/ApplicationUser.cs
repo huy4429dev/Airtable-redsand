@@ -55,6 +55,14 @@ namespace ProjectManage.Models
 
         public ICollection<ProjectHistory> ProjectHistories { get; set; }
 
+
+        
+        /*==================================
+            user - projectRecently: n - n  
+        */
+
+        public ICollection<ProjectRecently> ProjectRecentlies { get; set; }
+
     }
 
     public class Role : IdentityRole<int>
