@@ -122,11 +122,14 @@ export const handleAddTask = (task) =>{
  
 
 // add attachment
- export const handleShowModalAddAttchment= ()=>{
+ export const handleShowModalAddAttchment= (name,url)=>{
 
      return { 
-         type:types.SHOW_MODAL_ADD_ATTACHMENT
-     }
+         url:`${types.API_ENDPOINT}/${types.URL_TASK}`,
+         method:types.API_METHOD_POST,
+         onSuccess:types.SHOW_MODAL_ADD_ATTACHMENT,
+     
+        }
  }
 
  

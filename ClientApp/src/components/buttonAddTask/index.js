@@ -4,7 +4,7 @@ class ButtonAddTask extends Component {
     handleShowFormAddTask = (columnId) => {
         const { handleShowFormAddTask } = this.props;
         if (handleShowFormAddTask) {
-            handleShowFormAddTask(columnId);
+            handleShowFormAddTask(columnId.id);
         }      
     }
     render() {

@@ -40,7 +40,7 @@ class FormAddListTask extends Component {
                     <form className="form-list-task">
                         <input onChange={this.setValueState} name="title" className="form-list-task__innput" placeholder="Nhập tiêu đề danh sách..." />
                         <div className="d-flex">
-                            <button className="form-list-task__btn" onClick={this.handleAddListTask} >Thêm danh sách</button>
+                            <button className="form-list-task__btn"  onClick={this.handleAddListTask} >Thêm danh sách</button>
                             <i onClick={this.handleHideFormAddListTask} className="fas fa-times form-list-task__close"></i>
                         </div>
                     </form>

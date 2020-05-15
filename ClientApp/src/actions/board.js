@@ -63,6 +63,10 @@ export const actAddRecently = (projectRecently) => {
             
         }
     }
+
+
+    // add attachment
+  
 // export const actAddFileRequest = (img) => {
 //     return dispatch => {
 //         return callApi('background', 'POST', img).then(res => {
