@@ -4,6 +4,7 @@ export const ADD_PROJECT='ADD_PROJECT';
 
 export const URL_BACKGROUGT='background';
 export const ADD_FILE_IMG='ADD_FILE_IMG';
+export const ADD_FILE_IMG_ERROR='ADD_FILE_IMG_ERROR';
 export const SHOW_IMAGE = 'SHOW_IMAGE';
 
 export const URL_PROJECT_RECENTLY='project-recently';

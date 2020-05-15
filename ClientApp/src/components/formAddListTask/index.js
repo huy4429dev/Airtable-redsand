@@ -28,8 +28,8 @@ class FormAddListTask extends Component {
         const data = {
             title : title,
             desc : '',
-            projectId : 1,
-            userId : 1
+            projectId : null,
+            userId : null
         }
         handleAddListTask(data);
     }
