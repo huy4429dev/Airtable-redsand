@@ -12,12 +12,20 @@ class DetailtTask extends Component {
         handleHideModalDetailtTask();
     }
     handleShowModalDeadlineTask = () => {
+       // alert("vao deadline");
+       
         const { handleShowModalDeadlineTask } = this.props;
         handleShowModalDeadlineTask();
     }
     handleShowModalAddUserTask = () => {
         const { handleShowModalAddUserTask } = this.props;
         handleShowModalAddUserTask();
+    }
+    handleAddAttachment=()=>{
+        alert("vao att");
+        
+        const {handleAddAttachment}=this.props;
+        handleAddAttachment();
     }
     render() {
         return (
@@ -65,8 +73,8 @@ class DetailtTask extends Component {
                                     <li className="modal-task__list" onClick={this.handleShowModalDeadlineTask}>
                                         <i className="far fa-clock mr-2"></i>Ngày hết hạn
                                     </li>
-                                    <li className="modal-task__list">
-                                        <i className="fas fa-paperclip mr-2"></i>Đính kèm
+                                    <li className="modal-task__list" onClick={this.handleAddAttachment}>
+                                        <i className="fas fa-paperclip mr-2" ></i>Đính kèm
                                     </li>
                                 </ul>
                             </Col>

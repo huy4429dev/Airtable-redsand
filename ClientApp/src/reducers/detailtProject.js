@@ -11,7 +11,8 @@ const initialState = {
     idListTask: null,
     showModalEditDeadlineTask: false,
     showModalAddUserTask: false,
-    listTask: null
+    listTask: null,
+    showFormAttachment:false
 }
 
 const detailtProjectReducers = (state = initialState, action) => {
@@ -42,7 +43,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state, hideModalAddUser: true }
 
         case types.SHOW_MODAL_DEADLINE_TASK:
-            return { ...state, showModalEditDeadlineTask: true }
+           return { ...state, showModalEditDeadlineTask: true }
 
         case types.HIDE_MODAL_DEADLINE_TASK:
             return { ...state, showModalEditDeadlineTask: false }
@@ -85,8 +86,18 @@ const detailtProjectReducers = (state = initialState, action) => {
         case types.ADD_TASK_FAILE:
             return { ...state }
 
+
+        case types.ADD_ATTACHMENT_SUCCESS:
+            return { ...state,
+            showFormAttachment:true }
+
+       case types.ADD_ATTACHMENT_FAILE:
+           return {...state, showFormAttachment: false } 
+
         default:
             return state
+        
+    
     }
 }
 // const findTaskInListTask = (listTask, task) => {
@@ -101,4 +112,7 @@ const detailtProjectReducers = (state = initialState, action) => {
 //     }
 //     return index;
 // }
+
+
+
 export default detailtProjectReducers;

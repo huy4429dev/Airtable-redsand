@@ -117,3 +117,21 @@ export const handleAddTask = (task) =>{
     }
 }
 // add task
+
+
+// trang _add attchment
+export const handleAddAttachment=()=>{
+     return {
+        // url:`${types.API_ENDPOINT}/${types.URL_TASK}`,
+        // method:types.API_METHOD_POST,
+        // onSuccess:types.ADD_ATTACHMENT_SUCCESS,
+        // onError:types.ADD_ATTACHMENT_FAILE
+         type:types.ADD_ATTACHMENT_SUCCESS
+
+     }
+}
+ export const handleCloseAttachment=()=>{
+     return {
+         type:types.ADD_ATTACHMENT_FAILE
+     }
+ }

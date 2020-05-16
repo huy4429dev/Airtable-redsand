@@ -12,11 +12,13 @@ class ModalDeadlineTask extends Component {
         }
     }
     handleChange = (date) => {
+      
         this.setState({
             startDate : date
         })
     }
     handleHideModalDeadlineTask = ()=>{
+       
         const { handleHideModalDeadlineTask } =this.props;
         handleHideModalDeadlineTask();
     }

@@ -14,6 +14,7 @@ import DetailtTask from '../../components/detailtTask';
 import ModalAddUser from '../../components/modalAddUser';
 import ModalDeadlineTask from '../../components/modalDeadlineTask';
 import ModalAddUserTask from '../../components/modalAddUserTask';
+import FormAttachment from '../../components/formAttachment';
 
 class Detailt extends Component {
     constructor(props) {
@@ -123,13 +124,14 @@ class Detailt extends Component {
     }
     hideModalDetailtTask = () => {
         const { showModalDetailtTask } = this.props;
-        const { handleHideModalDetailtTask, handleShowModalDeadlineTask, handleShowModalAddUserTask } = this.props.actions;
+        const { handleHideModalDetailtTask,handleShowModalDeadlineTask, handleShowModalAddUserTask, handleAddAttachment } = this.props.actions;
         if (showModalDetailtTask) {
             return (
                 <DetailtTask
                     handleHideModalDetailtTask={handleHideModalDetailtTask}
                     handleShowModalDeadlineTask={handleShowModalDeadlineTask}
-                    handleShowModalAddUserTask={handleShowModalAddUserTask} />
+                    handleShowModalAddUserTask={handleShowModalAddUserTask} 
+                    handleAddAttachment={handleAddAttachment}/>
             )
         }
     }
@@ -151,6 +153,14 @@ class Detailt extends Component {
         const { handleHideModalDeadlineTask } = this.props.actions;
         if (showModalEditDeadlineTask) {
             return (<ModalDeadlineTask handleHideModalDeadlineTask={handleHideModalDeadlineTask} />)
+        }
+    }
+    // trang -add attachment
+    showFormAttachment=()=>{
+        const { showFormAttachment}= this.props;
+        const { handleAddAttachment}= this.props.actions;
+        if(showFormAttachment){
+            return (<FormAttachment handleAddAttachment={handleAddAttachment} />)
         }
     }
     showModalAddUserTask = () => {
@@ -237,6 +247,7 @@ class Detailt extends Component {
                 {this.showModalEditDeadlineTask()}
                 {this.hideModalDetailtTask()}
                 {this.showModalAddUserTask()}
+                {this.showFormAttachment()}
                 {/* <div style={{ backgroundImage: `url('${bgr}')` }} className="detailt">
                     <div className="detailt__box">
                         <div className="d-flex justify-content-between align-items-center mt-3">
@@ -298,6 +309,7 @@ export default (connect(Detailt, state => (
         idListTask: state.detailtProjectReducers.idListTask,
         showModalEditDeadlineTask: state.detailtProjectReducers.showModalEditDeadlineTask,
         showModalAddUserTask: state.detailtProjectReducers.showModalAddUserTask,
-        listTask: state.detailtProjectReducers.listTask
+        listTask: state.detailtProjectReducers.listTask,
+        showFormAttachment:state.detailtProjectReducers.showFormAttachment,
     }
 ), actions));
