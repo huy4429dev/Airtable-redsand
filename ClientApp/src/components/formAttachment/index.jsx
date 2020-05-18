@@ -38,8 +38,7 @@ class formAttachment extends Component {
     render() 
 
     {
- const {task, index}= this.props
- console.log(task)
+
 
         return (
 

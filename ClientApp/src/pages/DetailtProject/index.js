@@ -138,7 +138,7 @@ class Detailt extends Component {
         console.log(taskEdit);
 
         const { handleAddCommentTask, handleEditDescTask, handleEditTitleTask, handleHideModalDetailtTask,
-            handleShowModalDeadlineTask, handleShowModalAddUserTask, handleGetProfileTask } = this.props.actions;
+            handleShowModalDeadlineTask,handleAddAttachment, handleShowModalAddUserTask, handleGetProfileTask } = this.props.actions;
         if (showModalDetailtTask) {
             return (
                 <DetailtTask
@@ -150,7 +150,8 @@ class Detailt extends Component {
                     taskEdit={taskEdit}
                     handleEditTitleTask={handleEditTitleTask}
                     handleEditDescTask={handleEditDescTask}
-                    handleAddCommentTask={handleAddCommentTask} />
+                    handleAddCommentTask={handleAddCommentTask}
+                    handleAddAttachment={handleAddAttachment}/>           
             )
         }
     }
