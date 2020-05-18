@@ -11,12 +11,19 @@ import BoardRecentlyList from '../../components/boards/BoardRecentlyList';
 import BoardRecentlyItem from '../../components/boards/BoardRecentlyItem';
 import * as actions from './../../actions/board';
 import connect from '../../lib/connect';
+import { Redirect } from 'react-router-dom';
+
+
 class Boards extends Component {
     constructor(props, context) {
         super(props, context);
+        const userId = localStorage.userId;
+        var login = false;
+        login = userId !== undefined ? true : false;
         this.state={
             project:[],
-            projectRecently:[]
+            projectRecently:[],
+            loginUser:login
         }
     }
     
@@ -73,6 +80,10 @@ class Boards extends Component {
     render() {
         var project = this.props.project;
         var projectRecently= this.props.projectRecently;
+        const { loginUser } = this.state;     
+        if (loginUser === false) {
+            return <Redirect to='/home' />
+        }
         return (
             <React.Fragment>
                 <HeaderPage />

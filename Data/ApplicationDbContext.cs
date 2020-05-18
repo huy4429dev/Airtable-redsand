@@ -43,9 +43,9 @@ namespace ProjectManage.Data
             /*========================================================================
             /* Relation 
 
-              1. n - n: User - Project
-              2. n - n: User - Task
-              3. n - n: User - ProjectRecently
+            1. n - n: User - Project
+            2. n - n: User - Task
+            3. n - n: User - ProjectRecently
 
             */
 

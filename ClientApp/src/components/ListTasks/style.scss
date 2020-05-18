@@ -22,6 +22,9 @@ $bgr_white:#fff;
             box-shadow: inset 0 0 0 2px #0079bf;
         }
     }
+    &__more{
+        cursor: pointer;
+    }
 }
 .card__btn-sub{
     display: block;

@@ -4,17 +4,17 @@ import { Draggable } from 'react-beautiful-dnd';
 import './style.scss';
 
 class Task extends Component {
-    handleShowModalDetailtTask = () => {
+    handleShowModalDetailtTask = (id) => {
         const { handleShowModalDetailtTask } = this.props;
-        handleShowModalDetailtTask();
+        handleShowModalDetailtTask(id);
     }
     render() {
-      const { task,index} = this.props;
+        const { task, index } = this.props;
         return (
             <React.Fragment>
                 <Draggable draggableId={String(task.id)} index={index}>
                     {(provided, snapshot) => (
-                        <Card className="mt-2" onClick={this.handleShowModalDetailtTask}
+                        <Card className="mt-2" onClick={() => this.handleShowModalDetailtTask(task.id)}
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
