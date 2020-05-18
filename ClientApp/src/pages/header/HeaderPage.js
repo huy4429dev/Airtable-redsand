@@ -15,8 +15,8 @@ class HeaderPage extends Component {
         this.state = {
             isActive: false,
             isActiveNocation: false,
-            isActiveInfomation:false,
-            isActiveCreate:false
+            isActiveInfomation: false,
+            isActiveCreate: false,
         }
     }
     handleShowFormUser = () => {
@@ -29,15 +29,15 @@ class HeaderPage extends Component {
             isActiveNocation: !this.state.isActiveNocation
         })
     }
-    handleShowFormInfomation=()=>{
+    handleShowFormInfomation = () => {
         this.setState({
-            isActiveInfomation:!this.state.isActiveInfomation
+            isActiveInfomation: !this.state.isActiveInfomation
         })
     }
 
-    handleShowFormCreate=()=>{
+    handleShowFormCreate = () => {
         this.setState({
-            isActiveCreate:!this.state.isActiveCreate
+            isActiveCreate: !this.state.isActiveCreate
         })
     }
 
@@ -47,8 +47,8 @@ class HeaderPage extends Component {
                 <div className="header">
                     <div className="header-left">
                         <Button className="ml-2" color="info"><i className='fas fa-th'></i></Button>
-                        <Button  className="ml-1" color="info"><Link className="text-white" to ='/boards'><i className='fas fa-home'></i>  </Link></Button>
-                      
+                        <Button className="ml-1" color="info"><Link className="text-white" to='/boards'><i className='fas fa-home'></i>  </Link></Button>
+
                         <Button className="ml-1 d-flex align-items-center" color="info"><i className="material-icons">dashboard</i>Boards</Button>{' '}
                         <div>
                             <div className="searchbar">
@@ -71,15 +71,15 @@ class HeaderPage extends Component {
                 {this.state.isActiveNocation ?
                     <FormNocation onClick={this.handleShowFormNocation} />
                     : null}
-       
-                {this.state.isActiveInfomation?
-                    <Infomation onClick={this.handleShowFormInfomation}/>
-                    :null
+
+                {this.state.isActiveInfomation ?
+                    <Infomation onClick={this.handleShowFormInfomation} />
+                    : null
                 }
 
-                {this.state.isActiveCreate?
-                    <FormCreate onClick={this.handleShowFormCreate}/>
-                    :null
+                {this.state.isActiveCreate ?
+                    <FormCreate onClick={this.handleShowFormCreate} />
+                    : null
                 }
                 {/* <Boards /> */}
             </React.Fragment>

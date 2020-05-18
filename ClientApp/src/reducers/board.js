@@ -2,7 +2,7 @@ import * as types from './../constansts/boards';
 import { toast } from 'react-toastify';
 const initialState = {
     project: [],
-    img: null,
+    // img: null,
     showimg: [],
     projectRecently: []
 }
@@ -35,10 +35,10 @@ const boardReducer = (state = initialState, action) => {
             state.projectRecently.push(action.projectRecently)
             return { ...state }
         //img
-        case types.ADD_FILE_IMG:
-            // toast.success("Create success");   
-            // console.log(action.img)       
-            return { ...state, img: action.img.url }
+        // case types.ADD_FILE_IMG:
+        //     // toast.success("Create success");   
+        //     // console.log(action.img)       
+        //     return { ...state, img: action.img.url }
         default:
             return state
 

@@ -48,18 +48,17 @@ class BoardAdd extends Component {
                 }]
         }
         e.preventDefault();
-        actAddProjectRequest(userId,project);
+        actAddProjectRequest(userId, project);
         this.props.onClick();
 
     }
     handleUploadImage = (e) => {
-        const {actAddFileRequest} = this.props.actions;
-        const files = e.target.files;
-        const formData = new FormData();
-        formData.append('myFile', files[0]);
-        // this.props.onAddfile(formData);
-        actAddFileRequest(formData);
+        const { actAddFileRequest } = this.props.actions;
 
+        var formData = new FormData();
+        var fileField = document.querySelector('input[type="file"]');
+        formData.append('avatar', fileField.files[0]);
+        actAddFileRequest(formData);
     }
 
     componentWillMount() {
@@ -149,7 +148,7 @@ export default (connect(BoardAdd, state => (
     {
         showimg: state.imgReducer.showimg,
         project: state.boardReducer.project,
-        img:state.boardReducer.img
+        img: state.imgReducer.img
     }
 ), actions));
 // export default connect(mapStateToProps, mapDispatchToProps)(BoardAdd);

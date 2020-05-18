@@ -11,20 +11,10 @@ import BoardAdd from './pages/boards/BoardAdd';
 
 const routes = [
     {
-        path: '/',
+        path: '/detailt/:id.html',
         exact: true,
-        main: () => <Home />
+        main: ({ match }) => <Detailt match={match} />
     },
-    {
-        path: '/detailt',
-        exact: true,
-        main: () => <Detailt />
-    },
-    // {
-    //     path: '/profile',
-    //     exact: true,
-    //     main: () => <Profile />
-    // },
     {
         path: '/add_project',
         exact: false,
@@ -38,7 +28,7 @@ const routes = [
     {
         path: '/boards',
         exact: false,
-        main: ({ history }) => <Boards history={history} />
+        main: () => <Boards />
     },
     {
         path: '/sigup',
@@ -47,8 +37,13 @@ const routes = [
     },
     {
         path: '/home',
-        exact: false,
-        main: () => <HeaderPage />
+        exact: true,
+        main: () => <Home />
+    },
+    {
+        path: '/',
+        exact: true,
+        main: ({ history }) => <Boards history={history} />
     },
     {
         path: '',

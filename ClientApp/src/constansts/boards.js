@@ -3,8 +3,10 @@ export const SHOW_PROJECT = 'SHOW_PROJECT';
 export const ADD_PROJECT = 'ADD_PROJECT';
 export const ADD_PROJECT_ERROR = 'ADD_PROJECT_ERROR';
 
-export const URL_BACKGROUGT = 'background';
-export const ADD_FILE_IMG = 'ADD_FILE_IMG';
+
+export const URL_BACKGROUGT='background';
+export const ADD_FILE_IMG='ADD_FILE_IMG';
+export const ADD_FILE_IMG_ERROR='ADD_FILE_IMG_ERROR';
 export const SHOW_IMAGE = 'SHOW_IMAGE';
 export const SHOW_IMAGE_ERROR = 'SHOW_IMAGE_ERROR';
 export const ERRO_IMG = 'ERRO_IMG';

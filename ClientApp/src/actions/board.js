@@ -58,25 +58,16 @@ export const actAddRecently = (projectRecently) => {
 //add file img
 
 export const actAddFileRequest = (img) => {
-    return {
-        url: `${types.URL_API}/${types.URL_BACKGROUGT}`,
-        data: img,
-        method: types.API_METHOT_POST,
-        onSuccess: types.ADD_FILE_IMG,
-        onError: types.ERRO_IMG
+    return dispatch => {
+        return callApi('background', 'POST', img).then(res => {
+            // dispatch(actAddFile(res.data))
+        })
     }
 }
-// export const actAddFileRequest = (img) => {
-//     return dispatch => {
-//         return callApi('background', 'POST', img).then(res => {
-//             dispatch(actAddFile(res.data))
-//         })
-//     }
-// }
 
-// export const actAddFile = (img) => {
-//     return {
-//         type: types.ADD_FILE_IMG,
-//         img
-//     }
-// }
+export const actAddFile = (img) => {
+    return {
+        type: types.ADD_FILE_IMG,
+        img
+    }
+}
