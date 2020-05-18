@@ -89,7 +89,7 @@ const detailtProjectReducers = (state = initialState, action) => {
 
         case types.ADD_ATTACHMENT_SUCCESS:
             return { ...state,
-            showFormAttachment:true }
+            showFormAttachment: true }
 
        case types.ADD_ATTACHMENT_FAILE:
            return {...state, showFormAttachment: false } 

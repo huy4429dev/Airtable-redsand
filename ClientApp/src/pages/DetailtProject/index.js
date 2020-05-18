@@ -151,6 +151,7 @@ class Detailt extends Component {
     showModalEditDeadlineTask = () => {
         const { showModalEditDeadlineTask } = this.props;
         const { handleHideModalDeadlineTask } = this.props.actions;
+      
         if (showModalEditDeadlineTask) {
             return (<ModalDeadlineTask handleHideModalDeadlineTask={handleHideModalDeadlineTask} />)
         }
@@ -158,11 +159,12 @@ class Detailt extends Component {
     // trang -add attachment
     showFormAttachment=()=>{
         const { showFormAttachment}= this.props;
-        const { handleAddAttachment}= this.props.actions;
+       const {handleCloseAttachment}=this.props.actions;
         if(showFormAttachment){
-            return (<FormAttachment handleAddAttachment={handleAddAttachment} />)
+            return (<FormAttachment handleCloseAttachment={handleCloseAttachment} />)
         }
     }
+    
     showModalAddUserTask = () => {
         const { showModalAddUserTask } = this.props;
         const { handleHideModalAddUserTask } = this.props.actions;

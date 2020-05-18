@@ -7,8 +7,10 @@ class ButtonAddTask extends Component {
             handleShowFormAddTask(columnId);
         }      
     }
-    render() {
+    render()
+     {
         const {columnId} = this.props;
+        
         return (
             <React.Fragment>
                 <button onClick={()=>this.handleShowFormAddTask(columnId.id)} className="mt-2 card__btn-sub"><i className="fas fa-plus icon--gray" ></i>Thêm thẻ khác</button>

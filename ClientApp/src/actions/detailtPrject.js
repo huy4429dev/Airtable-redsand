@@ -122,7 +122,7 @@ export const handleAddTask = (task) =>{
 // trang _add attchment
 export const handleAddAttachment=()=>{
      return {
-        // url:`${types.API_ENDPOINT}/${types.URL_TASK}`,
+             // url:`${types.API_ENDPOINT}/${types.URL_TASK}`,
         // method:types.API_METHOD_POST,
         // onSuccess:types.ADD_ATTACHMENT_SUCCESS,
         // onError:types.ADD_ATTACHMENT_FAILE

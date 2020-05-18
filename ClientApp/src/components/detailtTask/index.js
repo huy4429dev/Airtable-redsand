@@ -3,6 +3,7 @@ import './style.scss';
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Image from 'react-bootstrap/Image'
 
 
 class DetailtTask extends Component {
@@ -12,8 +13,8 @@ class DetailtTask extends Component {
         handleHideModalDetailtTask();
     }
     handleShowModalDeadlineTask = () => {
-       // alert("vao deadline");
-       
+
+
         const { handleShowModalDeadlineTask } = this.props;
         handleShowModalDeadlineTask();
     }
@@ -21,13 +22,16 @@ class DetailtTask extends Component {
         const { handleShowModalAddUserTask } = this.props;
         handleShowModalAddUserTask();
     }
-    handleAddAttachment=()=>{
-        alert("vao att");
-        
-        const {handleAddAttachment}=this.props;
-        handleAddAttachment();
+    handleAddAttachment = () => {
+     
+        const { handleAddAttachment } = this.props;
+     
+             handleAddAttachment();
+            
+       
     }
     render() {
+      
         return (
             <React.Fragment>
                 <div className="modal-task" >
@@ -47,6 +51,33 @@ class DetailtTask extends Component {
                                     <textarea className="modal-task__desc-add" placeholder="Thêm mô tả chi tiết..." ></textarea>
                                     <button className="modal-task__desc-btn">Lưu</button>
                                 </form>
+                                <div className="block-attachment  ">
+                                    <div className="d-flex align-items-center mt-2">
+                                        <i class="fa fa-file-archive-o mr-3" aria-hidden="true"></i>
+                                        <p className="modal-task__desc">Attachments</p>
+                                    </div>
+
+                                    <div className="file-attachment ">
+                                        
+                                            <a href="#" className="">
+                                            
+                                                <img class="attachment-thumbnail modal-task__desc-add " src="https://img.icons8.com/plasticine/2x/file.png" />
+                                                </a>
+                                          
+                                                <div className="des_attachment">
+                                                <a href="#"> <h6 className="nameFile">ĐĂNG KÍ_CHỦ ĐỂ CONTENT</h6></a> 
+                                                 <a href="#"><span>Remove</span></a>
+                                                 <p>Creat At: 13-2-2020</p>
+                                            </div>
+                                          
+                                            
+                                      
+
+
+
+                                    </div>
+                                </div>
+
                                 <div className="d-flex justify-content-between align-items-center mt-2">
                                     <div className="d-flex">
                                         <i className="fas fa-align-left mr-3"></i>
