@@ -15,11 +15,8 @@ class formAttachment extends Component {
             fileUrl: null,
             nameUrl: null,
            display:"",
-           id:null,
-           
-
+           id:null,      
         }
-
     }
     save(e) {
       
@@ -41,12 +38,13 @@ class formAttachment extends Component {
     render() 
 
     {
-
+ const {task, index}= this.props
+ console.log(task)
 
         return (
 
             <React.Fragment>
-                <Card className="modal-deadline " style={{display:this.state.display}} >
+                <Card className="modal-deadline " style={{display:this.state.display}} index={this.props.task} >
                     <form>
                         <Card.Header className="text-center position-relative ">
                             <p className="modal-deadline__title">Attach Form</p>
@@ -94,7 +92,7 @@ class formAttachment extends Component {
                             <span>  Attach a link</span>
                             <form>
                                 <FormGroup>
-                                    <Input type="text" value="" placeholder="paste any link here" name="link-attach" />
+                                    <Input type="text" value={this.state.nameUrl} placeholder="paste any link here" name="link-attach" onChange={this.save} />
                                 </FormGroup>
                             </form>
                             <button className="modal-deadline__btn">Attach</button>

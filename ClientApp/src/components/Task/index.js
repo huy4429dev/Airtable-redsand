@@ -9,7 +9,7 @@ class Task extends Component {
         handleShowModalDetailtTask();
     }
     render() {
-        const { task,index} = this.props;
+      const { task,index} = this.props;
         return (
             <React.Fragment>
                 <Draggable draggableId={String(task.id)} index={index}>
