@@ -17,7 +17,7 @@ class ViewList extends Component {
         return (
             <Col className="view-board" xs="12">
                 <Row>
-                    <h6 className="d-flex align-items-center mt-5"><i className='far fa-user mr-3'></i> Personal Boards</h6>
+                    <h6 className="d-flex align-items-center mt-5 ml-1"><i className='far fa-user mr-3'></i> Personal Boards</h6>
                 </Row>
                 <Row>
                     {this.props.children}

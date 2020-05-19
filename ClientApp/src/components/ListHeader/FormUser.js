@@ -11,12 +11,18 @@ class FormUser extends Component {
         window.location.href='/';
     }
     render() {
+        const {project_profile}=this.props;
+        var userName = project_profile.userName;
+        if(userName){
+           
+           var name = userName.toUpperCase();
+        }
         return (
             // <div className="form-filter-information">
             <Form className="header-form">
                 <FormGroup className="d-flex align-items-center justify-content-between mt-2">
-                    <span className="header-form-top">Văn Hà</span>
-                    <i onClick={this.handleHideFormUser} className="fa fa-close mr-2"></i>
+        <span className="header-form-top">{name}</span>
+                    <i onClick={this.handleHideFormUser} className="form-list-board-right fa fa-close"></i>
                 </FormGroup>
                 <hr className="hr"></hr>
                 <Button  outline color="light border border-0 text-left text-dark" block><Link className="link text-dark" to = '/profile' >Profile and Visibility</Link></Button>

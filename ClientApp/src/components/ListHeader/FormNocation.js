@@ -9,7 +9,7 @@ class FormNocation extends Component {
             <Form className="header-form-second form-nacation">
                 <FormGroup className="d-flex align-items-center justify-content-between mt-2">
                     <span className="header-form-top">Notifications</span>
-                    <i onClick={this.handleShowFormNocation} className="fa fa-close mr-2"></i>
+                    <i onClick={this.handleShowFormNocation} className="form-list-board-right fa fa-close"></i>
                 </FormGroup>
                 <hr className="hr"></hr>
                 <FormGroup className="nocation-button-top">
@@ -20,7 +20,7 @@ class FormNocation extends Component {
                     <div className="toggler-nocation">
 
                         <Label className="show-lable" color="primary" id="toggler" style={{ marginBottom: '1rem' }}>
-                            <i class='fas fa-angle-down mr-1'></i>
+                            <i className='fas fa-angle-down mr-1'></i>
                                 Show Previous Card Activity
                                 </Label>
                         <UncontrolledCollapse toggler="#toggler">
@@ -31,14 +31,14 @@ class FormNocation extends Component {
                                     <h5 className="mb-0 mt-1">Văn Hà</h5>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label><i class='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
+                                    <Label><i className='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
                                 </FormGroup>
                                 <FormGroup className="d-flex mb-0">
                                     <div className="user mr-2 text-center ml-2">VH</div>
                                     <h5 className="mb-0 mt-1">Văn Hà</h5>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Label><i class='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
+                                    <Label><i className='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
                                 </FormGroup>
                             </FormGroup>
 
@@ -50,21 +50,21 @@ class FormNocation extends Component {
                     <h5 className="mb-0 mt-1">Văn Hà</h5>
                 </FormGroup>
                 <FormGroup>
-                    <Label><i class='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
+                    <Label><i className='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
                 </FormGroup>
                 <FormGroup className="d-flex mb-0">
                     <div className="user mr-2 text-center ml-2">VH</div>
                     <h5 className="mb-0 mt-1">Văn Hà</h5>
                 </FormGroup>
                 <FormGroup>
-                    <Label><i class='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
+                    <Label><i className='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
                 </FormGroup>
                 <FormGroup className="d-flex mb-0">
                     <div className="user mr-2 text-center ml-2">VH</div>
                     <h5 className="mb-0 mt-1">Văn Hà</h5>
                 </FormGroup>
                 <FormGroup>
-                    <Label><i class='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
+                    <Label><i className='fas fa-angle-right ml-4 mr-2'></i>Nội dung</Label>
                 </FormGroup>
             </Form>
 

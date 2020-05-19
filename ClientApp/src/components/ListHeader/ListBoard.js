@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import { Container, Row, Form } from 'reactstrap';
-import './style.css';
-import SizeBar from './../../components/boards/SizeBar';
+import { FormGroup, Form, Button, Label } from 'reactstrap';
+import BoardRecentlyList from './../../components/boards/BoardRecentlyList';
 import BoardList from './../../components/boards/BoardList';
-import BoardsListItem from '../../components/boards/BoardsListItem';
-import BoardRecentlyList from '../../components/boards/BoardRecentlyList';
-import BoardRecentlyItem from '../../components/boards/BoardRecentlyItem';
-import * as actions from './../../actions/board';
 import connect from '../../lib/connect';
-import FormCreate from '../../components/ListHeader/FormCreate';
-class Boards extends Component {
+// import BoardsListItem from './../../components/boards/BoardsListItem';
+import * as actions from './../../actions/board';
+import ListBoardRecentlyItem from './ListBoardRecentlyItem';
+import ListBoardItem from './ListBoardItem';
+class ListBoard extends Component {
+    HandFormListBoard = () => {
+        this.props.onClick()
+    }
     constructor(props, context) {
         super(props, context);
         this.state = {
             project: [],
             projectRecently: [],
-            isActiveClass:this.props.onClick
         }
     }
 
@@ -41,24 +41,10 @@ class Boards extends Component {
     }
     showProjectBoard = (project, search) => {
         var resoult = [];
-        var search = this.props.search;
         if (project.length > 0) {
-            if (search.length > 0) {
-                resoult = project.map((project, index) => {
-                    if (project.name.indexOf(search) !== -1) {
-                        return (
-                            <BoardsListItem
-                                key={index}
-                                project={project}
-                                index={index}
-                            />
-                        )
-                    }
-                })
-            } else
                 resoult = project.map((project, index) => {
                     return (
-                        <BoardsListItem
+                        <ListBoardItem
                             key={index}
                             project={project}
                             index={index}
@@ -73,7 +59,7 @@ class Boards extends Component {
         if (projectRecently.length > 0) {
             resoult = projectRecently.map((projectRecently, index) => {
                 return (
-                    <BoardRecentlyItem
+                    <ListBoardRecentlyItem
                         key={index}
                         projectRecently={projectRecently}
                         index={index}
@@ -83,37 +69,33 @@ class Boards extends Component {
         }
         return resoult;
     }
-
-
     render() {
         var project = this.props.project;
         var projectRecently = this.props.projectRecently;
 
         return (
-            <React.Fragment>
-                {/* <HeaderPage /> */}
-                <Container className="mt-5">
-                    <Row>
-                        <SizeBar />
-                        <div className={this.state.isActiveClass? "board__form col__item":"col__item"}>
-                            <BoardRecentlyList>
-                                {this.showProjectRecently(projectRecently)}
-                            </BoardRecentlyList>
-                            <BoardList>
-                                {this.showProjectBoard(project)}
-                            </BoardList>
-                        </div>
-
-                    </Row>
-                </Container>
-            </React.Fragment>
-
+            <Form className="header-form-board form-nacation">
+                <FormGroup className="d-flex align-items-center justify-content-between mt-2">
+                    <i onClick={this.HandFormListBoard} className="form-list-board-right fa fa-close "></i>
+                </FormGroup>
+                <FormGroup>
+                    <BoardRecentlyList>
+                        {this.showProjectRecently(projectRecently)}
+                    </BoardRecentlyList>
+                </FormGroup>
+                <FormGroup >
+                    <BoardList>
+                        {this.showProjectBoard(project)}
+                    </BoardList>
+                </FormGroup>
+            </Form>
         );
     }
 }
-export default (connect(Boards, state => (
+export default (connect(ListBoard, state => (
     {
         project: state.boardReducer.project,
         projectRecently: state.boardReducer.projectRecently
     }
 ), actions));
+// export default ListBoard;

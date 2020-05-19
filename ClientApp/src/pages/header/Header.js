@@ -129,7 +129,7 @@ class HeaderPage extends Component {
                     : null
 
                 }
-                <Boards search={search} />
+               
             </React.Fragment>
         );
     }

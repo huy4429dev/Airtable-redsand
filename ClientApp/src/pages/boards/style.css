@@ -30,7 +30,7 @@
     padding: 0 15px;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 1;
+    z-index: 3;
     background-color: #fff;
     box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
 }
@@ -74,4 +74,15 @@
   }
 .col__item{
     width: 53rem;
+}
+.form-list-board-right{
+    position: absolute;
+    right: 4px;
+    top: 3px;
+}
+.form-list-board-right:hover{
+    color: red;
+}
+.board__form{
+    z-index: -1;
 }

@@ -5,7 +5,7 @@ import ListTasks from '../../components/ListTasks';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import data from './../../data';
 import './style.scss';
-import HeaderPage from './../header/HeaderPage';
+// import HeaderPage from './../header/HeaderPage';
 import AddlistTask from '../../components/addListTask';
 import FormAddListTask from '../../components/formAddListTask';
 import connect from './../../lib/connect';
@@ -14,6 +14,7 @@ import DetailtTask from '../../components/detailtTask';
 import ModalAddUser from '../../components/modalAddUser';
 import ModalDeadlineTask from '../../components/modalDeadlineTask';
 import ModalAddUserTask from '../../components/modalAddUserTask';
+import Header from '../header/Header';
 
 class Detailt extends Component {
     constructor(props) {
@@ -214,7 +215,7 @@ class Detailt extends Component {
         // const { showButtonAddTask, idListTask, listTask } = this.props;
         return (
             <React.Fragment>
-                <HeaderPage />
+                <Header />
                 <div style={{ backgroundImage: `url('${bgr}')` }} className="detailt">
                     <div className="detailt__box">
                         <div className="d-flex justify-content-between align-items-center mt-3">

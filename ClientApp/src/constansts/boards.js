@@ -1,6 +1,8 @@
 export const URL_PROJECT ='project';
 export const SHOW_PROJECT = 'SHOW_PROJECT';
+export const SHOW_PROJECT_ERROR = 'SHOW_PROJECT_ERROR';
 export const ADD_PROJECT='ADD_PROJECT';
+export const ADD_PROJECT_ERROR='ADD_PROJECT_ERROR';
 
 export const URL_BACKGROUGT='background';
 export const ADD_FILE_IMG='ADD_FILE_IMG';

@@ -85,7 +85,7 @@ class BoardAdd extends Component {
             <React.Fragment>
                 <div className="form-filter">
                     <div className="form_addproject">
-                        <i onClick={this.showFormAdd} className="fa fa-close mt-1 float-right"></i>
+                        <i onClick={this.showFormAdd} className="fa fa-close form-list-board-right"></i>
                         <div className="mt-3 mb-5 text-center">
                             <h5 className="text-center">Create New Project</h5>
                         </div>
@@ -129,27 +129,6 @@ class BoardAdd extends Component {
         );
     }
 }
-// const mapStateToProps = (state) => {
-//     return {
-//         img: state.boardReducer.img,
-//         project: state.boardReducer.project,
-//         showimg: state.imgReducer
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, porps) => {
-//     return {
-//         onAddProject: (userId, project) => {
-//             dispatch(actAddProjectRequest(userId, project))
-//         },
-//         onAddfile: (img) => {
-//             dispatch(actAddFileRequest(img))
-//         },
-//         onshowimage: () => {
-//             dispatch(actShowImageRequest())
-//         }
-//     }
-// }
 export default (connect(BoardAdd, state => (
     {
         showimg: state.imgReducer.showimg,
@@ -157,4 +136,3 @@ export default (connect(BoardAdd, state => (
         img: state.imgReducer.img
     }
 ), actions));
-// export default connect(mapStateToProps, mapDispatchToProps)(BoardAdd);

@@ -1,0 +1,19 @@
+.form_profile{
+    margin: auto;
+}
+.form_profile_name {
+    background: transparent;
+    cursor: default;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+    color:black;
+    border: none;
+    padding: 0.1rem 0.2rem;
+    width: 70%;
+    margin-right: 0.2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    outline: none;
+    border-radius: 2px;
+}

@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Button } from 'reactstrap';
 import BoardAdd from './../../pages/boards/BoardAdd';
+import Boards from '../../pages/boards/Boards';
 class FormCreate extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             isActiveAdd: false,
-            addclass:false
+            addclass:false,
+            isShowClass:false
         }
     }
     showFormAdd=(e)=>{
         this.setState({
-            isActiveAdd:!this.state.isActiveAdd
+            isActiveAdd:!this.state.isActiveAdd,
+            isShowClass:!this.state.isActiveAdd
         })
+
     }
     handleShowFormCreate = () => {
         this.props.onClick();
+      
     }
     render() {
  
@@ -25,10 +30,10 @@ class FormCreate extends Component {
                 <Form className="header-form">
                     <FormGroup className="d-flex align-items-center justify-content-between mt-2">
                         <span className="header-form-top">Create</span>
-                        <i onClick={this.handleShowFormCreate} className="fa fa-close mr-2"></i>
+                        <i onClick={this.handleShowFormCreate} className="form-list-board-right fa fa-close"></i>
                     </FormGroup>
                     <hr className="hr"></hr>
-                    <Button onClick={this.showFormAdd} outline color="light border border-0 text-left text-dark" block>
+                    <Button onClick={(e)=>this.showFormAdd(e)} outline color="light border border-0 text-left text-dark" block>
                         <FormGroup className="d-flex align-items-center mb-0">
                             <i className="text-dark material-icons mr-2">dashboard</i>
                         Create Board...
@@ -54,7 +59,6 @@ class FormCreate extends Component {
                     <BoardAdd onClick={this.showFormAdd} />
                     :null
                  }
-                 
             </React.Fragment>
         );
     }
