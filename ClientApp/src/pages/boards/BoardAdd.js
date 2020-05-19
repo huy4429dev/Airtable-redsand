@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, Button } from 'reactstrap';
-// import { actAddProjectRequest, actAddFileRequest, actShowImageRequest } from './../../actions/board';
 import connect from '../../lib/connect';
 import * as actions from './../../actions/board';
-// import { connect } from 'react-redux';
 class BoardAdd extends Component {
     constructor(props, context) {
         super(props, context);
@@ -37,7 +35,6 @@ class BoardAdd extends Component {
         const userId = localStorage.userId;
         const { actAddProjectRequest } = this.props.actions;
         var { txtname } = this.state;
-        // var{history}=this.props;
         var project = {
             name: txtname,
             thumb: thumb || this.props.img,
@@ -54,21 +51,15 @@ class BoardAdd extends Component {
     }
     handleUploadImage = (e) => {
         const { actAddFileRequest } = this.props.actions;
-
-        var formData = new FormData();
+        var img = new FormData();
         var fileField = document.querySelector('input[type="file"]');
-        formData.append('avatar', fileField.files[0]);
+        img.append('avatar', fileField.files[0]);
+        actAddFileRequest(img);
 
-
-        console.log(fileField.files[0]);
-        console.log(formData);
-        
-
-        actAddFileRequest(formData);
     }
 
     componentWillMount() {
-        const { actShowImageRequest, actAddProjectRequest } = this.props.actions;
+        const { actShowImageRequest } = this.props.actions;
         const { showimg } = this.props;
         actShowImageRequest();
         if (showimg !== []) {
@@ -81,6 +72,9 @@ class BoardAdd extends Component {
     render() {
         var { txtname } = this.state;
         var showimg = this.props.showimg;
+
+
+
         return (
             <React.Fragment>
                 <div className="form-filter">

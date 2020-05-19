@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { FormGroup, Form, Button, Label } from 'reactstrap';
-import BoardRecentlyList from './../../components/boards/BoardRecentlyList';
-import BoardList from './../../components/boards/BoardList';
-import connect from '../../lib/connect';
+import BoardRecentlyList from './../../../components/boards/BoardRecentlyList';
+// import BoardList from './../../components/boards/BoardList';
+import connect from '../../../lib/connect';
 // import BoardsListItem from './../../components/boards/BoardsListItem';
-import * as actions from './../../actions/board';
+import * as actions from './../../../actions/board';
 import ListBoardRecentlyItem from './ListBoardRecentlyItem';
 import ListBoardItem from './ListBoardItem';
+import ListBoardList from './ListBoardList';
 class ListBoard extends Component {
     HandFormListBoard = () => {
         this.props.onClick()
@@ -84,9 +85,9 @@ class ListBoard extends Component {
                     </BoardRecentlyList>
                 </FormGroup>
                 <FormGroup >
-                    <BoardList>
+                    <ListBoardList>
                         {this.showProjectBoard(project)}
-                    </BoardList>
+                    </ListBoardList>
                 </FormGroup>
             </Form>
         );

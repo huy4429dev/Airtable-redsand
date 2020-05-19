@@ -5,7 +5,7 @@ import Detailt from './pages/DetailtProject';
 import Sigup from './components/account/Sigup';
 import Login from './components/account/Login';
 import HeaderPage from './pages/header/HeaderPage';
-// import Boards from './pages/boards/Boards';
+import Boards from './pages/boards/Boards';
 import BoardAdd from './pages/boards/BoardAdd';
 import LoginbyGoogle from './components/account/LoginbyGoogle';
 import FaceBook from './components/account/Facebook';
@@ -13,9 +13,9 @@ import Profile from './components/profile/Profile';
 
 const routes = [
     {
-        path: '/',
+        path: '/detailt/:id.html',
         exact: true,
-        main: () => <Home />
+        main: ({ match }) => <Detailt match={match} />
     },
     {
         path: '/detailt',
@@ -37,11 +37,11 @@ const routes = [
         exact: false,
         main: () => <Login />
     },
-    // {
-    //     path: '/boards',
-    //     exact: false,
-    //     main: ({ history }) => <Boards history={history} />
-    // },
+    {
+        path: '/',
+        exact: true,
+        main: () => <Home />
+    },
     {
         path: '/sigup',
         exact: false,
@@ -49,7 +49,7 @@ const routes = [
     },
     {
         path: '/home',
-        exact: false,
+        exact: true,
         main: () => <HeaderPage />
     },
     {

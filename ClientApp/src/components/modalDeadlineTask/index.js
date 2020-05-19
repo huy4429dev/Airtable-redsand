@@ -11,34 +11,46 @@ class ModalDeadlineTask extends Component {
             startDate: new Date(),
         }
     }
-    handleChange = (date) => {
+    onChangeDate = (date) => {
         this.setState({
-            startDate : date
+            startDate: date
         })
     }
-    handleHideModalDeadlineTask = ()=>{
-        const { handleHideModalDeadlineTask } =this.props;
+    handleChangeDeadlineTask = (e) => {
+        const { handleChangeDeadlineTask, taskEdit } = this.props;
+        const id = taskEdit.task.id;
+        e.preventDefault();
+        const data = {
+            title: taskEdit.task.title,
+            desc: taskEdit.task.desc,
+            deadline: this.state.startDate
+        }
+        handleChangeDeadlineTask(data, id);
+    }
+    handleHideModalDeadlineTask = () => {
+        const { handleHideModalDeadlineTask } = this.props;
         handleHideModalDeadlineTask();
     }
-    render() {  
+    render() {
+        console.log(this.props.taskEdit);
         return (
             <React.Fragment>
                 <Card className="modal-deadline">
                     <form>
                         <Card.Header className="text-center position-relative ">
                             <p className="modal-deadline__title">Sửa ngày hết hạn</p>
-                            <i className ="fas fa-times position-absolute modal-deadline__close" onClick ={ this.handleHideModalDeadlineTask}></i>
+                            <i className="fas fa-times position-absolute modal-deadline__close" onClick={this.handleHideModalDeadlineTask}></i>
                         </Card.Header>
                         <Card.Body>
                             <p className="modal-deadline__time">Thời gian:</p>
                             <DatePicker
                                 selected={this.state.startDate}
-                                onChange={this.handleChange}
+                                onChange={this.onChangeDate}
                                 dateFormat="dd/MM/yyyy"
                             />
                         </Card.Body>
                         <Card.Footer>
-                            <button className="modal-deadline__btn">Lưu</button>
+                            <button onClick={this.handleChangeDeadlineTask} className="modal-deadline__btn">Lưu</button>
                         </Card.Footer>
                     </form>
                 </Card>

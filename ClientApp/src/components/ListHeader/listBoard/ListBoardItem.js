@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { actAddRecentlyRequest } from './../../actions/board';
+import { actAddRecentlyRequest } from './../../../actions/board';
 class ListBoardItem extends Component {
     constructor(props, context) {
         super(props, context);
@@ -26,7 +26,7 @@ class ListBoardItem extends Component {
         var { project } = this.props;
         return (
             <Col sm="12 mt-1">
-                <Link to="/detailt" className="link">
+                <Link to={`/detailt/${project.id}.html`} className="link">
                     <div onClick={this.editRecently} style={{
                         backgroundImage: `url('https://localhost:5001/Resources/images/${project.thumb}')`,
                         backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat',height:'100%'

@@ -25,11 +25,13 @@ class FormAddListTask extends Component {
         e.preventDefault()
         const { handleAddListTask } = this.props;
         const { title } = this.state;
+        const userId = localStorage.userId;
+        const { projectId } = this.props;
         const data = {
-            title : title,
-            desc : '',
-            projectId : 1,
-            userId : 1
+            title: title,
+            desc: '',
+            projectId: projectId,
+            userId: userId
         }
         handleAddListTask(data);
     }

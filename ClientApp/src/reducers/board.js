@@ -24,8 +24,7 @@ const boardReducer = (state = initialState, action) => {
             return { ...state, projectRecently: projectRecently }
 
         case types.ADD_PROJECT_RECENTLY:
-            state.projectRecently.push(action.projectRecently)
-            return { ...state }
+            return{...state,projectRecently:state.projectRecently.concat(action.data)}
         default:
             return state
 

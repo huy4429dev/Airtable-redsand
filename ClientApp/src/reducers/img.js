@@ -10,9 +10,9 @@ const imgReducer = (state = initialState, action) => {
         case types.SHOW_IMAGE:
             const showimg = action.data;
             return { ...state, showimg: showimg }
+
         case types.ADD_FILE_IMG:
             console.log(action.img);
-
             return { ...state, img: action.img.url }
         // state = action.showimg;
         // return [...state];

@@ -9,7 +9,7 @@ import * as actions from './../../actions/header';
 import connect from './../../lib/connect';
 import { Link } from 'react-router-dom';
 import Boards from '../boards/Boards';
-import ListBoard from '../../components/ListHeader/ListBoard';
+import ListBoard from '../../components/ListHeader/listBoard/ListBoard';
 // import Table from '../../components/ListHeader/Table';
 
 class HeaderPage extends Component {
