@@ -58,7 +58,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state, showModalAddUserTask: false }
 
         case types.ADD_LIST_TASK_SUCCESS:
-            return { ...state, listTask: state.listTask.concat(action.data), showFormAddListTask: false,showButtonAddListTask:true }
+            return { ...state, listTask: state.listTask.concat(action.data), showFormAddListTask: false, showButtonAddListTask: true }
 
         case types.ADD_LIST_TASK_FAILE:
             return { ...state }
@@ -113,7 +113,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state }
 
         case types.GET_TASK_EDIT_SUCCESS:
-            return { ...state, taskEdit: action.data,showModalDetailtTask:true }
+            return { ...state, taskEdit: action.data, showModalDetailtTask: true }
 
         case types.GET_TASK_EDIT_FAILE:
             return { ...state }
@@ -137,7 +137,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state }
 
         case types.EDIT_DEADLINE_TASK_SUCCESS:
-            return { ...state,showModalEditDeadlineTask:false }
+            return { ...state, showModalEditDeadlineTask: false }
 
         case types.EDIT_DEADLINE_TASK_FAILE:
             return { ...state }
@@ -147,16 +147,23 @@ const detailtProjectReducers = (state = initialState, action) => {
                 content: action.data.content,
                 fullname: null
             };
+            console.log('====================================');
+            console.log(state.taskEdit.comments);
+            console.log('====================================');
             state.taskEdit.comments = [
                 ...state.taskEdit.comments,
                 comment
-            ]
+            ];
+            console.log('====================================');
+            console.log(state.taskEdit.comments);
+            console.log('====================================');
             return { ...state }
 
         case types.ADD_COMMENT_TASK_FAILE:
             return { ...state }
 
         case types.DELETE_LIST_TASK_SUCCESS:
+            state.listTask = state.listTask.filter((list) => list.id !== action.data.id);
             return { ...state }
 
         case types.DELETE_LIST_TASK_FAILE:

@@ -134,8 +134,8 @@ namespace ProjectManage.Controllers
                 var history = new ProjectHistory()
                 {
                     ProjectId = model.ProjectId,
-                    UserId    = model.UserId,
-                    Content   = "Thay đổi danh sách công việc",
+                    UserId = model.UserId,
+                    Content = "Thay đổi danh sách công việc",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
@@ -149,12 +149,12 @@ namespace ProjectManage.Controllers
                 Get projects and projectHistory
                 ==============================*/
 
-                viewModel.Id        = id;
-                viewModel.Title     = model.Title;
-                viewModel.Desc      = model.Desc;
+                viewModel.Id = id;
+                viewModel.Title = model.Title;
+                viewModel.Desc = model.Desc;
                 viewModel.ProjectId = model.ProjectId;
-                viewModel.FullName  = FullName;
-                viewModel.Content   = history.Content;
+                viewModel.FullName = FullName;
+                viewModel.Content = history.Content;
                 viewModel.CreatedAt = viewModel.CreatedAt;
                 return Ok(viewModel);
             }
@@ -173,11 +173,11 @@ namespace ProjectManage.Controllers
             {
                 context.ListTasks.Remove(found);
                 await context.SaveChangesAsync();
-                 var history = new ProjectHistory()
+                var history = new ProjectHistory()
                 {
                     ProjectId = found.ProjectId,
-                    UserId    = found.UserId,
-                    Content   = "Xóa danh sách công việc",
+                    UserId = found.UserId,
+                    Content = "Xóa danh sách công việc",
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now
                 };
@@ -191,13 +191,14 @@ namespace ProjectManage.Controllers
                 Get projects and projectHistory
                 ==============================*/
 
-                viewModel.Id        = id;
-                viewModel.Title     = found.Title;
-                viewModel.Desc      = found.Desc;
+                viewModel.Id = id;
+                viewModel.Title = found.Title;
+                viewModel.Desc = found.Desc;
                 viewModel.ProjectId = found.ProjectId;
-                viewModel.FullName  = FullName;
-                viewModel.Content   = history.Content;
+                viewModel.FullName = FullName;
+                viewModel.Content = history.Content;
                 viewModel.CreatedAt = viewModel.CreatedAt;
+                // viewModel.CreatedAt = DateTime.Now;
                 return Ok(viewModel);
             }
             return BadRequest("Không tồn tại list task");

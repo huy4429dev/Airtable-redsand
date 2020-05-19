@@ -44,24 +44,24 @@ namespace ProjectManage.Controllers
             if (userId.HasValue)
             {
                 var newQuery = _context.Projects.Where(p => p.UserProjects.Any(pu => pu.UserId == userId))
-                     .Select(p => new
-                     {
-                         id = p.Id,
-                         name = p.Name,
-                         created = p.CreatedAt,
-                         updated = p.UpdatedAt,
-                         manager = p.ManagerId,
-                         status = p.Status,
-                         thumb = p.Thumb,
-                         users = p.UserProjects.Select(du => new
-                         {
-                             userId = du.User.Id,
-                             fullName = du.User.FullName,
-                             email = du.User.Email,
-                             avatar = du.User.Avatar,
-                         }),
+                    .Select(p => new
+                    {
+                        id = p.Id,
+                        name = p.Name,
+                        created = p.CreatedAt,
+                        updated = p.UpdatedAt,
+                        manager = p.ManagerId,
+                        status = p.Status,
+                        thumb = p.Thumb,
+                        users = p.UserProjects.Select(du => new
+                        {
+                            userId = du.User.Id,
+                            fullName = du.User.FullName,
+                            email = du.User.Email,
+                            avatar = du.User.Avatar,
+                        }),
 
-                     });
+                    });
 
                 var dataNeW = await newQuery.ToListAsync();
                 return Ok(dataNeW);
@@ -173,7 +173,7 @@ namespace ProjectManage.Controllers
                 var query = _context.UserProjects.AsQueryable();
                 query = query.Where(item => item.ProjectId == id);
                 var data = await query.ToListAsync();
-                
+
                 foreach (var item in data)
                 {
 
@@ -181,8 +181,8 @@ namespace ProjectManage.Controllers
                     await _context.SaveChangesAsync();
 
                 }
-                 
-                
+
+
                 /* =========== 2 ==========*/
 
                 if (model.UserProjects.Count > 0)

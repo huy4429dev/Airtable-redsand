@@ -215,9 +215,9 @@ export const handleAddCommentTask = (data, id) => {
 }
 // add comment into task
 
-export const handleDeleteListTask = (id) => {
+export const handleDeleteListTask = (id, userId) => {
     return {
-        url: `${types.API_ENDPOINT}/${types.URL_LIST_TASK}/${id}`,
+        url: `${types.API_ENDPOINT}/${types.URL_LIST_TASK}/${id}?userId=${userId}`,
         method: types.API_METHOD_DELETE,
         onSuccess: types.DELETE_LIST_TASK_SUCCESS,
         onError: types.DELETE_LIST_TASK_FAILE
@@ -235,13 +235,13 @@ export const getAllUser = () => {
 }
 // delete list task
 
-export const handleAddUserProject = (data,id) => {
+export const handleAddUserProject = (data, id) => {
     return {
         url: `${types.API_ENDPOINT}/${types.URL_PROJECT}/${id}`,
         data: data,
         method: types.API_METHOD_PUT,
         onSuccess: types.ADD_USER_PROJECT_SUCCESS,
-        onError: types.ADD_USER_PROJECT_FAILE 
+        onError: types.ADD_USER_PROJECT_FAILE
     }
 }
 // add  user project
