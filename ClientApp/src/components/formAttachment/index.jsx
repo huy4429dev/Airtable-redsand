@@ -15,12 +15,23 @@ class formAttachment extends Component {
             fileUrl: null,
             nameUrl: null,
            display:"",
-           id:null,      
+                
         }
     }
-    save(e) {
+    saveAttachment(e) {
       
         this.setState({ display: "none" });
+        const {saveAttachment,taskEdit}= this.props;
+        console.log(taskEdit)
+        const id= taskEdit.task.id;
+        e.preventDefault();
+
+        const data={
+            nameUrl: this.state.nameUrl,
+            fileUrl:this.state.fileUrl
+        }
+        saveAttachment(data,id);
+
 
        // this.handleCloseAttachment()
 
@@ -59,7 +70,7 @@ class formAttachment extends Component {
                                         scope={['https://www.googleapis.com/auth/drive.readonly']}
                                         onChange={data => {
                                             data.docs ?
-                                                this.setState({ fileUrl: data.docs[0].url, nameUrl: data.docs[0].name }): this.save();
+                                                this.setState({ fileUrl: data.docs[0].url, nameUrl: data.docs[0].name }): this.saveAttachment();
                                         }}
                                         onAuthenticate={token =>{console.log('oauth token:', token)}}
                                         onAuthFailed={data => console.log('on auth failed:', data)}

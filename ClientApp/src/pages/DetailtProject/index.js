@@ -183,10 +183,15 @@ class Detailt extends Component {
     }
     // trang -add attachment
     showFormAttachment=()=>{
-        const { showFormAttachment}= this.props;
-       const {handleCloseAttachment}=this.props.actions;
+        const { showFormAttachment, taskEdit}= this.props;
+       const {handleCloseAttachment, saveAttachment}=this.props.actions;
         if(showFormAttachment){
-            return (<FormAttachment handleCloseAttachment={handleCloseAttachment} />)
+            return (<FormAttachment 
+                handleCloseAttachment={handleCloseAttachment} 
+            taskEdit={taskEdit}
+            saveAttachment={saveAttachment}
+            
+            />)
         }
     }
     

@@ -19,6 +19,8 @@ class ModalDeadlineTask extends Component {
     handleChangeDeadlineTask = (e) => {
         const { handleChangeDeadlineTask, taskEdit } = this.props;
         const id = taskEdit.task.id;
+       
+   
         e.preventDefault();
         const data = {
             title: taskEdit.task.title,
