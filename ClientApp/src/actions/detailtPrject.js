@@ -221,9 +221,9 @@ export const handleChangeDeadlineTask = (data, id) => {
 // edit dealline  task
 
 // add attachment into task- trang
-export const saveAttachment = (data, id) => {
+export const saveAttachment = (data) => {
     return {
-        url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}/attachment`,
+        url: `${types.API_ENDPOINT}/api/attachment`,
         data: data,
         method: types.API_METHOD_POST,
         onSuccess: types.ADD_ATTACHMENT_SUCCESS,
@@ -233,7 +233,7 @@ export const saveAttachment = (data, id) => {
 //get attachment -trang
 export const getAllAttachment = (id) => {
     return {
-        url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}/attachment`,
+        url: `${types.API_ENDPOINT}/attachment`,
         method: types.API_METHOD_GET,
         onSuccess: types.ADD_ATTACHMENT_SUCCESS,
         onError: types.ADD_ATTACHMENT_FAILE
@@ -244,7 +244,7 @@ export const getAllAttachment = (id) => {
     // DELETE ATTCHMENT
     export const deleteAttachment = (id,idAttachment) => {
         return {
-            url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}/attachment=${idAttachment}`,
+            url: `${types.API_ENDPOINT}/attachment=${idAttachment}`,
             method: types.API_METHOD_DELETE,
             onSuccess: types.ADD_ATTACHMENT_SUCCESS,
             onError: types.ADD_ATTACHMENT_FAILE

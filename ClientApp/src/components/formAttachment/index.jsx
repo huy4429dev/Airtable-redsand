@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Nav from 'react-bootstrap/Nav'
 import Card from 'react-bootstrap/Card'
 import './style.scss';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText, Tag } from 'reactstrap';
 import GooglePicker from 'react-google-picker'
 
 
@@ -14,31 +14,54 @@ class formAttachment extends Component {
 
             fileUrl: null,
             nameUrl: null,
-           display:"",
-                
+            display: "",
+
         }
     }
-    saveAttachment(e) {
-      
-        this.setState({ display: "none" });
-        const {saveAttachment,taskEdit}= this.props;
-        console.log(taskEdit)
-        const id= taskEdit.task.id;
-        e.preventDefault();
+    static getDerivedStateFromProps(nextProps, prevState){
+     
+        if ( prevState.nameUrl=== null){
+         
+          return { nameUrl: null };
+       }
+       else return null;
+     }
+  componentDidUpdate(prevProps, prevState) {
+    
+    if (prevState.nameUrl !== this.state.nameUrl) {
+     
 
+      this.setState({ fileUrl: this.state.fileUrl, nameUrl:this.state.nameUrl})
+      this.saveAttachment()
+      this.handleCloseAttachment();
+     
+    }
+  }
+  
+
+    
+    saveAttachment(){
+ 
+        const {saveAttachment,taskEdit}= this.props;
+       
+        const id= taskEdit.task.id;       
         const data={
-            nameUrl: this.state.nameUrl,
-            fileUrl:this.state.fileUrl
+            url: this.state.fileUrl,
+            name:this.state.nameUrl,
+            taskId:id
         }
         saveAttachment(data,id);
+        this.handleCloseAttachment();
 
 
-       // this.handleCloseAttachment()
+       
 
     }
 
 
-    handleCloseAttachment = () => {
+
+    handleCloseAttachment=()=>{
+        alert('đa đóng');
      
         const { handleCloseAttachment } = this.props;
         handleCloseAttachment();
@@ -46,15 +69,15 @@ class formAttachment extends Component {
 
 
 
-    render() 
 
-    {
+    render() {
 
-
+        const { taskEdit } = this.props;
+        console.log('tas'+taskEdit.attaches)
         return (
 
             <React.Fragment>
-                <Card className="modal-deadline " style={{display:this.state.display}} index={this.props.task} >
+                <Card className="modal-deadline " style={{ display: this.state.display }} index={this.props.task} >
                     <form>
                         <Card.Header className="text-center position-relative ">
                             <p className="modal-deadline__title">Attach Form</p>
@@ -68,16 +91,15 @@ class formAttachment extends Component {
                                         clientId={'136988398048-r3i3a1625h8hnrng9p2sj8chjjfurmiu.apps.googleusercontent.com'}
                                         developerKey={'AIzaSyDE7tXkC6FzOOMlaew-Y257DS9hCXYKeXg'}
                                         scope={['https://www.googleapis.com/auth/drive.readonly']}
-                                        onChange={data => {
-                                            data.docs ?
-                                                this.setState({ fileUrl: data.docs[0].url, nameUrl: data.docs[0].name }): this.saveAttachment();
-                                        }}
-                                        onAuthenticate={token =>{console.log('oauth token:', token)}}
+                                        onChange={ data=>{data.docs?
+                                            this.setState({nameUrl:data.docs[0].name, fileUrl:data.docs[0].url}): console.log("")}
+                                        }
+                                        onAuthenticate={token => { console.log('oauth token:', token) }}
                                         onAuthFailed={data => console.log('on auth failed:', data)}
                                         multiselect={true}
                                         navHidden={true}
                                         authImmediate={false}
-                                      
+
 
                                         mimeTypes={['image/png', 'image/jpeg', 'image/jpg',
                                             'application/vnd.google-apps.folder',

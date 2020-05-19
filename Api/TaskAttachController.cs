@@ -38,21 +38,11 @@ namespace Airtable_redsand.Api
             }
             model.CreatedAt = DateTime.Now;
             model.UpdatedAt = DateTime.Now;
-            var attachment = new TaskAttach
-            {
-                Url = model.Url,
-                Name = model.Name,
-                CreatedAt = model.CreatedAt,
-                UpdatedAt = model.UpdatedAt,
-            };
-             var result= await context.TaskAttaches.AddAsync(attachment);
-             if(result !=null)
-             {
-                 return Ok(result);
-             }
-             else
-             { return BadRequest();}
+           await context.TaskAttaches.AddAsync(model);
+           await context.SaveChangesAsync();
+           return Ok(model);
         }
+        
 
             
 
