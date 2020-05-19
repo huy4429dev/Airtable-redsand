@@ -30,13 +30,6 @@ export const handleHideFormAddTask = () => {
 }
 // show form add task
 
-export const handleShowModalDetailtTask = (id) => {
-    return {
-        type: types.SHOW_MODAL_DETAIL_TASK,
-        id
-    }
-}
-// show modal detailt task
 
 export const handleHideModalDetailtTask = () => {
     return {
@@ -160,8 +153,15 @@ export const getListTaskEdit = (id) => {
     }
 }
 // get  listtask edit
+// export const handleShowModalDetailtTask = (id) => {
+//     return {
+//         type: types.SHOW_MODAL_DETAIL_TASK,
+//         id
+//     }
+// }
+// show modal detailt task
 
-export const handleGetProfileTask = (id) => {
+export const handleShowModalDetailtTask = (id) => {
     return {
         url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}`,
         method: types.API_METHOD_GET,
@@ -234,3 +234,14 @@ export const getAllUser = () => {
     }
 }
 // delete list task
+
+export const handleAddUserProject = (data,id) => {
+    return {
+        url: `${types.API_ENDPOINT}/${types.URL_PROJECT}/${id}`,
+        data: data,
+        method: types.API_METHOD_PUT,
+        onSuccess: types.ADD_USER_PROJECT_SUCCESS,
+        onError: types.ADD_USER_PROJECT_FAILE 
+    }
+}
+// add  user project

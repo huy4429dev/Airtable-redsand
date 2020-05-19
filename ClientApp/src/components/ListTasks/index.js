@@ -71,7 +71,6 @@ class ListTasks extends Component {
         }, 3000);
     }
     componentDidMount() {
-
         const idListTask = this.props.columnId.id;
         const { getListTaskEdit } = this.props;
         getListTaskEdit(idListTask)
