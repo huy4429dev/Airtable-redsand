@@ -17,52 +17,56 @@ class formAttachment extends Component {
             display: "",
 
         }
+        this.handleChangLink = this.handleChangLink.bind(this)
     }
-    static getDerivedStateFromProps(nextProps, prevState){
-     
-        if ( prevState.nameUrl=== null){
-         
-          return { nameUrl: null };
-       }
-       else return null;
-     }
-  componentDidUpdate(prevProps, prevState) {
-    
-    if (prevState.nameUrl !== this.state.nameUrl) {
-     
+    static getDerivedStateFromProps(nextProps, prevState) {
 
-      this.setState({ fileUrl: this.state.fileUrl, nameUrl:this.state.nameUrl})
-      this.saveAttachment()
-      this.handleCloseAttachment();
-     
-    }
-  }
-  
+        if (prevState.nameUrl === null) {
 
-    
-    saveAttachment(){
- 
-        const {saveAttachment,taskEdit}= this.props;
-       
-        const id= taskEdit.task.id;       
-        const data={
-            url: this.state.fileUrl,
-            name:this.state.nameUrl,
-            taskId:id
+
+            return { nameUrl: null };
         }
-        saveAttachment(data,id);
-        this.handleCloseAttachment();
+        else return null;
+    }
+    componentDidUpdate(prevProps, prevState) {
 
+        if (prevState.nameUrl !== this.state.nameUrl) {
+
+
+            this.setState({ fileUrl: this.state.fileUrl, nameUrl: this.state.nameUrl })
+            this.saveAttachment()
+        }
+    }
+
+    handleChangLink = (e) => {
+
+        this.setState({
+            fileUrl: e.target.value,
+            nameUrl: 'ANH_WEB',
+        })
+
+    }
+
+    saveAttachment=(e)=> {
 
        
+        const { saveAttachment, taskEdit } = this.props;
+
+        const id = taskEdit.task.id;
+        const data = {
+            url: this.state.fileUrl,
+            name: this.state.nameUrl,
+            taskId: id
+        }
+        saveAttachment(data, id);
 
     }
 
 
 
-    handleCloseAttachment=()=>{
-        alert('đa đóng');
-     
+    handleCloseAttachment = () => {
+
+
         const { handleCloseAttachment } = this.props;
         handleCloseAttachment();
     }
@@ -73,7 +77,7 @@ class formAttachment extends Component {
     render() {
 
         const { taskEdit } = this.props;
-        console.log('tas'+taskEdit.attaches)
+      
         return (
 
             <React.Fragment>
@@ -91,8 +95,10 @@ class formAttachment extends Component {
                                         clientId={'136988398048-r3i3a1625h8hnrng9p2sj8chjjfurmiu.apps.googleusercontent.com'}
                                         developerKey={'AIzaSyDE7tXkC6FzOOMlaew-Y257DS9hCXYKeXg'}
                                         scope={['https://www.googleapis.com/auth/drive.readonly']}
-                                        onChange={ data=>{data.docs?
-                                            this.setState({nameUrl:data.docs[0].name, fileUrl:data.docs[0].url}): console.log("")}
+                                        onChange={data => {
+                                            data.docs ?
+                                            this.setState({ nameUrl: data.docs[0].name, fileUrl: data.docs[0].url }) : console.log("")
+                                        }
                                         }
                                         onAuthenticate={token => { console.log('oauth token:', token) }}
                                         onAuthFailed={data => console.log('on auth failed:', data)}
@@ -124,10 +130,10 @@ class formAttachment extends Component {
                             <span>  Attach a link</span>
                             <form>
                                 <FormGroup>
-                                    <Input type="text" value={this.state.nameUrl} placeholder="paste any link here" name="link-attach" onChange={this.save} />
+                                    <Input type="text" value={this.state.fileUrl} placeholder="paste any link here" name="fileUrl" onChange={this.handleChangLink} />
                                 </FormGroup>
                             </form>
-                            <button className="modal-deadline__btn">Attach</button>
+                            <button className="modal-deadline__btn" onClick={this.saveAttachment}>Attach</button>
                         </Card.Footer>
                     </form>
                 </Card>

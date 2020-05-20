@@ -242,7 +242,7 @@ export const getAllAttachment = (id) => {
 }
 
     // DELETE ATTCHMENT
-    export const deleteAttachment = (id,idAttachment) => {
+    export const deleteAttachment = (idAttachment) => {
         return {
             url: `${types.API_ENDPOINT}/attachment=${idAttachment}`,
             method: types.API_METHOD_DELETE,

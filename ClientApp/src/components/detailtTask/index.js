@@ -14,6 +14,7 @@ class DetailtTask extends Component {
             desc: null,
             comment: null
         }
+       this.deleteAttachment=this.deleteAttachment.bind(this)
     }
 
 
@@ -22,7 +23,7 @@ class DetailtTask extends Component {
         handleHideModalDetailtTask();
     }
     handleShowModalDeadlineTask = () => {
-       
+
         const { handleShowModalDeadlineTask } = this.props;
         handleShowModalDeadlineTask();
     }
@@ -31,12 +32,12 @@ class DetailtTask extends Component {
         handleShowModalAddUserTask();
     }
     handleAddAttachment = () => {
-     
+
         const { handleAddAttachment } = this.props;
-     
-             handleAddAttachment();
+
+        handleAddAttachment();
     }
-    
+
 
     componentDidMount() {
         const { idDetailtTask, handleGetProfileTask } = this.props;
@@ -110,6 +111,7 @@ class DetailtTask extends Component {
     }
     showDesc = () => {
         const { taskEdit } = this.props;
+
         if (taskEdit !== null) {
             return (
                 <textarea onChange={this.onChangeInputDesc} name="desc" className="modal-task__desc-add" placeholder="Thêm mô tả chi tiết..." defaultValue={taskEdit.task.desc}></textarea>
@@ -118,6 +120,7 @@ class DetailtTask extends Component {
     }
     showDeadline = () => {
         const { taskEdit } = this.props;
+
         if (taskEdit !== null) {
             return (
                 <div className="ml-4  d-flex align-center">
@@ -150,6 +153,7 @@ class DetailtTask extends Component {
     }
     showComment = () => {
         const { taskEdit } = this.props;
+
         if (taskEdit !== null && taskEdit.comments.length > 0) {
             return (
                 taskEdit.comments.map((comment, index) => {
@@ -158,8 +162,73 @@ class DetailtTask extends Component {
             )
         }
     }
+
+    showAttachments = () => {
+        const { taskEdit } = this.props;
+        if (taskEdit != null && taskEdit.attaches.length > 0) {
+            return (
+                <div className="block-attachment  ">
+                    <div className="d-flex align-items-center mt-2">
+                        <i class="fa fa-file-archive-o mr-3" aria-hidden="true"></i>
+                        <p className="modal-task__desc">Attachments</p>
+                    </div>
+                    {
+                       
+                         taskEdit.attaches.map((file)=>{
+                             return(
+                                <div className="file-attachment " key={file.id}>
+                                        
+                                <a href={file.url} className="">
+                                
+                                    <img class="attachment-thumbnail modal-task__desc-add " src="https://img.icons8.com/plasticine/2x/file.png" />
+                                    </a>
+                              
+                                    <div className="des_attachment">
+                             <a href={file.url}> <h6 className="nameFile">{file.name}</h6></a> 
+                                    <a ><span  key={file.id} onClick={this.deleteAttachment(file.id)}>Remove</span></a>
+                             <p>Creat At: {file.createdAt}</p>
+                                </div>
+                              
+                                
+                          
+
+
+
+                        </div>
+
+                             )
+                         })   
+                            
+                    }
+        
+                  
+                            
+
+
+                </div>
+
+            )
+        }
+    }
+
+
+    deleteAttachment=(key)=>{
+        console.log('key'+key);
+        const {deleteAttachment}=this.props;
+       // deleteAttachment();
+    }
+
+
+
+
+
+
+
+
     render() {
         const { taskEdit } = this.props;
+
+
         return (
             <React.Fragment>
                 <div className="modal-task" >
@@ -188,33 +257,9 @@ class DetailtTask extends Component {
                                     {/* <textarea onChange={this.handleEditDescTask} name="desc" className="modal-task__desc-add" placeholder="Thêm mô tả chi tiết..." >{this.state.desc}</textarea> */}
                                     <button className="modal-task__desc-btn" onClick={this.handleEditDescTask}>Lưu</button>
                                 </div>
-                            
-                                <div className="block-attachment  ">
-                                    <div className="d-flex align-items-center mt-2">
-                                        <i class="fa fa-file-archive-o mr-3" aria-hidden="true"></i>
-                                        <p className="modal-task__desc">Attachments</p>
-                                    </div>
 
-                                    <div className="file-attachment ">
-                                        
-                                            <a href="#" className="">
-                                            
-                                                <img class="attachment-thumbnail modal-task__desc-add " src="https://img.icons8.com/plasticine/2x/file.png" />
-                                                </a>
-                                          
-                                                <div className="des_attachment">
-                                                <a href="#"> <h6 className="nameFile">ĐĂNG KÍ_CHỦ ĐỂ CONTENT</h6></a> 
-                                                 <a href="#"><span>Remove</span></a>
-                                                 <p>Creat At: 13-2-2020</p>
-                                            </div>
-                                          
-                                            
-                                      
+                                {this.showAttachments()}
 
-
-
-                                    </div>
-                                </div>
 
                                 <div className="d-flex justify-content-between align-items-center mt-2">
                                     <div className="d-flex">
