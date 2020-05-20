@@ -7,7 +7,7 @@ export const actShowProjectReques = (userId) => {
         url: `${types.URL_API}/${types.URL_PROJECT}?userId=${userId}`,
         method: types.API_METHOT_GET,
         onSuccess: types.SHOW_PROJECT,
-        // onError:types.SHOW_PROJECT_ERROR
+        onError:types.SHOW_PROJECT_ERROR
     }
 }
 //Show project recently
@@ -17,7 +17,7 @@ export const actShowProjectReccentlyRequest = (userId) => {
         url: `${types.URL_API}/${types.URL_PROJECT_RECENTLY}?userId=${userId}`,
         method: types.API_METHOT_GET,
         onSuccess: types.SHOW_PROJECT_RECENTLY,
-        // onError: types.SHOW_PROJECT_RECENTLY_ERROR
+        onError: types.SHOW_PROJECT_RECENTLY_ERROR
     }
 }
 

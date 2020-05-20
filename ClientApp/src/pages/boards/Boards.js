@@ -9,7 +9,7 @@ import BoardRecentlyItem from '../../components/boards/BoardRecentlyItem';
 import * as actions from './../../actions/board';
 import connect from '../../lib/connect';
 
-import FormCreate from '../../components/ListHeader/FormCreate';
+// import FormCreate from '../../components/ListHeader/FormCreate';
 import { Redirect } from 'react-router-dom';
 
 

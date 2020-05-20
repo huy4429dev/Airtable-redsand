@@ -8,7 +8,7 @@ class BoardRecentlyItem extends Component {
         return (
 
             <Col sm="3 mr-5">
-                <Link to={`/detailt/${projectRecently.id}.html`} className="link">
+                <Link to={`/detailt/${projectRecently.projectId}.html`} className="link">
                     <div className="mt-3 mb-3 text-white item-recently " style={{
                         backgroundImage: `url('https://localhost:5001/Resources/images/${projectRecently.thumb}')`,
                         backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'

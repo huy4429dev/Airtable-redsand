@@ -72,9 +72,6 @@ class BoardAdd extends Component {
     render() {
         var { txtname } = this.state;
         var showimg = this.props.showimg;
-
-
-
         return (
             <React.Fragment>
                 <div className="form-filter">
