@@ -29,10 +29,10 @@ class DetailtTask extends Component {
         const { handleShowModalAddUserTask } = this.props;
         handleShowModalAddUserTask();
     }
-    componentDidMount() {
-        const { idDetailtTask, handleGetProfileTask } = this.props;
-        handleGetProfileTask(idDetailtTask);
-    }
+    // componentDidMount() {
+    //     const { idDetailtTask, handleGetProfileTask } = this.props;
+    //     handleGetProfileTask(idDetailtTask);
+    // }
     handleEditTitleTask = (e) => {
         const { handleEditTitleTask, taskEdit } = this.props;
         const { target } = e;

@@ -137,10 +137,8 @@ class Detailt extends Component {
     }
     hideModalDetailtTask = () => {
         const { showModalDetailtTask, idDetailtTask, taskEdit } = this.props;
-        console.log(taskEdit);
-
         const { handleAddCommentTask, handleEditDescTask, handleEditTitleTask, handleHideModalDetailtTask,
-            handleShowModalDeadlineTask, handleShowModalAddUserTask, handleGetProfileTask } = this.props.actions;
+            handleShowModalDeadlineTask, handleShowModalAddUserTask } = this.props.actions;
         if (showModalDetailtTask) {
             return (
                 <DetailtTask
@@ -148,7 +146,6 @@ class Detailt extends Component {
                     handleShowModalDeadlineTask={handleShowModalDeadlineTask}
                     handleShowModalAddUserTask={handleShowModalAddUserTask}
                     idDetailtTask={idDetailtTask}
-                    handleGetProfileTask={handleGetProfileTask}
                     taskEdit={taskEdit}
                     handleEditTitleTask={handleEditTitleTask}
                     handleEditDescTask={handleEditDescTask}
@@ -158,12 +155,13 @@ class Detailt extends Component {
     }
     hideModalAddUser = () => {
         const { hideModalAddUser, allUser, project } = this.props;
-        const { handleHideModalAddUser } = this.props.actions;
+        const { handleHideModalAddUser,handleAddUserProject } = this.props.actions;
         if (hideModalAddUser) {
             return (
                 <ModalAddUser handleHideModalAddUser={handleHideModalAddUser}
                     allUser={allUser}
-                    project={project} />
+                    project={project} 
+                    handleAddUserProject={handleAddUserProject}/>
             )
         }
     }
@@ -179,7 +177,8 @@ class Detailt extends Component {
             return (<ModalDeadlineTask
                 handleHideModalDeadlineTask={handleHideModalDeadlineTask}
                 taskEdit={taskEdit}
-                handleChangeDeadlineTask={handleChangeDeadlineTask} />)
+                handleChangeDeadlineTask={handleChangeDeadlineTask}
+                />)
         }
     }
     showModalAddUserTask = () => {

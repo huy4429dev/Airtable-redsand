@@ -58,7 +58,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state, showModalAddUserTask: false }
 
         case types.ADD_LIST_TASK_SUCCESS:
-            return { ...state, listTask: state.listTask.concat(action.data), showFormAddListTask: false }
+            return { ...state, listTask: state.listTask.concat(action.data), showFormAddListTask: false,showButtonAddListTask:true }
 
         case types.ADD_LIST_TASK_FAILE:
             return { ...state }
@@ -113,7 +113,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state }
 
         case types.GET_TASK_EDIT_SUCCESS:
-            return { ...state, taskEdit: action.data }
+            return { ...state, taskEdit: action.data,showModalDetailtTask:true }
 
         case types.GET_TASK_EDIT_FAILE:
             return { ...state }
@@ -137,7 +137,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state }
 
         case types.EDIT_DEADLINE_TASK_SUCCESS:
-            return { ...state }
+            return { ...state,showModalEditDeadlineTask:false }
 
         case types.EDIT_DEADLINE_TASK_FAILE:
             return { ...state }
@@ -157,8 +157,6 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state }
 
         case types.DELETE_LIST_TASK_SUCCESS:
-            console.log(action.data);
-
             return { ...state }
 
         case types.DELETE_LIST_TASK_FAILE:
@@ -166,7 +164,14 @@ const detailtProjectReducers = (state = initialState, action) => {
 
         case types.GET_ALL_USER_SUCCESS:
             return { ...state, allUser: action.data }
+
         case types.GET_ALL_USER_FAILE:
+            return { ...state }
+
+        case types.ADD_USER_PROJECT_SUCCESS:
+            return { ...state }
+
+        case types.ADD_USER_PROJECT_FAILE:
             return { ...state }
 
         default:
