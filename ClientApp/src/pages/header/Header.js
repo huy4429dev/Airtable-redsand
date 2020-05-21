@@ -64,19 +64,19 @@ class HeaderPage extends Component {
         const { project_profile } = this.props;
         const userId = localStorage.userId;
         FectProfile(userId);
-            if (project_profile !== []) {
-                this.setState({
-                    project_profile: project_profile
-                })
-            }
+        if (project_profile !== []) {
+            this.setState({
+                project_profile: project_profile
+            })
+        }
     }
 
     render() {
         var search = this.state.noidungsearch;
         var { project_profile } = this.props;
         var userName = project_profile.userName;
-        if (userName) {
-            var name = userName.slice(0, 1);
+        if(userName){
+            var name = userName.slice(0,1);
             name = name.toUpperCase();
         }
         return (
@@ -108,7 +108,7 @@ class HeaderPage extends Component {
                     <FormUser onClick={this.handleShowFormUser}
                         project_profile={project_profile}
                     />
-
+                       
                     : null}
                 {this.state.isActiveNocation ?
                     <FormNocation onClick={this.handleShowFormNocation} />
@@ -129,7 +129,7 @@ class HeaderPage extends Component {
                     : null
 
                 }
-                <Boards search={search} />
+               
             </React.Fragment>
         );
     }

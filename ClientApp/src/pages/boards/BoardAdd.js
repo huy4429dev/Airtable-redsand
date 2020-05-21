@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, Button } from 'reactstrap';
-// import { actAddProjectRequest, actAddFileRequest, actShowImageRequest } from './../../actions/board';
 import connect from '../../lib/connect';
 import * as actions from './../../actions/board';
-// import { connect } from 'react-redux';
 class BoardAdd extends Component {
     constructor(props, context) {
         super(props, context);
@@ -37,7 +35,6 @@ class BoardAdd extends Component {
         const userId = localStorage.userId;
         const { actAddProjectRequest } = this.props.actions;
         var { txtname } = this.state;
-        // var{history}=this.props;
         var project = {
             name: txtname,
             thumb: thumb || this.props.img,
@@ -54,15 +51,15 @@ class BoardAdd extends Component {
     }
     handleUploadImage = (e) => {
         const { actAddFileRequest } = this.props.actions;
-
-        var formData = new FormData();
+        var img = new FormData();
         var fileField = document.querySelector('input[type="file"]');
-        formData.append('avatar', fileField.files[0]);
-        actAddFileRequest(formData);
+        img.append('avatar', fileField.files[0]);
+        actAddFileRequest(img);
+
     }
 
     componentWillMount() {
-        const { actShowImageRequest, actAddProjectRequest } = this.props.actions;
+        const { actShowImageRequest } = this.props.actions;
         const { showimg } = this.props;
         actShowImageRequest();
         if (showimg !== []) {
@@ -79,7 +76,7 @@ class BoardAdd extends Component {
             <React.Fragment>
                 <div className="form-filter">
                     <div className="form_addproject">
-                        <i onClick={this.showFormAdd} className="fa fa-close mt-1 float-right"></i>
+                        <i onClick={this.showFormAdd} className="fa fa-close form-list-board-right"></i>
                         <div className="mt-3 mb-5 text-center">
                             <h5 className="text-center">Create New Project</h5>
                         </div>
@@ -123,27 +120,6 @@ class BoardAdd extends Component {
         );
     }
 }
-// const mapStateToProps = (state) => {
-//     return {
-//         img: state.boardReducer.img,
-//         project: state.boardReducer.project,
-//         showimg: state.imgReducer
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch, porps) => {
-//     return {
-//         onAddProject: (userId, project) => {
-//             dispatch(actAddProjectRequest(userId, project))
-//         },
-//         onAddfile: (img) => {
-//             dispatch(actAddFileRequest(img))
-//         },
-//         onshowimage: () => {
-//             dispatch(actShowImageRequest())
-//         }
-//     }
-// }
 export default (connect(BoardAdd, state => (
     {
         showimg: state.imgReducer.showimg,
@@ -151,4 +127,3 @@ export default (connect(BoardAdd, state => (
         img: state.imgReducer.img
     }
 ), actions));
-// export default connect(mapStateToProps, mapDispatchToProps)(BoardAdd);

@@ -14,6 +14,9 @@ import DetailtTask from '../../components/detailtTask';
 import ModalAddUser from '../../components/modalAddUser';
 import ModalDeadlineTask from '../../components/modalDeadlineTask';
 import ModalAddUserTask from '../../components/modalAddUserTask';
+
+import Header from '../header/Header';
+
 import { Redirect } from 'react-router-dom';
 
 class Detailt extends Component {
@@ -289,7 +292,7 @@ class Detailt extends Component {
         }
         return (
             <React.Fragment>
-                <HeaderPage />
+                <Header />
                 <div style={{ backgroundImage: `url('https://localhost:5001/Resources/images/${this.state.bgr}')` }} className="detailt">
                     <div className="detailt__box">
                         <div className="d-flex justify-content-between align-items-center mt-3">
