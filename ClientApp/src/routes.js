@@ -9,9 +9,14 @@ import Boards from './pages/boards/Boards';
 import BoardAdd from './pages/boards/BoardAdd';
 import LoginbyGoogle from './components/account/LoginbyGoogle';
 import FaceBook from './components/account/Facebook';
-import Profile from './components/profile/Profile';
+import Profile from './components/profile/profile';
 
 const routes = [
+    {
+        path: '/',
+        exact: true,
+        main: () => <Home />
+    },
     {
         path: '/detailt/:id.html',
         exact: true,
@@ -36,11 +41,6 @@ const routes = [
         path: '/login',
         exact: false,
         main: () => <Login />
-    },
-    {
-        path: '/',
-        exact: true,
-        main: () => <Home />
     },
     {
         path: '/sigup',

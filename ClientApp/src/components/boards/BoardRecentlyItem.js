@@ -7,11 +7,11 @@ class BoardRecentlyItem extends Component {
         var projectRecently = this.props.projectRecently;
         return (
 
-            <Col sm="3 mr-5">
+            <Col lg="3">
                 <Link to={`/detailt/${projectRecently.projectId}.html`} className="link">
                     <div className="mt-3 mb-3 text-white item-recently " style={{
                         backgroundImage: `url('https://localhost:5001/Resources/images/${projectRecently.thumb}')`,
-                        backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
+                        backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat', borderRadius:'8px'
                     }} >
                         <span className="ml-3">{projectRecently.name}</span>
                     </div>
