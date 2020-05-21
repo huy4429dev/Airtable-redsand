@@ -35,8 +35,7 @@ componentDidUpdate(prevProps, prevState) {
     render() {
         const {attachment}= this.props;
         const {index}= this.props;
-        return (
-           
+        return ( 
             <React.Fragment>
                 <div className="file-attachment " key={index}>
                                         
@@ -50,8 +49,6 @@ componentDidUpdate(prevProps, prevState) {
                                              <a  key={index} onClick={this.deleteAttachment( index)}><span>Remove</span></a>
         <p className="creatAt">Created At: {attachment.createdAt}</p>
                                         </div>
-                    
-
                                 
             </div>
             </React.Fragment>

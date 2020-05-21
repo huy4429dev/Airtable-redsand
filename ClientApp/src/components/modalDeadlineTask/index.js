@@ -21,7 +21,7 @@ class ModalDeadlineTask extends Component {
         const id = taskEdit.task.id;
        console.log("deadline"+taskEdit);
    
-        e.preventDefault();
+       e.preventDefault();
         const data = {
             title: taskEdit.task.title,
             desc: taskEdit.task.desc,

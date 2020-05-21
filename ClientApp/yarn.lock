@@ -1541,7 +1541,7 @@
   resolved "https://registry.yarnpkg.com/@types/react-calendar/-/react-calendar-3.0.1.tgz#45527c0ec03cbd17678cec478add1c4bb17ac852"
   integrity sha512-taCzghjYNgJZvHWB9tQKfRcmALtPBCu+Nl1VurpUYK6RT+ZASXI+ysjBaMstqd0uP4bbVt8ITMEprNqKLrrGzA==
 
-"@types/react@^16.9.11", "@types/react@^16.9.23":
+"@types/react@*", "@types/react@^16.9.11", "@types/react@^16.9.23":
   version "16.9.35"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
   integrity sha512-q0n0SsWcGc8nDqH2GJfWQWUOmZSJhXV64CjVN5SvcNti3TdEaA3AH0D8DwNmMdzjMAC/78tB8nAZIlV8yTz+zQ==
@@ -13082,12 +13082,25 @@ react-error-overlay@^6.0.7:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
+react-facebook-login@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-4.1.1.tgz#005121236a6ac0dee02099976fb1a3265f9d633e"
+  integrity sha512-COnHEHlYGTKipz4963safFAK9PaNTcCiXfPXMS/yxo8El+/AJL5ye8kMJf23lKSSGGPgqFQuInskIHVqGqTvSw==
+
 react-fit@^1.0.3:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-fit/-/react-fit-1.2.0.tgz#de8340d0013e1cbaa8cbca2b7562c50aa0941712"
   integrity sha512-dT6dsaF2cgBeiKsgixzFRgkQK7wp8vjvLdpaVoT+nLx1v+olncOJFBnkK+w83CDHIY6s85DDwYDbkwgHdm8FqA==
   dependencies:
     detect-element-overflow "^1.2.0"
+    prop-types "^15.6.0"
+
+react-google-login@^5.1.19:
+  version "5.1.20"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.1.20.tgz#06afbf5fd9013455ae3bfba93054630df203542d"
+  integrity sha512-/5vDx8Hy7Wo1fO1VC/0e5D6/ZGWgIgvcscI8mYZUQ653QOFf0c4GhTnKkebX5uE7m5rAB/2bzzZIUlIesGqWig==
+  dependencies:
+    "@types/react" "*"
     prop-types "^15.6.0"
 
 react-google-picker-2@^0.0.2:

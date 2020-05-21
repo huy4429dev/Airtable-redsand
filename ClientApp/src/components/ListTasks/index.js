@@ -71,7 +71,6 @@ class ListTasks extends Component {
         }, 3000);
     }
     componentDidMount() {
-
         const idListTask = this.props.columnId.id;
         const { getListTaskEdit } = this.props;
         getListTaskEdit(idListTask)
@@ -80,14 +79,14 @@ class ListTasks extends Component {
         e.preventDefault();
         const { handleDeleteListTask } = this.props;
         const { id } = this.props.columnId;
+        const userId = localStorage.userId;
         if (window.confirm("bạn có muốn xóa list task")) {
-            handleDeleteListTask(id);
+            handleDeleteListTask(id, userId);
         }
 
     }
     render() {
         const { column, columnId, index, tasks, handleShowModalDetailtTask } = this.props;
-
         return (
             <React.Fragment>
                 <Draggable draggableId={String(column)} index={index}>

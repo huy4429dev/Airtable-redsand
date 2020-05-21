@@ -17,11 +17,11 @@ class ViewList extends Component {
         return (
             <Col className="view-board" xs="12">
                 <Row>
-                    <h6 className="d-flex align-items-center mt-5"><i className='far fa-user mr-3'></i> Personal Boards</h6>
+                    <h6 className="d-flex align-items-center mt-5 ml-1"><i className='far fa-user mr-3'></i> Personal Boards</h6>
                 </Row>
                 <Row>
                     {this.props.children}
-                    <Col sm="3 mr-5 crate-project">
+                    <Col lg="4 mr-5 crate-project">
                         <button onClick={this.showFormAdd} className="mt-3 mb-3 border-0  bg-light text-dark item-recently">
                             <span className="ml- addBoard">Create New Board</span>
                         </button>

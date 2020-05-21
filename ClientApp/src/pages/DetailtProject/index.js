@@ -14,7 +14,10 @@ import DetailtTask from '../../components/detailtTask';
 import ModalAddUser from '../../components/modalAddUser';
 import ModalDeadlineTask from '../../components/modalDeadlineTask';
 import ModalAddUserTask from '../../components/modalAddUserTask';
-import FormAttachment from '../../components/formAttachment'
+import FormAttachment from '../../components/formAttachment/index'
+
+import Header from '../header/Header';
+
 import { Redirect } from 'react-router-dom';
 
 class Detailt extends Component {
@@ -135,10 +138,9 @@ class Detailt extends Component {
     }
     hideModalDetailtTask = () => {
         const { showModalDetailtTask, idDetailtTask, taskEdit } = this.props;
-        console.log(taskEdit);
-
         const { handleAddCommentTask, handleEditDescTask, handleEditTitleTask, handleHideModalDetailtTask,
             handleShowModalDeadlineTask,handleAddAttachment, handleShowModalAddUserTask, handleGetProfileTask } = this.props.actions;
+            
         if (showModalDetailtTask) {
             return (
                 <DetailtTask
@@ -146,7 +148,6 @@ class Detailt extends Component {
                     handleShowModalDeadlineTask={handleShowModalDeadlineTask}
                     handleShowModalAddUserTask={handleShowModalAddUserTask}
                     idDetailtTask={idDetailtTask}
-                    handleGetProfileTask={handleGetProfileTask}
                     taskEdit={taskEdit}
                     handleEditTitleTask={handleEditTitleTask}
                     handleEditDescTask={handleEditDescTask}
@@ -157,12 +158,13 @@ class Detailt extends Component {
     }
     hideModalAddUser = () => {
         const { hideModalAddUser, allUser, project } = this.props;
-        const { handleHideModalAddUser } = this.props.actions;
+        const { handleHideModalAddUser, handleAddUserProject } = this.props.actions;
         if (hideModalAddUser) {
             return (
                 <ModalAddUser handleHideModalAddUser={handleHideModalAddUser}
                     allUser={allUser}
-                    project={project} />
+                    project={project}
+                    handleAddUserProject={handleAddUserProject} />
             )
         }
     }
@@ -178,7 +180,8 @@ class Detailt extends Component {
             return (<ModalDeadlineTask
                 handleHideModalDeadlineTask={handleHideModalDeadlineTask}
                 taskEdit={taskEdit}
-                handleChangeDeadlineTask={handleChangeDeadlineTask} />)
+                handleChangeDeadlineTask={handleChangeDeadlineTask}
+            />)
         }
     }
     // trang -add attachment
@@ -196,11 +199,14 @@ class Detailt extends Component {
     }
     
     showModalAddUserTask = () => {
-        const { showModalAddUserTask } = this.props;
-        const { handleHideModalAddUserTask } = this.props.actions;
+        const { showModalAddUserTask, project, idTaskAddUser } = this.props;
+        const { handleHideModalAddUserTask, handleAddUserTask } = this.props.actions;
         if (showModalAddUserTask) {
             return (<ModalAddUserTask
-                handleHideModalAddUserTask={handleHideModalAddUserTask} />)
+                handleHideModalAddUserTask={handleHideModalAddUserTask}
+                project={project}
+                handleAddUserTask={handleAddUserTask}
+                idTaskAddUser={idTaskAddUser} />)
         }
     }
     componentDidMount() {
@@ -213,7 +219,6 @@ class Detailt extends Component {
     show = () => {
         const { handleDeleteListTask, getListTaskEdit, handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask, handleAddTask, handleEditTitleListTask } = this.props.actions;
         const { showButtonAddTask, idListTask, listTask, hideFormAddTask, listTaskEdit } = this.props;
-
         if (listTask !== null) {
             return (
                 <DragDropContext onDragEnd={this.onDragEnd}>
@@ -287,6 +292,16 @@ class Detailt extends Component {
             })
         }
     }
+    showListUserProject = () => {
+        const { project } = this.props;
+        if (project !== null) {
+            return (
+                project.users.map((user, index) => {
+                    return (<Image key={index} src={`https://localhost:5001/Resources/images/${user.avatar === null ? this.state.bgr : user.avatar}`} className="detailt__avatar" roundedCircle />)
+                })
+            )
+        }
+    }
     render() {
         const { loginUser } = this.state;
         if (loginUser === false) {
@@ -294,7 +309,7 @@ class Detailt extends Component {
         }
         return (
             <React.Fragment>
-                <HeaderPage />
+                <Header />
                 <div style={{ backgroundImage: `url('https://localhost:5001/Resources/images/${this.state.bgr}')` }} className="detailt">
                     <div className="detailt__box">
                         <div className="d-flex justify-content-between align-items-center mt-3">
@@ -303,7 +318,7 @@ class Detailt extends Component {
                                 <button className="detailt__btn"><i className="far fa-star"></i></button>
                                 <button className="detailt__btn">Nhóm cá nhân</button>
                                 <button className="detailt__btn"><i className="fas fa-user-friends mr-1"></i>Hiện với nhóm</button>
-                                <Image src={bgr} className="detailt__avatar" roundedCircle />
+                                {this.showListUserProject()}
                                 <button className="detailt__btn" onClick={this.handleShowModalAddUser} >Mời</button>
                             </div>
                             <button className="detailt__btn">Hiện menu</button>
@@ -385,6 +400,7 @@ export default (connect(Detailt, state => (
         listTaskEdit: state.detailtProjectReducers.listTaskEdit,
         idDetailtTask: state.detailtProjectReducers.idDetailtTask,
         taskEdit: state.detailtProjectReducers.taskEdit,
-        allUser: state.detailtProjectReducers.allUser
+        allUser: state.detailtProjectReducers.allUser,
+        idTaskAddUser: state.detailtProjectReducers.idTaskAddUser,
     }
 ), actions));

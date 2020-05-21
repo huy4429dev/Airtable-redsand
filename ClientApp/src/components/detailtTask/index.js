@@ -28,6 +28,7 @@ class DetailtTask extends Component {
         handleShowModalDeadlineTask();
     }
     handleShowModalAddUserTask = () => {
+        const { id } = this.props.taskEdit.task;
         const { handleShowModalAddUserTask } = this.props;
         handleShowModalAddUserTask();
     }
@@ -40,8 +41,9 @@ class DetailtTask extends Component {
 
 
     componentDidMount() {
-        const { idDetailtTask, handleGetProfileTask } = this.props;
-        handleGetProfileTask(idDetailtTask);
+        const { idDetailtTask,handleShowModalAddUserTask } = this.props;
+       // handleGetProfileTask(idDetailtTask);
+        handleShowModalAddUserTask(idDetailtTask);
     }
     handleEditTitleTask = (e) => {
         const { handleEditTitleTask, taskEdit } = this.props;
@@ -165,7 +167,7 @@ class DetailtTask extends Component {
 
     showAttachments = () => {
         const { taskEdit } = this.props;
-        if (taskEdit != null && taskEdit.attaches.length > 0) {
+        if (taskEdit !== null) {
             return (
                 <div className="block-attachment  ">
                     <div className="d-flex align-items-center mt-2">
@@ -185,26 +187,15 @@ class DetailtTask extends Component {
                               
                                     <div className="des_attachment">
                              <a href={file.url}> <h6 className="nameFile">{file.name}</h6></a> 
-                                    <a ><span  key={file.id} onClick={this.deleteAttachment(file.id)}>Remove</span></a>
-                             <p>Creat At: {file.createdAt}</p>
+                                    <a className="user-comment__link" ><span  key={file.id} onClick={this.deleteAttachment(file.id)}>Remove</span></a>
+                             <p className="createdAt">Creat At: {file.createdAt}</p>
                                 </div>
-                              
-                                
-                          
-
-
-
                         </div>
 
                              )
                          })   
                             
                     }
-        
-                  
-                            
-
-
                 </div>
 
             )
@@ -219,12 +210,18 @@ class DetailtTask extends Component {
     }
 
 
-
-
-
-
-
-
+    showUserTask = () => {
+        const { taskEdit } = this.props;
+        if (taskEdit.users.length > 0) {
+            return (
+                taskEdit.users.map((us, index) => {
+                    return (
+                        <div key={index} className="avatar_img"><p className="avatar_text">{us}</p></div>
+                    )
+                })
+            )
+        }
+    }
     render() {
         const { taskEdit } = this.props;
 
@@ -243,8 +240,8 @@ class DetailtTask extends Component {
                             <Col md="8">
                                 <div className="mt-5 ml-4">
                                     <p style={{ fontSize: '0.95rem' }}>Thành viên</p>
-                                    <div>
-                                        <Image className="avatar_img" src="https://localhost:5001/static/media/bg.1761074f.jpg" roundedCircle />
+                                    <div className="d-flex">
+                                        {this.showUserTask()}
                                     </div>
                                 </div>
                                 {this.showDeadline()}

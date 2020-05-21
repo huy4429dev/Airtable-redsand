@@ -1,7 +1,8 @@
 import * as types from './../constansts/header';
 
 const initialState = {
-    showModalAddProject: false
+    showModalAddProject: false,
+    project_profile: []
 }
 
 const headerReducer = (state = initialState, action) => {
@@ -17,7 +18,9 @@ const headerReducer = (state = initialState, action) => {
                 ...state,
                 showModalAddProject: false
             }
-        
+        case types.SHOW_PROFILE:
+            const project_profile = action.data;
+            return { ...state, project_profile: project_profile }
 
         default:
             return state

@@ -30,13 +30,6 @@ export const handleHideFormAddTask = () => {
 }
 // show form add task
 
-export const handleShowModalDetailtTask = (id) => {
-    return {
-        type: types.SHOW_MODAL_DETAIL_TASK,
-        id
-    }
-}
-// show modal detailt task
 
 export const handleHideModalDetailtTask = () => {
     return {
@@ -73,9 +66,10 @@ export const handleHideModalDeadlineTask = () => {
 }
 // show modal deadline task
 
-export const handleShowModalAddUserTask = () => {
+export const handleShowModalAddUserTask = (id) => {
     return {
-        type: types.SHOW_MODAL_ADD_USER_TASK
+        type: types.SHOW_MODAL_ADD_USER_TASK,
+        id
     }
 }
 // show modal add user task
@@ -176,8 +170,15 @@ export const getListTaskEdit = (id) => {
     }
 }
 // get  listtask edit
+// export const handleShowModalDetailtTask = (id) => {
+//     return {
+//         type: types.SHOW_MODAL_DETAIL_TASK,
+//         id
+//     }
+// }
+// show modal detailt task
 
-export const handleGetProfileTask = (id) => {
+export const handleShowModalDetailtTask = (id) => {
     return {
         url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}`,
         method: types.API_METHOD_GET,
@@ -265,9 +266,9 @@ export const handleAddCommentTask = (data, id) => {
 }
 
 
-export const handleDeleteListTask = (id) => {
+export const handleDeleteListTask = (id, userId) => {
     return {
-        url: `${types.API_ENDPOINT}/${types.URL_LIST_TASK}/${id}`,
+        url: `${types.API_ENDPOINT}/${types.URL_LIST_TASK}/${id}?userId=${userId}`,
         method: types.API_METHOD_DELETE,
         onSuccess: types.DELETE_LIST_TASK_SUCCESS,
         onError: types.DELETE_LIST_TASK_FAILE
@@ -284,3 +285,25 @@ export const getAllUser = () => {
     }
 }
 // delete list task
+
+export const handleAddUserProject = (data, id) => {
+    return {
+        url: `${types.API_ENDPOINT}/${types.URL_PROJECT}/${id}`,
+        data: data,
+        method: types.API_METHOD_PUT,
+        onSuccess: types.ADD_USER_PROJECT_SUCCESS,
+        onError: types.ADD_USER_PROJECT_FAILE
+    }
+}
+// add  user project
+
+export const handleAddUserTask = (data, id) => {
+    return {
+        url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}/user`,
+        data: data,
+        method: types.API_METHOD_POST,
+        onSuccess: types.ADD_USER_TASK_SUCCESS,
+        onError: types.ADD_USER_TASK_FAILE
+    }
+}
+// add  user project

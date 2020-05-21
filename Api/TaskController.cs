@@ -28,7 +28,7 @@ namespace ProjectManage.Controllers
             .Select(t => new
             {
                 task     = t,
-                users    = t.UserTasks.Select(ut => ut.User.FullName),
+                users    = t.UserTasks.Select(ut => ut.User.UserName),
                 comments = t.TaskComments
                             .Where(tc => tc.TaskId == id)
                             .Select(tc => new {
@@ -93,13 +93,13 @@ namespace ProjectManage.Controllers
         public async Task<IActionResult> AddUser(int id, [FromBody] Models.Task model)
         {
 
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Select(x => x.Value.Errors)
-                                    .Where(y => y.Count > 0)
-                                    .ToList();
-                return BadRequest(errors);
-            }
+            // if (!ModelState.IsValid)
+            // {
+            //     var errors = ModelState.Select(x => x.Value.Errors)
+            //                         .Where(y => y.Count > 0)
+            //                         .ToList();
+            //     return BadRequest(errors);
+            // }
 
             var found = await context.Tasks.FindAsync(id);
             if (found != null)

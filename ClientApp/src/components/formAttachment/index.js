@@ -15,10 +15,12 @@ class formAttachment extends Component {
             fileUrl: null,
             nameUrl: null,
             display: "",
+            resource:null,
 
         }
-        this.handleChangLink = this.handleChangLink.bind(this)
+       // this.handleChangLink = this.handleChangLink.bind(this)
     }
+    /*
     static getDerivedStateFromProps(nextProps, prevState) {
 
         if (prevState.nameUrl === null) {
@@ -31,28 +33,33 @@ class formAttachment extends Component {
     componentDidUpdate(prevProps, prevState) {
 
         if (prevState.nameUrl !== this.state.nameUrl) {
+            if(this.state.resource===null){
+                this.setState({ fileUrl: this.state.fileUrl, nameUrl: this.state.nameUrl })
+            }
+            
 
 
-            this.setState({ fileUrl: this.state.fileUrl, nameUrl: this.state.nameUrl })
-            this.saveAttachment()
+          
+          this.saveAttachment();
         }
     }
-
+*/
     handleChangLink = (e) => {
-
+        e.preventDefault();
         this.setState({
             fileUrl: e.target.value,
-            nameUrl: 'ANH_WEB',
+            nameUrl: 'Link_WEB',
+            resource:'link'
         })
 
     }
-
     saveAttachment=(e)=> {
 
        
         const { saveAttachment, taskEdit } = this.props;
 
         const id = taskEdit.task.id;
+      // e.preventDefault();
         const data = {
             url: this.state.fileUrl,
             name: this.state.nameUrl,
@@ -61,17 +68,24 @@ class formAttachment extends Component {
         saveAttachment(data, id);
 
     }
+     saveAttachments=(e)=>{
+        const { saveAttachment, taskEdit } = this.props;
 
-
-
+        const id = taskEdit.task.id;
+       e.preventDefault();
+        const data = {
+            url: this.state.fileUrl,
+            name: this.state.nameUrl,
+            taskId: id
+        }
+        saveAttachment(data, id);
+         
+     }
     handleCloseAttachment = () => {
-
 
         const { handleCloseAttachment } = this.props;
         handleCloseAttachment();
     }
-
-
 
 
     render() {
@@ -133,7 +147,7 @@ class formAttachment extends Component {
                                     <Input type="text" value={this.state.fileUrl} placeholder="paste any link here" name="fileUrl" onChange={this.handleChangLink} />
                                 </FormGroup>
                             </form>
-                            <button className="modal-deadline__btn" onClick={this.saveAttachment}>Attach</button>
+                            <button className="modal-deadline__btn" onClick={this.saveAttachments}>Attach</button>
                         </Card.Footer>
                     </form>
                 </Card>
