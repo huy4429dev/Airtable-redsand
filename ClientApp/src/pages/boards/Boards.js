@@ -19,10 +19,10 @@ class Boards extends Component {
         const userId = localStorage.userId;
         var login = false;
         login = userId !== undefined ? true : false;
-        this.state={
-            project:[],
-            projectRecently:[],
-            loginUser:login
+        this.state = {
+            project: [],
+            projectRecently: [],
+            loginUser: login
         }
     }
 
@@ -75,9 +75,24 @@ class Boards extends Component {
         }
         return resoult;
     }
-    showProjectRecently = (projectRecently) => {
+    showProjectRecently = (projectRecently, search) => {
         var resoult = [];
+        var search = this.props.search;
         if (projectRecently.length > 0) {
+            if (search.length > 0) {
+                resoult = projectRecently.map((projectRecently, index) => {
+                    if(projectRecently.name.indexOf(search)!==-1){
+                    return (
+                        <BoardRecentlyItem
+                            key={index}
+                            projectRecently={projectRecently}
+                            index={index}
+                        />
+                    )
+                    }
+                })
+            
+            }else
             resoult = projectRecently.map((projectRecently, index) => {
                 return (
                     <BoardRecentlyItem
@@ -95,8 +110,8 @@ class Boards extends Component {
     render() {
         var project = this.props.project;
 
-        var projectRecently= this.props.projectRecently;
-        const { loginUser } = this.state;     
+        var projectRecently = this.props.projectRecently;
+        const { loginUser } = this.state;
         if (loginUser === false) {
             return <Redirect to='/home' />
         }
@@ -106,7 +121,7 @@ class Boards extends Component {
                 <Container className="mt-5">
                     <Row>
                         <SizeBar />
-                        <div className={this.state.isActiveClass? "board__form col__item":"col__item"}>
+                        <div className={this.state.isActiveClass ? "board__form col__item" : "col__item"}>
                             <BoardRecentlyList>
                                 {this.showProjectRecently(projectRecently)}
                             </BoardRecentlyList>
