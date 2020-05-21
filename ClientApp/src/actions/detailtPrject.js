@@ -66,9 +66,10 @@ export const handleHideModalDeadlineTask = () => {
 }
 // show modal deadline task
 
-export const handleShowModalAddUserTask = () => {
+export const handleShowModalAddUserTask = (id) => {
     return {
-        type: types.SHOW_MODAL_ADD_USER_TASK
+        type: types.SHOW_MODAL_ADD_USER_TASK,
+        id
     }
 }
 // show modal add user task
@@ -242,6 +243,17 @@ export const handleAddUserProject = (data, id) => {
         method: types.API_METHOD_PUT,
         onSuccess: types.ADD_USER_PROJECT_SUCCESS,
         onError: types.ADD_USER_PROJECT_FAILE
+    }
+}
+// add  user project
+
+export const handleAddUserTask = (data, id) => {
+    return {
+        url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}/user`,
+        data: data,
+        method: types.API_METHOD_POST,
+        onSuccess: types.ADD_USER_TASK_SUCCESS,
+        onError: types.ADD_USER_TASK_FAILE
     }
 }
 // add  user project

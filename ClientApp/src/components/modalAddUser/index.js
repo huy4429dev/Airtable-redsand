@@ -20,52 +20,37 @@ export default class ModalAddUser extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps && nextProps.allUser) {
-            const option = nextProps.allUser.map((user, index) => {
+            var option = nextProps.allUser.map((user, index) => {
                 return { value: user.id, label: user.userName }
             });
+            var filter = option.filter((ft) => ft.value != localStorage.userId);
             this.setState({
-                options: option
+                options: filter
             })
         }
     }
     handleAddUserProject = (e) => {
         e.preventDefault();
-        const { project,handleAddUserProject } = this.props;
-        const {selectedOption} = this.state;
+        const { project, handleAddUserProject } = this.props;
+        const { selectedOption } = this.state;
         const id = project.id;
-        var userBeforUpdate = null;
-        if(project.userProjects !== null){
-            userBeforUpdate = project.userProjects.map((user,index)=>{
-                return { userId : user.userId, projectId:project.id}
-            })
-        }
-        const userUpdate = selectedOption.map((use,index)=>{
-            return {userId : use.value, projectId:project.id}
+        var userBeforUpdate = project.users.map((user, index) => {
+            return { userId: user.userId, projectId: project.id }
         })
-        var data;
-        if(userBeforUpdate === null){
-             data = {
-                name : project.name,
-                thumb: project.thumb,
-                projectId:id,
-                managerId:project.managerId,
-                userProjects : [
-                    ...userUpdate
-                ]
-            }
-        }else{
-               data = {
-                name : project.name,
-                thumb: project.thumb,
-                managerId:project.managerId,
-                projectId:id,
-                userProjects : [
-                    ...userUpdate,
-                    userBeforUpdate
-                ]
-            }
+        const userUpdate = selectedOption.map((use, index) => {
+            return { userId: use.value, projectId: project.id }
+        });
+        const data = {
+            name: project.name,
+            thumb: project.thumb,
+            managerId: project.manager,
+            projectId: id,
+            userProjects: [
+                ...userBeforUpdate,
+                ...userUpdate
+            ]
         }
-        handleAddUserProject(data,id);
+        handleAddUserProject(data, id);
     }
     render() {
         return (

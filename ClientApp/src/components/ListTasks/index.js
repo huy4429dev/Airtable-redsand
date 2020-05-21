@@ -87,7 +87,6 @@ class ListTasks extends Component {
     }
     render() {
         const { column, columnId, index, tasks, handleShowModalDetailtTask } = this.props;
-
         return (
             <React.Fragment>
                 <Draggable draggableId={String(column)} index={index}>

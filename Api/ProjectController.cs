@@ -24,10 +24,30 @@ namespace ProjectManage.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> Get(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
-            if (project == null)
-                return BadRequest();
-            return project;
+
+
+            var newQuery = _context.Projects.Where(p => p.UserProjects.Any(pu => pu.ProjectId == id))
+                .Select(p => new
+                {
+                    id = p.Id,
+                    name = p.Name,
+                    created = p.CreatedAt,
+                    updated = p.UpdatedAt,
+                    manager = p.ManagerId,
+                    status = p.Status,
+                    thumb = p.Thumb,
+                    users = p.UserProjects.Select(du => new
+                    {
+                        userId = du.User.Id,
+                        fullName = du.User.FullName,
+                        email = du.User.Email,
+                        avatar = du.User.Avatar,
+                    }),
+
+                });
+
+            var dataNeW = await newQuery.FirstAsync();
+            return Ok(dataNeW);
         }
 
         [HttpGet]

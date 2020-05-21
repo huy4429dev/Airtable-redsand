@@ -26,13 +26,10 @@ class DetailtTask extends Component {
         handleShowModalDeadlineTask();
     }
     handleShowModalAddUserTask = () => {
+        const { id } = this.props.taskEdit.task;
         const { handleShowModalAddUserTask } = this.props;
-        handleShowModalAddUserTask();
+        handleShowModalAddUserTask(id);
     }
-    // componentDidMount() {
-    //     const { idDetailtTask, handleGetProfileTask } = this.props;
-    //     handleGetProfileTask(idDetailtTask);
-    // }
     handleEditTitleTask = (e) => {
         const { handleEditTitleTask, taskEdit } = this.props;
         const { target } = e;
@@ -149,6 +146,18 @@ class DetailtTask extends Component {
             )
         }
     }
+    showUserTask = () => {
+        const { taskEdit } = this.props;
+        if (taskEdit.users.length > 0) {
+            return (
+                taskEdit.users.map((us, index) => {
+                    return (
+                        <div key={index} className="avatar_img"><p className="avatar_text">{us}</p></div>
+                    )
+                })
+            )
+        }
+    }
     render() {
         const { taskEdit } = this.props;
         return (
@@ -165,8 +174,8 @@ class DetailtTask extends Component {
                             <Col md="8">
                                 <div className="mt-5 ml-4">
                                     <p style={{ fontSize: '0.95rem' }}>Thành viên</p>
-                                    <div>
-                                        <Image className="avatar_img" src="https://localhost:5001/static/media/bg.1761074f.jpg" roundedCircle />
+                                    <div className="d-flex">
+                                        {this.showUserTask()}
                                     </div>
                                 </div>
                                 {this.showDeadline()}
