@@ -22,6 +22,7 @@ const initialState = {
 const detailtProjectReducers = (state = initialState, action) => {
     var index = -1;
     switch (action.type) {
+
         case types.SHOW_FORM_ADD_LIST_TASK:
             return { ...state, showFormAddListTask: true, showButtonAddListTask: false }
 
@@ -47,10 +48,11 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state, hideModalAddUser: true }
 
         case types.SHOW_MODAL_DEADLINE_TASK:
-           return { ...state, showModalEditDeadlineTask: true }
+            return { ...state, showModalEditDeadlineTask: true }
 
         case types.HIDE_MODAL_DEADLINE_TASK:
             return { ...state, showModalEditDeadlineTask: false }
+
 
         case types.SHOW_MODAL_ADD_USER_TASK:
             return { ...state, showModalAddUserTask: true, idTaskAddUser: action.id }
@@ -92,16 +94,19 @@ const detailtProjectReducers = (state = initialState, action) => {
                 listTask: newListTask
             }
 
-        case types.ADD_TASK_FAILE:
-            return { ...state }
 
 
-        case types.ADD_ATTACHMENT_SUCCESS:
-            return { ...state,
-            showFormAttachment: true }
 
-       case types.ADD_ATTACHMENT_FAILE:
-           return {...state, showFormAttachment: false } 
+        case types.SHOW_MODAL_ATTACHMENT:
+            return {
+                ...state,
+                showFormAttachment: true
+            }
+
+        case types.HIDE_MODAL_ATTACHMENT:
+            return { ...state, showFormAttachment: false }
+
+
         case types.EDIT_PROJECT_SUCCESS:
             return { ...state }
 
@@ -163,6 +168,26 @@ const detailtProjectReducers = (state = initialState, action) => {
         case types.EDIT_DEADLINE_TASK_FAILE:
             return { ...state }
 
+        case types.ADD_ATTACHMENT_SUCCESS:
+            const newAttach = {
+                name: action.data.name,
+                url: action.data.url,
+                createdAt: action.data.createdAt,
+
+            };
+            const newTaskEdit1 = {
+                ...state.taskEdit,
+                attaches: [
+                    ...state.taskEdit.attaches,
+                    newAttach
+                ]
+            }
+            return { ...state, taskEdit: newTaskEdit1 }
+
+        case types.ADD_ATTACHMENT_FAILE:
+            return { ...state }
+
+
         case types.ADD_COMMENT_TASK_SUCCESS:
             const comment = {
                 content: action.data.content,
@@ -217,8 +242,8 @@ const detailtProjectReducers = (state = initialState, action) => {
 
         default:
             return state
-        
-    
+
+
     }
 }
 

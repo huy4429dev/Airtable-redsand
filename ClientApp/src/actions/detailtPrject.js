@@ -118,13 +118,13 @@ export const handleAddTask = (task) => {
 export const handleAddAttachment = () => {
     return {
 
-        type: types.ADD_ATTACHMENT_SUCCESS
+        type: types.SHOW_MODAL_ATTACHMENT
 
     }
 }
 export const handleCloseAttachment = () => {
     return {
-        type: types.ADD_ATTACHMENT_FAILE
+        type: types.HIDE_MODAL_ATTACHMENT
     }
 }
 
