@@ -6,9 +6,11 @@ using Models = ProjectManage.Models;
 using ProjectManage.Data;
 using Microsoft.AspNetCore.Mvc;
 using ProjectManage.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectManage.Controllers
 {
+    [Authorize]
     [Route("api/task")]
     public class TaskController : ControllerBase
     {

@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectManage.Controllers
 {
+    [Authorize]
     [Route("api/background")]
     public class BackgroundController : ControllerBase
     {

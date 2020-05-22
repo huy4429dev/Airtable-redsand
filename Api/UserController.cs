@@ -1,9 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManage.Data;
 using ProjectManage.Models;
+using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 namespace ProjectManage.Controllers
 {
@@ -20,42 +24,20 @@ namespace ProjectManage.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
-
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAction(int id)
-        {
-
-            var found = await _context.Users.FindAsync(id);
-            if (found != null)
-            {
-                return Ok(found);
-            }
-            return NotFound("Không tồn tại user");
-        }
-
-
+        
+        [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetAll(string search = null)
+        public IActionResult GetAction()
         {
-            var query = _context.Users.AsQueryable();
-
-            /*==============================
-              Search Task by FullName
-              ==============================*/
-
-            if (!string.IsNullOrWhiteSpace(search))
-            {
-                query = query.Where(item => item.FullName.ToLower().Contains(search.ToLower()));
-            }
-
-
-            var data = await query.ToListAsync();
-
+            var found =  new {
+                Name =  User.Identity.Name,
+                Email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
+                userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value,
+            };
+            int f =Int32.Parse(found.userId);
+            var data = _context.Users.Find(f);
             return Ok(data);
-
         }
-
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ApplicationUser model)
         {
@@ -66,14 +48,13 @@ namespace ProjectManage.Controllers
                                        .ToList();
                 return BadRequest(errors);
             }
-
             var user = new ApplicationUser
             {
                 FullName = model.FullName,
                 Email = model.Email,
                 Avatar = model.Avatar,
                 UserName = model.UserName,
-                Password = "hihihi",
+                Password = model.Password,
             };
 
             var result = await userManager.CreateAsync(user, model.Password);
@@ -83,13 +64,11 @@ namespace ProjectManage.Controllers
                 return Ok(model);
             }
             return BadRequest(result.Errors);
-
         }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(int id, [FromBody] ApplicationUser model)
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] ApplicationUser model)
         {
-
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Select(x => x.Value.Errors)
@@ -98,10 +77,11 @@ namespace ProjectManage.Controllers
                 return BadRequest(errors);
             }
 
-            var found = await userManager.FindByIdAsync(id.ToString());
+            var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
+            var found = await userManager.FindByIdAsync(userID.ToString());
             if (found != null)
             {
-
                 found.Avatar = model.Avatar;
                 found.FullName = model.FullName;
                 var result = await userManager.UpdateAsync(found);
@@ -113,24 +93,22 @@ namespace ProjectManage.Controllers
                     return Ok(model);
                 }
                 return BadRequest("Cập nhật thông tin thất bại !");
-
             }
-
             return NotFound("Không tồn tại user");
         }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> Delete()
         {
-
-            var found = await _context.Users.FindAsync(id);
+            var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+         
+            var found = await _context.Users.FindAsync(userID);
             if (found != null)
             {
                 _context.Users.Remove(found);
                 await _context.SaveChangesAsync();
                 return Ok(new { success = "Xóa user thành công" });
             }
-
             return NotFound();
         }
     }

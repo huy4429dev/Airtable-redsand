@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectManage.Controllers
 {
+    [Authorize]
     [Route("api/upload")]
     public class UploadController : ControllerBase
     {

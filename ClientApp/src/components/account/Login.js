@@ -6,6 +6,8 @@ import images2 from './../../assets/images/image2.png';
 import { Link, Redirect } from "react-router-dom"
 import * as actions from './../../actions/user';
 import connect from './../../lib/connect';
+import Facebook from './../account/Facebook'
+import LoginbyGoogle from './../account/LoginbyGoogle'
 
 
 class Login extends Component {
@@ -78,6 +80,14 @@ class Login extends Component {
                                     <i className="fa fa-google"></i> Đăng nhập bằng Google
                                 </Link>
                             </Button>
+                        </FormGroup>
+                        <FormGroup>
+                        <LoginbyGoogle></LoginbyGoogle>
+                        </FormGroup>
+                        <FormGroup>
+                            <div>
+                                <Facebook></Facebook>
+                            </div>
                         </FormGroup>
                         <FormGroup>
                             <hr></hr>

@@ -37,7 +37,7 @@ namespace ProjectManage
             services.AddDbContext<ApplicationDbContext>(options =>
               options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddCors();
+           
 
 
             //==================== Add config password and username
@@ -86,29 +86,17 @@ namespace ProjectManage
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.Zero
                     };
-                    // options.Events = new JwtBearerEvents
-                    // {
-                    //     OnMessageReceived = context =>
-                    //     {
-                    //         if (context.Request.Query.TryGetValue("access_token", out StringValues token))
-                    //         {
-                    //             context.Token = token;
-                    //         }
-
-                    //         return Task.CompletedTask;
-                    //     }
-                    // };
                 });
+             
+            // services.AddAuthentication()
+            //     .AddGoogle(options =>
+            //     {
+            //         IConfigurationSection googleAuthNSection =
+            //             Configuration.GetSection("Authentication:Google");
 
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    IConfigurationSection googleAuthNSection =
-                        Configuration.GetSection("Authentication:Google");
-
-                    options.ClientId = googleAuthNSection["88295671040-1qd369uj90dgl3ab8dbv7bj4lq8q7n95.apps.googleusercontent.com"];
-                    options.ClientSecret = googleAuthNSection["37HAGU5SsV43KDrlnvQ39Dvc"];
-                });
+            //         options.ClientId = googleAuthNSection["88295671040-1qd369uj90dgl3ab8dbv7bj4lq8q7n95.apps.googleusercontent.com"];
+            //         options.ClientSecret = googleAuthNSection["37HAGU5SsV43KDrlnvQ39Dvc"];
+            //     });
 
             services.AddCors();
             services.AddControllersWithViews();
@@ -157,7 +145,7 @@ namespace ProjectManage
 
             //========== Upload file
 
-            app.UseStaticFiles();
+            // app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
             //========== Public folder 
@@ -167,6 +155,8 @@ namespace ProjectManage
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
                 RequestPath = new PathString("/Resources")
             });
+
+            app.UseAuthentication();
 
 
             app.UseRouting();
