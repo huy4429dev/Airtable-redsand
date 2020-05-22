@@ -1,76 +1,89 @@
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManage.Data;
 using ProjectManage.Models;
+
 namespace ProjectManage.Controllers
 {
+    [Authorize]
     [Route("api/list-task")]
     public class ListTaskController : ControllerBase
     {
-
         private readonly ApplicationDbContext context;
         public ListTaskController(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-        [HttpGet("{id}")]
-
-        public async Task<IActionResult> Get(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetAll(int projectId )
         {
-            var found = await context.ListTasks.FindAsync(id);
-            if (found != null)
-                return Ok(found);
+            var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var query2 = await context.ListTasks.Where(p=> p.UserId == userID && p.ProjectId==projectId)
+            .Select(l => new
+                {
+                    l.Id,
+                    l.Title,
+                    l.Desc,
+                    l.UserId,
+                    l.ProjectId,
+                    User = new
+                    {
+                        name = l.User.FullName,
+                        avatar = l.User.Avatar,
+                    },
+                    Project = new 
+                    {
+                        projectId= l.ProjectId,
+                        projectName = l.Project.Name
+                    },
+                    Tasks = l.Tasks.Select(lt => lt)})
+            .ToListAsync();
+            if(query2 != null){
+                return Ok(query2);
+            }
             return BadRequest("Không tồn tại list task");
         }
-
-
-        [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string search = null, int? projectId = null)
+        [HttpGet("{id}")]
+        // public async Task<IActionResult> GetAll(int? projectId = null)
+        public async Task<IActionResult> Get(int id,int? projectId = null)
         {
-            var query = context.ListTasks.AsQueryable();
-
-            /*===================== 
-             1. get by keyword
-             2. get by projectId
-            ======================*/
-
-            if (!string.IsNullOrEmpty(search))
-            {
-                query = query.Where(l => l.Title.Contains(search));
-            }
-
-            if (projectId.HasValue)
-            {
-                var queryProject = context.ListTasks.Where(l => l.ProjectId.Equals(projectId))
-                                                    .Select(l => new
-                                                    {
-                                                        l.Id,
-                                                        l.Title,
-                                                        l.Desc,
-                                                        l.UserId,
-                                                        User = new
-                                                        {
-                                                            name = l.User.FullName,
-                                                            avatar = l.User.Avatar,
-                                                        },
-                                                        Tasks = l.Tasks.Select(lt => lt)
-                                                    });
-                var queryProjectData = await queryProject.ToListAsync();
-                return Ok(queryProjectData);
-            }
-
-            var data = await query.ToListAsync();
-            return Ok(data);
+            // list task của project nào đó của user NÀO ĐÓ
+            var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var query3 = await context.ListTasks.Where(p=> p.UserId == userID && p.ProjectId==projectId && p.Id == id)
+            .Select(l => new
+                {
+                    l.Id,
+                    l.Title,
+                    l.Desc,
+                    l.UserId,
+                    l.ProjectId,
+                    User = new
+                    {
+                        name = l.User.FullName,
+                        avatar = l.User.Avatar,
+                    },
+                    Project = new 
+                    {
+                        projectId= l.ProjectId,
+                        projectName = l.Project.Name
+                    },
+                    Tasks = l.Tasks.Select(lt => lt)
+                }).ToListAsync();;
+           return Ok(query3);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ListTask model, ListTaskViewModel viewModel)
         {
-
+            var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            // var found = await context.Projects.FirstAsync(p => p.UserProjects.Any(pu => pu.UserId == userID && pu.ProjectId == id));
+          
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Select(x => x.Value.Errors)

@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectManage.Controllers
 {
+    [Authorize]
     [Route("api/google-driver")]
     public class GoogleDriverController : ControllerBase
     {

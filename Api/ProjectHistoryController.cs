@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectManage.Data;
@@ -8,6 +9,7 @@ using ProjectManage.Models;
 
 namespace ProjectManage.Controllers
 {
+    [Authorize]
     [Route("api/project-history")]
     public class ProjectHistoryController : ControllerBase
     {

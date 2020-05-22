@@ -65,6 +65,7 @@ namespace Netcore1.Controllers
             var claims = new List<Claim>{
                 new Claim(ClaimTypes.NameIdentifier,  user.Id.ToString()),
                 new Claim(ClaimTypes.Name,  user.UserName),
+                // new Claim(ClaimTypes.Email,  user.Email),Identity
                 new Claim("AspNet.Identity.SecurityStamp",  user.SecurityStamp),
                 new Claim(JwtRegisteredClaimNames.Sub,  user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
