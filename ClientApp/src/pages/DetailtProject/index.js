@@ -15,13 +15,25 @@ import ModalAddUser from '../../components/modalAddUser';
 import ModalDeadlineTask from '../../components/modalDeadlineTask';
 import ModalAddUserTask from '../../components/modalAddUserTask';
 
+import Header from '../header/Header';
+
+import { Redirect } from 'react-router-dom';
+
 class Detailt extends Component {
     constructor(props) {
         super(props);
-
+        const userId = localStorage.userId;
+        var login = false;
+        login = userId !== undefined ? true : false;
         this.state = {
             data: data,
-            data1: null
+            data1: null,
+            name: null,
+            widthInput: null,
+            titleProject: null,
+            idProject: 1,
+            bgr: '',
+            loginUser: login
         }
     }
 
@@ -102,13 +114,15 @@ class Detailt extends Component {
 
     };
     hideFormAddListTask = () => {
-        const { showFormAddListTask } = this.props;
+        const { showFormAddListTask, match } = this.props;
+        const projectId = match.params.id;
         const { handleHideFormAddListTask, handleAddListTask } = this.props.actions;
         if (showFormAddListTask) {
             return (
                 <FormAddListTask
                     handleHideFormAddListTask={handleHideFormAddListTask}
-                    handleAddListTask={handleAddListTask} />
+                    handleAddListTask={handleAddListTask}
+                    projectId={projectId} />
             )
         }
     }
@@ -122,59 +136,72 @@ class Detailt extends Component {
         }
     }
     hideModalDetailtTask = () => {
-        const { showModalDetailtTask } = this.props;
-        const { handleHideModalDetailtTask, handleShowModalDeadlineTask, handleShowModalAddUserTask } = this.props.actions;
+        const { showModalDetailtTask, idDetailtTask, taskEdit } = this.props;
+        const { handleAddCommentTask, handleEditDescTask, handleEditTitleTask, handleHideModalDetailtTask,
+            handleShowModalDeadlineTask, handleShowModalAddUserTask } = this.props.actions;
         if (showModalDetailtTask) {
             return (
                 <DetailtTask
                     handleHideModalDetailtTask={handleHideModalDetailtTask}
                     handleShowModalDeadlineTask={handleShowModalDeadlineTask}
-                    handleShowModalAddUserTask={handleShowModalAddUserTask} />
+                    handleShowModalAddUserTask={handleShowModalAddUserTask}
+                    idDetailtTask={idDetailtTask}
+                    taskEdit={taskEdit}
+                    handleEditTitleTask={handleEditTitleTask}
+                    handleEditDescTask={handleEditDescTask}
+                    handleAddCommentTask={handleAddCommentTask} />
             )
         }
     }
     hideModalAddUser = () => {
-        const { hideModalAddUser } = this.props;
-        const { handleHideModalAddUser } = this.props.actions;
+        const { hideModalAddUser, allUser, project } = this.props;
+        const { handleHideModalAddUser, handleAddUserProject } = this.props.actions;
         if (hideModalAddUser) {
             return (
-                <ModalAddUser handleHideModalAddUser={handleHideModalAddUser} />
+                <ModalAddUser handleHideModalAddUser={handleHideModalAddUser}
+                    allUser={allUser}
+                    project={project}
+                    handleAddUserProject={handleAddUserProject} />
             )
         }
     }
     handleShowModalAddUser = () => {
-        const { handleShowModalAddUser } = this.props.actions;
+        const { handleShowModalAddUser, getAllUser } = this.props.actions;
         handleShowModalAddUser();
+        getAllUser();
     }
     showModalEditDeadlineTask = () => {
-        const { showModalEditDeadlineTask } = this.props;
-        const { handleHideModalDeadlineTask } = this.props.actions;
+        const { showModalEditDeadlineTask, taskEdit } = this.props;
+        const { handleHideModalDeadlineTask, handleChangeDeadlineTask } = this.props.actions;
         if (showModalEditDeadlineTask) {
-            return (<ModalDeadlineTask handleHideModalDeadlineTask={handleHideModalDeadlineTask} />)
+            return (<ModalDeadlineTask
+                handleHideModalDeadlineTask={handleHideModalDeadlineTask}
+                taskEdit={taskEdit}
+                handleChangeDeadlineTask={handleChangeDeadlineTask}
+            />)
         }
     }
     showModalAddUserTask = () => {
-        const { showModalAddUserTask } = this.props;
-        const { handleHideModalAddUserTask } = this.props.actions;
+        const { showModalAddUserTask, project, idTaskAddUser } = this.props;
+        const { handleHideModalAddUserTask, handleAddUserTask } = this.props.actions;
         if (showModalAddUserTask) {
             return (<ModalAddUserTask
-                handleHideModalAddUserTask={handleHideModalAddUserTask} />)
+                handleHideModalAddUserTask={handleHideModalAddUserTask}
+                project={project}
+                handleAddUserTask={handleAddUserTask}
+                idTaskAddUser={idTaskAddUser} />)
         }
     }
     componentDidMount() {
-        const { getListTask } = this.props.actions;
-        const { showButtonAddTask, idListTask, listTask } = this.props;
-        const userId = 1;
-        getListTask(userId);
-        if (listTask !== null) {
-            this.setState({
-                data1: listTask
-            })
-        }
+        const { getListTask, getProject } = this.props.actions;
+        const { showButtonAddTask, idListTask, listTask, match } = this.props;
+        const projectId = match.params.id;
+        getListTask(projectId);
+        getProject(projectId);
     }
     show = () => {
-        const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask,handleAddTask } = this.props.actions;
-        const { showButtonAddTask, idListTask, listTask, hideFormAddTask } = this.props;    
+        const { handleDeleteListTask, getListTaskEdit, handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask, handleAddTask, handleEditTitleListTask } = this.props.actions;
+        const { showButtonAddTask, idListTask, listTask, hideFormAddTask, listTaskEdit } = this.props;
         if (listTask !== null) {
             return (
                 <DragDropContext onDragEnd={this.onDragEnd}>
@@ -183,12 +210,12 @@ class Detailt extends Component {
                             <div className="detailt__list-box mt-2 d-flex"
                                 {...provided.droppableProps}
                                 ref={provided.innerRef}>
-                                { 
+                                {
                                     listTask.map((columnId, index) => {
                                         const column = columnId.id;
-                                        const tasks = columnId.tasks;   
-                                        return (<ListTasks 
-                                            key={index} 
+                                        const tasks = columnId.tasks;
+                                        return (<ListTasks
+                                            key={index}
                                             column={column}
                                             columnId={columnId}
                                             tasks={tasks} index={index}
@@ -197,8 +224,12 @@ class Detailt extends Component {
                                             handleHideFormAddTask={handleHideFormAddTask}
                                             showButtonAddTask={showButtonAddTask}
                                             handleShowModalDetailtTask={handleShowModalDetailtTask}
-                                            idListTask={idListTask} 
-                                            handleAddTask ={handleAddTask}/>)
+                                            idListTask={idListTask}
+                                            handleAddTask={handleAddTask}
+                                            handleEditTitleListTask={handleEditTitleListTask}
+                                            getListTaskEdit={getListTaskEdit}
+                                            listTaskEdit={listTaskEdit}
+                                            handleDeleteListTask={handleDeleteListTask} />)
                                     })
                                 }
                                 {provided.placeholder}
@@ -209,21 +240,68 @@ class Detailt extends Component {
             )
         }
     }
+    setWidthInput = (e) => {
+        const { target } = e;
+        const { idProject, name } = this.state;
+        const value = target.value;
+        const lengthValue = value.length;
+        const idUser = JSON.parse(localStorage.userId);
+        const { project } = this.props;
+        this.setState({
+            widthInput: lengthValue,
+            name: value
+        })
+        const data = {
+            name: name,
+            thumb: project.thumb,
+            managerId: project.managerId,
+            userProjects: [
+                {
+                    userId: idUser,
+                    projectId: idProject
+                }
+            ]
+        }
+        setTimeout(() => {
+            this.props.actions.handleEditNameProject(idProject, data);
+        }, 3000);
+    }
+    componentWillReceiveProps(nextProp) {
+        if (nextProp && nextProp.project) {
+            this.setState({
+                name: nextProp.project.name,
+                widthInput: nextProp.project.name.length,
+                bgr: nextProp.project.thumb
+            })
+        }
+    }
+    showListUserProject = () => {
+        const { project } = this.props;
+        if (project !== null) {
+            return (
+                project.users.map((user, index) => {
+                    return (<Image key={index} src={`https://localhost:5001/Resources/images/${user.avatar === null ? this.state.bgr : user.avatar}`} className="detailt__avatar" roundedCircle />)
+                })
+            )
+        }
+    }
     render() {
-        // const { handleShowFormAddTask, handleHideFormAddTask, handleShowModalDetailtTask } = this.props.actions;
-        // const { showButtonAddTask, idListTask, listTask } = this.props;
+        const { loginUser } = this.state;
+        if (loginUser === false) {
+            return <Redirect to='/login' />
+        }
         return (
             <React.Fragment>
-                <HeaderPage />
-                <div style={{ backgroundImage: `url('${bgr}')` }} className="detailt">
+                <Header />
+                <div style={{ backgroundImage: `url('https://localhost:5001/Resources/images/${this.state.bgr}')` }} className="detailt">
                     <div className="detailt__box">
                         <div className="d-flex justify-content-between align-items-center mt-3">
                             <div>
-                                <input className="detailt__name" defaultValue="linh" />
+                                <input className="detailt__name" defaultValue={this.state.name} name="name" onChange={this.setWidthInput} style={{ minWidth: `${this.state.widthInput * 9}px` }} />
                                 <button className="detailt__btn"><i className="far fa-star"></i></button>
                                 <button className="detailt__btn">Nhóm cá nhân</button>
                                 <button className="detailt__btn"><i className="fas fa-user-friends mr-1"></i>Hiện với nhóm</button>
-                                <Image src={bgr} className="detailt__avatar" roundedCircle />
+                                {this.showListUserProject()}
                                 <button className="detailt__btn" onClick={this.handleShowModalAddUser} >Mời</button>
                             </div>
                             <button className="detailt__btn">Hiện menu</button>
@@ -298,6 +376,12 @@ export default (connect(Detailt, state => (
         idListTask: state.detailtProjectReducers.idListTask,
         showModalEditDeadlineTask: state.detailtProjectReducers.showModalEditDeadlineTask,
         showModalAddUserTask: state.detailtProjectReducers.showModalAddUserTask,
-        listTask: state.detailtProjectReducers.listTask
+        listTask: state.detailtProjectReducers.listTask,
+        project: state.detailtProjectReducers.project,
+        listTaskEdit: state.detailtProjectReducers.listTaskEdit,
+        idDetailtTask: state.detailtProjectReducers.idDetailtTask,
+        taskEdit: state.detailtProjectReducers.taskEdit,
+        allUser: state.detailtProjectReducers.allUser,
+        idTaskAddUser: state.detailtProjectReducers.idTaskAddUser,
     }
 ), actions));

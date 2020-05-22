@@ -5,32 +5,40 @@ import Card from 'react-bootstrap/Card';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import FormAddTask from '../formAddTask';
 import ButtonAddTask from '../buttonAddTask';
+import { getListTask } from '../../actions/detailtPrject';
 
 class ListTasks extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: null
+        }
+    }
+
     hideFormAddTask = () => {
-        const { hideFormAddTask, handleHideFormAddTask ,idListTask} = this.props;
-        const {handleAddTask} = this.props;
-        const { columnId } = this.props; 
+        const { hideFormAddTask, handleHideFormAddTask, idListTask } = this.props;
+        const { handleAddTask } = this.props;
+        const { columnId } = this.props;
         if (hideFormAddTask && idListTask === columnId.id) {
             return (
                 <FormAddTask handleHideFormAddTask={handleHideFormAddTask}
-                handleAddTask = {handleAddTask}
-                columnId={columnId}/>
+                    handleAddTask={handleAddTask}
+                    columnId={columnId} />
             )
         }
     }
     showButtonAddTask = () => {
         const { showButtonAddTask, handleShowFormAddTask, idListTask } = this.props;
-        const { columnId } = this.props; 
+        const { columnId } = this.props;
         if (showButtonAddTask && idListTask !== columnId.id) {
             return (
                 <ButtonAddTask handleShowFormAddTask={handleShowFormAddTask} columnId={columnId} />
             )
         }
     }
-    show = ()=>{
-        const {tasks,handleShowModalDetailtTask} = this.props;
-        if(tasks){
+    show = () => {
+        const { tasks, handleShowModalDetailtTask } = this.props;
+        if (tasks) {
             return (
                 tasks.map((task, index) => {
                     return <Task key={index} task={task} index={index} handleShowModalDetailtTask={handleShowModalDetailtTask} />
@@ -38,8 +46,47 @@ class ListTasks extends Component {
             )
         }
     }
+    changeTitle = (e) => {
+        const { handleEditTitleListTask, columnId, listTaskEdit } = this.props;
+        const { target } = e;
+        var name = target.name;
+        const value = target.value;
+        const idListTask = columnId.id;
+        this.setState({
+            [name]: target.value
+        });
+        const data = {
+            createdAt: listTaskEdit.createdAt,
+            desc: listTaskEdit.desc,
+            userId: listTaskEdit.userId,
+            user: listTaskEdit.user,
+            projectId: listTaskEdit.projectId,
+            project: listTaskEdit.project,
+            tasks: listTaskEdit.tasks,
+            createdAt: listTaskEdit.createdAt,
+            title: this.state.title,
+        }
+        setTimeout(() => {
+            handleEditTitleListTask(data, idListTask);
+        }, 3000);
+    }
+    componentDidMount() {
+        const idListTask = this.props.columnId.id;
+        const { getListTaskEdit } = this.props;
+        getListTaskEdit(idListTask)
+    }
+    handleDeleteListTask = (e) => {
+        e.preventDefault();
+        const { handleDeleteListTask } = this.props;
+        const { id } = this.props.columnId;
+        const userId = localStorage.userId;
+        if (window.confirm("bạn có muốn xóa list task")) {
+            handleDeleteListTask(id, userId);
+        }
+
+    }
     render() {
-        const { column, columnId,index ,tasks,handleShowModalDetailtTask } = this.props;
+        const { column, columnId, index, tasks, handleShowModalDetailtTask } = this.props;
         return (
             <React.Fragment>
                 <Draggable draggableId={String(column)} index={index}>
@@ -51,8 +98,8 @@ class ListTasks extends Component {
                             <Card className="detailt__list-task"  {...provided.dragHandleProps}>
                                 <Card.Body className="card__body">
                                     <div className="d-flex justify-content-between">
-                                        <input defaultValue={columnId.title} className="detailt__name-list-task" />
-                                        <i className="fas fa-ellipsis-h detailt__more"></i>
+                                        <input onChange={this.changeTitle} name="title" defaultValue={columnId.title} className="detailt__name-list-task" />
+                                        <i className="fas fa-times detailt__more" onClick={this.handleDeleteListTask}></i>
                                     </div>
                                     <Droppable droppableId={String(column)}>
                                         {(provided, snapshot) => (
@@ -60,7 +107,7 @@ class ListTasks extends Component {
                                                 ref={provided.innerRef}
                                                 {...provided.droppableProps}
                                                 isdraggingover={snapshot.isdraggingover}>
-                                                    {this.show()}
+                                                {this.show()}
                                                 {provided.placeholder}
                                             </div>
                                         )}

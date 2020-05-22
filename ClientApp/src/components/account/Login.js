@@ -3,7 +3,7 @@ import './style.css';
 import { Row, Col, Form, FormGroup, Input, Button } from 'reactstrap';
 import images1 from './../../assets/images/image1.png';
 import images2 from './../../assets/images/image2.png';
-import { Link ,Redirect} from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import * as actions from './../../actions/user';
 import connect from './../../lib/connect';
 import Facebook from './../account/Facebook'
@@ -13,10 +13,10 @@ import LoginbyGoogle from './../account/LoginbyGoogle'
 class Login extends Component {
     constructor(props) {
         super(props);
-        const token =  localStorage.token;
+        const token = localStorage.token;
         const login = token ? true : false;
         this.state = {
-            login : login,
+            login: login,
             userName: null,
             password: null
         }
@@ -31,24 +31,24 @@ class Login extends Component {
     }
     hadleLoginUser = (e) => {
         e.preventDefault();
-        const { userName , password } = this.state;
+        const { userName, password } = this.state;
         const { loginUser } = this.props.actions;
         const user = {
-            userName : userName,
-            password : password
+            userName: userName,
+            password: password
         }
         loginUser(user);
     }
-    componentWillReceiveProps(nextProps){
-        if(nextProps && nextProps.login){
+    componentWillReceiveProps(nextProps) {
+        if (nextProps && nextProps.login) {
             this.setState({
-                login:true
+                login: true
             })
         }
     }
     render() {
-        if( this.state.login){
-            return <Redirect to ="/boards"/>
+        if (this.state.login) {
+            return <Redirect to="/home" />
         }
         return (
             <div className="wrapper">
@@ -76,9 +76,10 @@ class Login extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Button outline color="info" bssize="lg" block>
-                               
-                                <i className="fa fa-google"></i> Đăng nhập bằng Google
-                                    </Button>{' '}
+                                <Link to="/google">
+                                    <i className="fa fa-google"></i> Đăng nhập bằng Google
+                                </Link>
+                            </Button>
                         </FormGroup>
                         <FormGroup>
                         <LoginbyGoogle></LoginbyGoogle>
@@ -93,8 +94,8 @@ class Login extends Component {
                         </FormGroup>
                         <FormGroup>
                             <div className="text-center">
-                                <Link to="sigup" className="text-primary link">Chưa có tài khoản ?</Link>
-                                <Link to="sigup" className="text-primary ml-3 link">Đăng Ký tài Khoản</Link>
+                                <Link to="/sigup" className="text-primary link">Chưa có tài khoản ?</Link>
+                                <Link to="/sigup" className="text-primary ml-3 link">Đăng Ký tài Khoản</Link>
                             </div>
                         </FormGroup>
                     </Col>
@@ -109,6 +110,6 @@ class Login extends Component {
 
 export default (connect(Login, state => (
     {
-        login : state.userReducer.login
+        login: state.userReducer.login
     }
-    ),actions));
+), actions));

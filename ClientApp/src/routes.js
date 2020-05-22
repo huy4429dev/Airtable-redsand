@@ -7,7 +7,9 @@ import Login from './components/account/Login';
 import HeaderPage from './pages/header/HeaderPage';
 import Boards from './pages/boards/Boards';
 import BoardAdd from './pages/boards/BoardAdd';
-//import Profile from './components/profile/Profile';
+import LoginbyGoogle from './components/account/LoginbyGoogle';
+import FaceBook from './components/account/Facebook';
+import Profile from './components/profile/profile';
 
 const routes = [
     {
@@ -16,15 +18,20 @@ const routes = [
         main: () => <Home />
     },
     {
+        path: '/detailt/:id.html',
+        exact: true,
+        main: ({ match }) => <Detailt match={match} />
+    },
+    {
         path: '/detailt',
         exact: true,
         main: () => <Detailt />
     },
-    // {
-    //     path: '/profile',
-    //     exact: true,
-    //     main: () => <Profile />
-    // },
+    {
+        path: '/profile',
+        exact: true,
+        main: () => <Profile />
+    },
     {
         path: '/add_project',
         exact: false,
@@ -36,25 +43,30 @@ const routes = [
         main: () => <Login />
     },
     {
-        path: '/boards',
-        exact: false,
-        main: ({ history }) => <Boards history={history} />
-    },
-    {
         path: '/sigup',
         exact: false,
         main: () => <Sigup />
     },
     {
         path: '/home',
-        exact: false,
+        exact: true,
         main: () => <HeaderPage />
+    },
+    {
+        path: '/google',
+        exact: false,
+        main: () => <LoginbyGoogle />
+    },
+    {
+        path: '/facebook',
+        exact: false,
+        main: () => <FaceBook />
     },
     {
         path: '',
         exact: false,
         main: () => <NotFound />
-    },
+    }
 
 ];
 

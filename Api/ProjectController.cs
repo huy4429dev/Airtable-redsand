@@ -24,6 +24,7 @@ namespace ProjectManage.Controllers
         public async Task<ActionResult<Project>> Get(int id)
         {
 
+
             // var project = await _context.Projects.FindAsync(id);
             var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             var newQuery = _context.Projects.Where(p => p.UserProjects.Any(pu => pu.UserId == userID && pu.ProjectId == id))
@@ -43,14 +44,19 @@ namespace ProjectManage.Controllers
                         email = du.User.Email,
                         avatar = du.User.Avatar,
                     }),
+
+
                 });
-                var dataNeW = await newQuery.ToListAsync();
-                return Ok(dataNeW);
+
+            var dataNeW = await newQuery.FirstAsync();
+            return Ok(dataNeW);
+
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+          
             var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             var newQuery = _context.Projects.Where(p => p.UserProjects.Any(pu => pu.UserId == userID))
                 .Select(p => new

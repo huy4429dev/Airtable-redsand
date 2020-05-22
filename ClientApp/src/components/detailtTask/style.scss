@@ -1,12 +1,18 @@
+.modal__scoll{
+    overflow-y: auto;
+    height: auto;
+    width: 100%;
+}
 .modal-task{
     background: rgba(0,0,0,.54);
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: auto;
     right: 0;
     z-index: 1000;
-    overflow-y: auto;
     &__content{
         position: relative;
         padding: 0.8rem;
@@ -14,6 +20,7 @@
         top: 25%;
         left: 50%;
         width: 50%;
+        height: 100%;
         color: #42526e;
         transform: translate(-50%,-25%);
     }
@@ -77,7 +84,7 @@
     }
     &__comment{
         @extend .modal-task__desc-btn;
-        width: 10%;
+        width: 11%;
         margin-top: 0.5rem;
         margin-left: 0rem;
     }
@@ -102,4 +109,55 @@
         cursor: pointer;
         color: #172b4d;
     }
+}
+.avatar_img{
+    width: 35px;
+    height: 35px;
+    border: 1px solid #42526e;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avatar_text{
+    margin: 0;
+    font-size: 0.6rem;
+}
+.user-comment{
+    &__name{
+        color: #5e6c84;
+        font-size: 15px;
+    }
+    &__text{
+        background-color: #fff;
+        width: 350px;
+        padding: 8px 8px;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px -1px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+        box-sizing: border-box;
+        clear: both;
+        display: inline-block;
+        margin: 4px 2px 4px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    &__link{
+        color: #5e6c84;
+        margin-right: 0.2rem;
+        font-size: 14px;
+        cursor: pointer;
+        &:hover{
+            text-decoration: underline !important;
+        }
+    }
+}
+.modal-task__dealine{
+    margin: 0.5rem 0.5rem;
+    font-size: 15px;
+}
+.modal-task__dealine-btn{
+    background-color: rgba(9,30,66,.04);
+    border: none;
+    border-radius: 4px;
+    outline: none !important;
 }

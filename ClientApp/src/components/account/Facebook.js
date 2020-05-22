@@ -42,7 +42,7 @@ componentDidUpdate() {
             .catch((error) => {
                 console.error('Error:', error);
             });
-            
+
 }
 
 componentClicked = () => console.log("clicked");
