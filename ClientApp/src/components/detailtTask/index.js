@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import Comment from '../comment';
+import Attachments from '../formAttachment/attachment'
 
 class DetailtTask extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class DetailtTask extends Component {
             desc: null,
             comment: null
         }
+       this.deleteAttachment=this.deleteAttachment.bind(this)
     }
 
 
@@ -22,17 +24,28 @@ class DetailtTask extends Component {
         handleHideModalDetailtTask();
     }
     handleShowModalDeadlineTask = () => {
+
         const { handleShowModalDeadlineTask } = this.props;
         handleShowModalDeadlineTask();
     }
     handleShowModalAddUserTask = () => {
+        const { id } = this.props.taskEdit.task;
         const { handleShowModalAddUserTask } = this.props;
         handleShowModalAddUserTask();
     }
-    // componentDidMount() {
-    //     const { idDetailtTask, handleGetProfileTask } = this.props;
-    //     handleGetProfileTask(idDetailtTask);
-    // }
+    handleAddAttachment = () => {
+
+        const { handleAddAttachment } = this.props;
+
+        handleAddAttachment();
+    }
+
+
+    componentDidMount() {
+        const { idDetailtTask,handleShowModalAddUserTask } = this.props;
+       // handleGetProfileTask(idDetailtTask);
+        handleShowModalAddUserTask(idDetailtTask);
+    }
     handleEditTitleTask = (e) => {
         const { handleEditTitleTask, taskEdit } = this.props;
         const { target } = e;
@@ -101,6 +114,7 @@ class DetailtTask extends Component {
     }
     showDesc = () => {
         const { taskEdit } = this.props;
+
         if (taskEdit !== null) {
             return (
                 <textarea onChange={this.onChangeInputDesc} name="desc" className="modal-task__desc-add" placeholder="Thêm mô tả chi tiết..." defaultValue={taskEdit.task.desc}></textarea>
@@ -109,6 +123,7 @@ class DetailtTask extends Component {
     }
     showDeadline = () => {
         const { taskEdit } = this.props;
+
         if (taskEdit !== null) {
             return (
                 <div className="ml-4  d-flex align-center">
@@ -141,6 +156,7 @@ class DetailtTask extends Component {
     }
     showComment = () => {
         const { taskEdit } = this.props;
+
         if (taskEdit !== null && taskEdit.comments.length > 0) {
             return (
                 taskEdit.comments.map((comment, index) => {
@@ -149,8 +165,50 @@ class DetailtTask extends Component {
             )
         }
     }
+
+    showAttachments = () => {
+        const { taskEdit, deleteAttachment } = this.props;
+        if (taskEdit !== null && taskEdit.attaches.length>0){
+            return (
+                <div className="block-attachment">
+                    <div className="d-flex align-items-center mt-2">
+                        <i class="fa fa-file-archive-o mr-3" aria-hidden="true"></i>
+                        <p className="modal-task__desc">Attachments</p>
+                    </div>
+                  {
+                 taskEdit.attaches.map((attachment,index)=>{
+                  return   (<Attachments attachment={attachment} index={index} deleteAttachment={deleteAttachment}/>)
+                 })                   
+                       }
+          
+                    </div>
+            )
+                    }
+                }
+
+    deleteAttachment=(key)=>{
+        console.log('key'+key);
+        const {deleteAttachment}=this.props;
+       // deleteAttachment();
+    }
+
+
+    showUserTask = () => {
+        const { taskEdit } = this.props;
+        if (taskEdit.users.length > 0) {
+            return (
+                taskEdit.users.map((us, index) => {
+                    return (
+                        <div key={index} className="avatar_img"><p className="avatar_text">{us}</p></div>
+                    )
+                })
+            )
+        }
+    }
     render() {
         const { taskEdit } = this.props;
+
+
         return (
             <React.Fragment>
                 <div className="modal-task" >
@@ -165,8 +223,8 @@ class DetailtTask extends Component {
                             <Col md="8">
                                 <div className="mt-5 ml-4">
                                     <p style={{ fontSize: '0.95rem' }}>Thành viên</p>
-                                    <div>
-                                        <Image className="avatar_img" src="https://localhost:5001/static/media/bg.1761074f.jpg" roundedCircle />
+                                    <div className="d-flex">
+                                        {this.showUserTask()}
                                     </div>
                                 </div>
                                 {this.showDeadline()}
@@ -179,6 +237,10 @@ class DetailtTask extends Component {
                                     {/* <textarea onChange={this.handleEditDescTask} name="desc" className="modal-task__desc-add" placeholder="Thêm mô tả chi tiết..." >{this.state.desc}</textarea> */}
                                     <button className="modal-task__desc-btn" onClick={this.handleEditDescTask}>Lưu</button>
                                 </div>
+
+                                {this.showAttachments()}
+
+
                                 <div className="d-flex justify-content-between align-items-center mt-2">
                                     <div className="d-flex">
                                         <i className="fas fa-align-left mr-3"></i>
@@ -206,7 +268,7 @@ class DetailtTask extends Component {
                                     <li className="modal-task__list" onClick={this.handleShowModalDeadlineTask}>
                                         <i className="far fa-clock mr-2"></i>Ngày hết hạn
                                     </li>
-                                    <li className="modal-task__list">
+                                    <li className="modal-task__list" onClick={this.handleAddAttachment}>
                                         <i className="fas fa-paperclip mr-2"></i>Đính kèm
                                     </li>
                                 </ul>

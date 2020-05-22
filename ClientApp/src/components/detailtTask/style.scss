@@ -110,9 +110,27 @@
         color: #172b4d;
     }
 }
+.attachment-thumbnail{
+    width: 25%;
+    float: left;
+    margin-right: 20px;
+}
+.file-attachment{
+    display: flow-root;
+    margin-top: 10px;
+}
 .avatar_img{
     width: 35px;
     height: 35px;
+    border: 1px solid #42526e;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.avatar_text{
+    margin: 0;
+    font-size: 0.6rem;
 }
 .user-comment{
     &__name{
@@ -152,3 +170,7 @@
     border-radius: 4px;
     outline: none !important;
 }
+.createdAt{
+    font-size: 13px;
+}
+

@@ -1,13 +1,45 @@
 import React, { Component } from 'react'
 import Card from 'react-bootstrap/Card'
 import './style.scss';
-import bgr from './../../assets/images/bg.jpg'
+import bgr from './../../assets/images/bg.jpg';
+import Select from 'react-select';
 
 class ModalAddUserTask extends Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            options: null,
+            selectedOption: null
+        }
+    }
     handleHideModalAddUserTask = () => {
-        const {handleHideModalAddUserTask} = this.props;
+        const { handleHideModalAddUserTask } = this.props;
         handleHideModalAddUserTask();
+    }
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+    }
+    componentDidMount() {
+        const { project } = this.props;
+        var option = project.users.map((user, index) => {
+            return { value: user.userId, label: user.email }
+        });
+        var filter = option.filter((ft) => ft.value != localStorage.userId);
+        this.setState({
+            options: filter
+        })
+    }
+    handleAddUserTask = (e) => {
+        const { handleAddUserTask, idTaskAddUser } = this.props;
+        const {selectedOption} = this.state;
+        e.preventDefault();
+        const userUpdate = selectedOption.map((use, index) => {
+            return { userId: use.value, taskId: idTaskAddUser }
+        });
+        const data = {
+            userTasks:userUpdate
+        }      
+        handleAddUserTask(data, idTaskAddUser);
     }
     render() {
         return (
@@ -19,17 +51,16 @@ class ModalAddUserTask extends Component {
                             <i className="fas fa-times position-absolute modal-deadline__close" onClick={this.handleHideModalAddUserTask}></i>
                         </Card.Header>
                         <Card.Body className="modal-user-task__card">
-                            <input placeholder="Tìm kiếm các thành viên" className="modal-user-task__input" />
                             <p>Thành viên của bảng</p>
-                            <ul className="modal-user-task__nav">
-                                <li className="modal-user-task__list">
-                                    <img src={bgr} className="modal-user-task__img" />
-                                    <span>linh</span>
-                                </li>
-                            </ul>
+                            <Select
+                                onChange={this.handleChange}
+                                options={this.state.options}
+                                isMulti={true}
+                                isSearchable={true}
+                            />
                         </Card.Body>
                         <Card.Footer>
-                            <button className="modal-deadline__btn d-block">Thêm</button>
+                            <button className="modal-deadline__btn d-block" onClick={this.handleAddUserTask}>Thêm</button>
                         </Card.Footer>
                     </form>
                 </Card>

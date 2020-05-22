@@ -66,9 +66,10 @@ export const handleHideModalDeadlineTask = () => {
 }
 // show modal deadline task
 
-export const handleShowModalAddUserTask = () => {
+export const handleShowModalAddUserTask = (id) => {
     return {
-        type: types.SHOW_MODAL_ADD_USER_TASK
+        type: types.SHOW_MODAL_ADD_USER_TASK,
+        id
     }
 }
 // show modal add user task
@@ -111,6 +112,22 @@ export const handleAddTask = (task) => {
     }
 }
 // add task
+
+
+// trang 
+export const handleAddAttachment = () => {
+    return {
+
+        type: types.SHOW_MODAL_ATTACHMENT
+
+    }
+}
+export const handleCloseAttachment = () => {
+    return {
+        type: types.HIDE_MODAL_ATTACHMENT
+    }
+}
+
 
 export const handleEditNameProject = (idProject, project) => {
     return {
@@ -204,6 +221,40 @@ export const handleChangeDeadlineTask = (data, id) => {
 }
 // edit dealline  task
 
+// add attachment into task- trang
+export const saveAttachment = (data) => {
+    return {
+        url: `${types.API_ENDPOINT}/api/attachment`,
+        data: data,
+        method: types.API_METHOD_POST,
+        onSuccess: types.ADD_ATTACHMENT_SUCCESS,
+        onError: types.ADD_ATTACHMENT_FAILE
+    }
+}
+//get attachment -trang
+export const getAllAttachment = (id) => {
+    return {
+        url: `${types.API_ENDPOINT}/api/attachment`,
+        method: types.API_METHOD_GET,
+        onSuccess: types.ADD_ATTACHMENT_SUCCESS,
+        onError: types.ADD_ATTACHMENT_FAILE
+
+    }
+}
+
+    // DELETE ATTCHMENT
+    export const deleteAttachment = (idAttachment) => {
+        return {
+            url: `${types.API_ENDPOINT}/api/attachment/${idAttachment}`,
+            method: types.API_METHOD_DELETE,
+            onSuccess: types.DELETE_ATTACHMENT_SUCCESS,
+            onError: types.DELETE_ATTACHMENT_FAILE
+    
+
+    }
+}
+
+// add comment into task
 export const handleAddCommentTask = (data, id) => {
     return {
         url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}/comment`,
@@ -213,11 +264,11 @@ export const handleAddCommentTask = (data, id) => {
         onError: types.ADD_COMMENT_TASK_FAILE
     }
 }
-// add comment into task
 
-export const handleDeleteListTask = (id) => {
+
+export const handleDeleteListTask = (id, userId) => {
     return {
-        url: `${types.API_ENDPOINT}/${types.URL_LIST_TASK}/${id}`,
+        url: `${types.API_ENDPOINT}/${types.URL_LIST_TASK}/${id}?userId=${userId}`,
         method: types.API_METHOD_DELETE,
         onSuccess: types.DELETE_LIST_TASK_SUCCESS,
         onError: types.DELETE_LIST_TASK_FAILE
@@ -235,13 +286,24 @@ export const getAllUser = () => {
 }
 // delete list task
 
-export const handleAddUserProject = (data,id) => {
+export const handleAddUserProject = (data, id) => {
     return {
         url: `${types.API_ENDPOINT}/${types.URL_PROJECT}/${id}`,
         data: data,
         method: types.API_METHOD_PUT,
         onSuccess: types.ADD_USER_PROJECT_SUCCESS,
-        onError: types.ADD_USER_PROJECT_FAILE 
+        onError: types.ADD_USER_PROJECT_FAILE
+    }
+}
+// add  user project
+
+export const handleAddUserTask = (data, id) => {
+    return {
+        url: `${types.API_ENDPOINT}/${types.URL_TASK}/${id}/user`,
+        data: data,
+        method: types.API_METHOD_POST,
+        onSuccess: types.ADD_USER_TASK_SUCCESS,
+        onError: types.ADD_USER_TASK_FAILE
     }
 }
 // add  user project

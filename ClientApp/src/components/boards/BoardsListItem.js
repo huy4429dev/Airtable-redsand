@@ -28,12 +28,12 @@ class BoardsListItem extends Component {
     render() {
         var { project } = this.props;
         return (
-            <Col sm="3 mr-5">
+            <Col lg="3">
                 <Link to={`/detailt/${project.id}.html`} className="link">
                 
                     <div onClick={this.editRecently}  style={{
                         backgroundImage: `url('https://localhost:5001/Resources/images/${project.thumb}')`,
-                        backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
+                        backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat',borderRadius:'8px'
                     }}
                         className="mt-3 mb-3 text-dark item-recently">
                         <h5 className="ml-3 text-white">{project.name}</h5>

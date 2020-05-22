@@ -1,0 +1,53 @@
+.modal-deadline{
+    width: 20rem;
+    position: absolute !important;
+    top: 20%;
+    color: #5e6c84;
+    left: 57.3%;  
+    // transform: translate(-80%,-50%);
+    z-index: 1005;
+    &__btn{
+        background-color: #5aac44;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        padding: 0.2rem 0.5rem;
+    }
+    &__time{
+        margin-bottom: 0.5rem !important;
+        font-weight: 700;
+        color: #5e6c84;
+        font-size: 15px;
+    }
+    &__close{
+        top: 25%;
+        right: 5%;
+    }
+}
+.react-datepicker-wrapper{
+    width:  100% !important;
+    display: block !important;
+}
+.react-datepicker-wrapper input{
+    width: 100%;
+    padding:  0.2rem 0.3rem;
+    outline: none !important;
+    &:focus{
+        box-shadow: inset 0 0 0 2px #0079bf;
+        border: none;
+    }
+}
+.choose-drive{
+    border: unset;
+    background: unset;
+    padding: unset;
+}
+.creatAt{
+    font-size: 13px;
+}
+.user-comment{
+    &__linh{
+        text-decoration: underline !important
+        ;
+    }
+}

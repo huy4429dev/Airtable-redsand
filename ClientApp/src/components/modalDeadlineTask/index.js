@@ -19,12 +19,15 @@ class ModalDeadlineTask extends Component {
     handleChangeDeadlineTask = (e) => {
         const { handleChangeDeadlineTask, taskEdit } = this.props;
         const id = taskEdit.task.id;
-        e.preventDefault();
+       console.log("deadline"+taskEdit);
+   
+       e.preventDefault();
         const data = {
             title: taskEdit.task.title,
             desc: taskEdit.task.desc,
             deadline: this.state.startDate
         }
+       
         handleChangeDeadlineTask(data, id);
     }
     handleHideModalDeadlineTask = () => {
@@ -32,7 +35,7 @@ class ModalDeadlineTask extends Component {
         handleHideModalDeadlineTask();
     }
     render() {
-        console.log(this.props.taskEdit);
+        console.log("deadline"+this.props.taskEdit);
         return (
             <React.Fragment>
                 <Card className="modal-deadline">

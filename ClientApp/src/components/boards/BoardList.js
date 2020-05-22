@@ -21,7 +21,7 @@ class ViewList extends Component {
                 </Row>
                 <Row>
                     {this.props.children}
-                    <Col sm="3 mr-5 crate-project">
+                    <Col lg="4 mr-5 crate-project">
                         <button onClick={this.showFormAdd} className="mt-3 mb-3 border-0  bg-light text-dark item-recently">
                             <span className="ml- addBoard">Create New Board</span>
                         </button>
