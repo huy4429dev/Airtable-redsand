@@ -5,8 +5,11 @@ using ProjectManage.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+
 namespace ProjectManage.Controllers
 {
+    [Authorize]
     [Route("api/project-recently")]
     public class ProjectRecentlyController : ControllerBase
     {
