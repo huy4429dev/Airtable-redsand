@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 import Comment from '../comment';
+import Attachments from '../formAttachment/attachment'
 
 class DetailtTask extends Component {
     constructor(props) {
@@ -166,42 +167,24 @@ class DetailtTask extends Component {
     }
 
     showAttachments = () => {
-        const { taskEdit } = this.props;
-        if (taskEdit !== null) {
+        const { taskEdit, deleteAttachment } = this.props;
+        if (taskEdit !== null && taskEdit.attaches.length>0){
             return (
-                <div className="block-attachment  ">
+                <div className="block-attachment">
                     <div className="d-flex align-items-center mt-2">
                         <i class="fa fa-file-archive-o mr-3" aria-hidden="true"></i>
                         <p className="modal-task__desc">Attachments</p>
                     </div>
-                    {
-                       
-                         taskEdit.attaches.map((file)=>{
-                             return(
-                                <div className="file-attachment " key={file.id}>
-                                        
-                                <a href={file.url} className="">
-                                
-                                    <img class="attachment-thumbnail modal-task__desc-add " src="https://img.icons8.com/plasticine/2x/file.png" />
-                                    </a>
-                              
-                                    <div className="des_attachment">
-                             <a href={file.url}> <h6 className="nameFile">{file.name}</h6></a> 
-                                    <a className="user-comment__link" ><span  key={file.id} onClick={this.deleteAttachment(file.id)}>Remove</span></a>
-                             <p className="createdAt">Creat At: {file.createdAt}</p>
-                                </div>
-                        </div>
-
-                             )
-                         })   
-                            
-                    }
-                </div>
-
+                  {
+                 taskEdit.attaches.map((attachment,index)=>{
+                  return   (<Attachments attachment={attachment} index={index} deleteAttachment={deleteAttachment}/>)
+                 })                   
+                       }
+          
+                    </div>
             )
-        }
-    }
-
+                    }
+                }
 
     deleteAttachment=(key)=>{
         console.log('key'+key);

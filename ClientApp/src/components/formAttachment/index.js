@@ -20,7 +20,7 @@ class formAttachment extends Component {
         }
        // this.handleChangLink = this.handleChangLink.bind(this)
     }
-    /*
+    
     static getDerivedStateFromProps(nextProps, prevState) {
 
         if (prevState.nameUrl === null) {
@@ -36,19 +36,17 @@ class formAttachment extends Component {
             if(this.state.resource===null){
                 this.setState({ fileUrl: this.state.fileUrl, nameUrl: this.state.nameUrl })
             }
-            
-
+        
 
           
           this.saveAttachment();
         }
     }
-*/
     handleChangLink = (e) => {
         e.preventDefault();
         this.setState({
             fileUrl: e.target.value,
-            nameUrl: 'Link_WEB',
+            nameUrl: e.target.value,
             resource:'link'
         })
 
@@ -59,13 +57,16 @@ class formAttachment extends Component {
         const { saveAttachment, taskEdit } = this.props;
 
         const id = taskEdit.task.id;
-      // e.preventDefault();
+      //e.preventDefault();
         const data = {
             url: this.state.fileUrl,
             name: this.state.nameUrl,
             taskId: id
         }
         saveAttachment(data, id);
+        setTimeout(() => {
+            this.handleCloseAttachment();
+        }, 2000);
 
     }
      saveAttachments=(e)=>{
@@ -79,6 +80,10 @@ class formAttachment extends Component {
             taskId: id
         }
         saveAttachment(data, id);
+        setTimeout(() => {
+            this.handleCloseAttachment();
+        }, 2000);
+     
          
      }
     handleCloseAttachment = () => {
@@ -86,8 +91,6 @@ class formAttachment extends Component {
         const { handleCloseAttachment } = this.props;
         handleCloseAttachment();
     }
-
-
     render() {
 
         const { taskEdit } = this.props;
@@ -144,7 +147,7 @@ class formAttachment extends Component {
                             <span>  Attach a link</span>
                             <form>
                                 <FormGroup>
-                                    <Input type="text" value={this.state.fileUrl} placeholder="paste any link here" name="fileUrl" onChange={this.handleChangLink} />
+                                    <Input type="url"  value={this.state.fileUrl} placeholder="paste any link here" name="fileUrl" onChange={this.handleChangLink} />
                                 </FormGroup>
                             </form>
                             <button className="modal-deadline__btn" onClick={this.saveAttachments}>Attach</button>

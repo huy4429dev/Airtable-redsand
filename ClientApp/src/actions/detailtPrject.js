@@ -234,7 +234,7 @@ export const saveAttachment = (data) => {
 //get attachment -trang
 export const getAllAttachment = (id) => {
     return {
-        url: `${types.API_ENDPOINT}/attachment`,
+        url: `${types.API_ENDPOINT}/api/attachment`,
         method: types.API_METHOD_GET,
         onSuccess: types.ADD_ATTACHMENT_SUCCESS,
         onError: types.ADD_ATTACHMENT_FAILE
@@ -245,10 +245,10 @@ export const getAllAttachment = (id) => {
     // DELETE ATTCHMENT
     export const deleteAttachment = (idAttachment) => {
         return {
-            url: `${types.API_ENDPOINT}/attachment=${idAttachment}`,
+            url: `${types.API_ENDPOINT}/api/attachment/${idAttachment}`,
             method: types.API_METHOD_DELETE,
-            onSuccess: types.ADD_ATTACHMENT_SUCCESS,
-            onError: types.ADD_ATTACHMENT_FAILE
+            onSuccess: types.DELETE_ATTACHMENT_SUCCESS,
+            onError: types.DELETE_ATTACHMENT_FAILE
     
 
     }

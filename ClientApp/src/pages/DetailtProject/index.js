@@ -139,7 +139,7 @@ class Detailt extends Component {
     hideModalDetailtTask = () => {
         const { showModalDetailtTask, idDetailtTask, taskEdit } = this.props;
         const { handleAddCommentTask, handleEditDescTask, handleEditTitleTask, handleHideModalDetailtTask,
-            handleShowModalDeadlineTask,handleAddAttachment, handleShowModalAddUserTask, handleGetProfileTask } = this.props.actions;
+            handleShowModalDeadlineTask,handleAddAttachment, handleShowModalAddUserTask, handleGetProfileTask,deleteAttachment  } = this.props.actions;
             
         if (showModalDetailtTask) {
             return (
@@ -152,7 +152,8 @@ class Detailt extends Component {
                     handleEditTitleTask={handleEditTitleTask}
                     handleEditDescTask={handleEditDescTask}
                     handleAddCommentTask={handleAddCommentTask}
-                    handleAddAttachment={handleAddAttachment}/>           
+                    handleAddAttachment={handleAddAttachment}
+                    deleteAttachment ={deleteAttachment }/>           
             )
         }
     }

@@ -42,3 +42,12 @@
     background: unset;
     padding: unset;
 }
+.creatAt{
+    font-size: 13px;
+}
+.user-comment{
+    &__linh{
+        text-decoration: underline !important
+        ;
+    }
+}

@@ -94,7 +94,13 @@ const detailtProjectReducers = (state = initialState, action) => {
                 listTask: newListTask
             }
 
+        case types.DELETE_ATTACHMENT_SUCCESS:
+            console.log("state hiên tại" + state.taskEdit)
+            state.taskEdit = state.taskEdit.filter((list) => list.id !== action.data.id);
+            return { ...state }
 
+        case types.DELETE_ATTACHMENT_FAILE:
+            return { ...state }
 
 
         case types.SHOW_MODAL_ATTACHMENT:
@@ -106,6 +112,25 @@ const detailtProjectReducers = (state = initialState, action) => {
         case types.HIDE_MODAL_ATTACHMENT:
             return { ...state, showFormAttachment: false }
 
+        case types.ADD_ATTACHMENT_SUCCESS:
+            
+            const newAttach = {
+                name: action.data.name,
+                url: action.data.url,
+                createdAt: action.data.createdAt,
+
+            };
+            const newTaskEdit1 = {
+                ...state.taskEdit,
+                attaches: [
+                    ...state.taskEdit.attaches,
+                    newAttach
+                ]
+            }
+            return { ...state, taskEdit: newTaskEdit1 }
+
+        case types.ADD_ATTACHMENT_FAILE:
+            return { ...state }
 
         case types.EDIT_PROJECT_SUCCESS:
             return { ...state }
@@ -156,6 +181,7 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state }
 
         case types.EDIT_DEADLINE_TASK_SUCCESS:
+
             const newDeadLine = {
                 ...state.taskEdit,
                 task: {
@@ -167,26 +193,6 @@ const detailtProjectReducers = (state = initialState, action) => {
 
         case types.EDIT_DEADLINE_TASK_FAILE:
             return { ...state }
-
-        case types.ADD_ATTACHMENT_SUCCESS:
-            const newAttach = {
-                name: action.data.name,
-                url: action.data.url,
-                createdAt: action.data.createdAt,
-
-            };
-            const newTaskEdit1 = {
-                ...state.taskEdit,
-                attaches: [
-                    ...state.taskEdit.attaches,
-                    newAttach
-                ]
-            }
-            return { ...state, taskEdit: newTaskEdit1 }
-
-        case types.ADD_ATTACHMENT_FAILE:
-            return { ...state }
-
 
         case types.ADD_COMMENT_TASK_SUCCESS:
             const comment = {
@@ -206,11 +212,13 @@ const detailtProjectReducers = (state = initialState, action) => {
             return { ...state }
 
         case types.DELETE_LIST_TASK_SUCCESS:
+
             state.listTask = state.listTask.filter((list) => list.id !== action.data.id);
             return { ...state }
 
         case types.DELETE_LIST_TASK_FAILE:
             return { ...state }
+
 
         case types.GET_ALL_USER_SUCCESS:
             return { ...state, allUser: action.data }
