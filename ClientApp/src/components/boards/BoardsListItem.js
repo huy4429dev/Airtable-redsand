@@ -30,7 +30,8 @@ class BoardsListItem extends Component {
         return (
             <Col sm="3 mr-5">
                 <Link to={`/detailt/${project.id}.html`} className="link">
-                    <div onClick={this.editRecently} style={{
+                
+                    <div onClick={this.editRecently}  style={{
                         backgroundImage: `url('https://localhost:5001/Resources/images/${project.thumb}')`,
                         backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'
                     }}
