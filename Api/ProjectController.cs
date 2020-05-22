@@ -23,6 +23,7 @@ namespace ProjectManage.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> Get(int id)
         {
+
             // var project = await _context.Projects.FindAsync(id);
             var userID =Int32.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             var newQuery = _context.Projects.Where(p => p.UserProjects.Any(pu => pu.UserId == userID && pu.ProjectId == id))
@@ -166,7 +167,7 @@ namespace ProjectManage.Controllers
                 var query = _context.UserProjects.AsQueryable();
                 query = query.Where(item => item.ProjectId == id);
                 var data = await query.ToListAsync();
-                
+
                 foreach (var item in data)
                 {
 

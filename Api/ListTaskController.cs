@@ -110,7 +110,7 @@ namespace ProjectManage.Controllers
             await context.ProjectHistories.AddAsync(history);
             await context.SaveChangesAsync();
 
-            var FullName = await context.Users.Where(u => u.Id == model.UserId).Select(u => u.FullName).FirstAsync();
+            var FullName =  context.Users.Where(u => u.Id == model.UserId).Select(u => u.FullName).First();
 
             /*==============================
             Get projects and projectHistory
@@ -168,7 +168,7 @@ namespace ProjectManage.Controllers
                 viewModel.ProjectId = model.ProjectId;
                 viewModel.FullName  = FullName;
                 viewModel.Content   = history.Content;
-                viewModel.CreatedAt = viewModel.CreatedAt;
+                viewModel.CreatedAt = DateTime.Now;
                 return Ok(viewModel);
             }
 
@@ -198,7 +198,7 @@ namespace ProjectManage.Controllers
                 await context.ProjectHistories.AddAsync(history);
                 await context.SaveChangesAsync();
 
-                var FullName = await context.Users.Where(u => u.Id == UserId).Select(u => u.FullName).FirstAsync();
+                var FullName =  context.Users.Where(u => u.Id == UserId).Select(u => u.FullName).First();
 
                 /*==============================
                 Get projects and projectHistory
@@ -210,7 +210,8 @@ namespace ProjectManage.Controllers
                 viewModel.ProjectId = found.ProjectId;
                 viewModel.FullName  = FullName;
                 viewModel.Content   = history.Content;
-                viewModel.CreatedAt = viewModel.CreatedAt;
+                viewModel.CreatedAt = DateTime.Now;
+
                 return Ok(viewModel);
             }
             return BadRequest("Không tồn tại list task");
