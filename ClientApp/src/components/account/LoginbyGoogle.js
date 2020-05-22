@@ -48,6 +48,7 @@ class LoginbyGoogle extends Component {
 
 // componentClicked = () => console.log("clicked");
     
+    
     render() {
       console.log(this.state.name);
   let fbContent;
